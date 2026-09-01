@@ -42,6 +42,7 @@
     <p id="footer-text"></p>
   </footer>
 
+  <script src="assets/js/bank-manager.js"></script>
   <script src="assets/js/exam-engine.js"></script>
   <script>
     const params = new URLSearchParams(location.search);
@@ -51,13 +52,9 @@
     if (!config) {
       document.body.innerHTML = '<div class="container"><h2>找不到此科目，請從<a href="index.html">首頁</a>選擇。</h2></div>';
     } else {
-      const bankScript = document.createElement('script');
-      bankScript.src = `assets/js/banks/${subject}.js`;
-      bankScript.onload = initExam;
-      bankScript.onerror = () => {
+      BankManager.initForExam(subject).then(() => initExam()).catch(() => {
         document.getElementById('exam-content').innerHTML = '<p>題庫載入失敗，請確認檔案是否存在。</p>';
-      };
-      document.body.appendChild(bankScript);
+      });
 
       function initExam(regenerate) {
         const forceNew = params.get('new') === '1';
@@ -78,9 +75,10 @@
         const total = exam.questions.length;
         const choiceN = exam.questions.filter(q => !q.isNonChoice).length;
         const nonChoiceN = total - choiceN;
+        const bankSize = BankManager.countUnits(BankManager.getBank(subject));
         let meta = nonChoiceN > 0
-          ? `選擇題 ${choiceN} 題 + 非選擇題 ${nonChoiceN} 題｜${config.time} 分鐘`
-          : `選擇題 ${total} 題｜${config.time} 分鐘`;
+          ? `選擇題 ${choiceN} 題 + 非選擇題 ${nonChoiceN} 題｜${config.time} 分鐘｜題庫 ${bankSize} 題`
+          : `選擇題 ${total} 題｜${config.time} 分鐘｜題庫 ${bankSize} 題`;
         document.getElementById('exam-meta').textContent = meta;
         document.getElementById('exam-id').textContent = `測驗編號：${exam.examId}`;
         document.getElementById('exam-header').style.background = `linear-gradient(135deg, ${config.color}, ${config.color}cc)`;

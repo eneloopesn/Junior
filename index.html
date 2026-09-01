@@ -12,7 +12,7 @@
     <p class="subtitle">參考近十年（105～115年）會考命題趨勢編製｜隨機抽題</p>
     <div class="exam-info">
       <span>🎲 每次題目不同</span>
-      <span>📚 五科完整題庫</span>
+      <span>📚 各科 200 題題庫</span>
       <span>📝 附詳細解答</span>
     </div>
   </header>
@@ -20,23 +20,29 @@
   <div class="container">
     <section class="hero">
       <h2>歡迎使用會考模擬試題</h2>
-      <p>本系統從各科題庫中<strong>隨機抽取</strong>試題，每次測驗的題目組合都不相同，適合反覆練習。點選「開始測驗」即可產生一份全新的試卷。</p>
+      <p>本系統各科備有 <strong>200 題</strong>完整題庫，每次測驗隨機抽取不同題目，適合反覆練習。點選「開始測驗」即可產生一份全新的試卷。</p>
     </section>
 
     <div class="exam-notice">
       <h4>📋 使用說明</h4>
       <ul>
-        <li>點選「開始測驗」→ 系統從題庫隨機抽出題目</li>
+        <li>點選「開始測驗」→ 系統從 200 題題庫中隨機抽出題目</li>
         <li>測驗頁面可點「🔄 重新抽題」更換題目</li>
         <li>「查看解答」僅對應<strong>本次</strong>測驗的題目與答案</li>
         <li>建議測驗時間：國文70分鐘、英文60分鐘、數學80分鐘、自然70分鐘、社會70分鐘</li>
       </ul>
     </div>
 
+    <section class="bank-stats-panel" id="bank-stats-panel">
+      <h3>📚 題庫概覽</h3>
+      <p id="bank-status-text">載入中…</p>
+      <ul class="bank-stats-list" id="bank-stats-list"></ul>
+    </section>
+
     <div class="subject-grid">
       <div class="subject-card chinese">
         <h3>國文科</h3>
-        <p class="meta">題庫 55+ 題｜每次抽 30 題｜70 分鐘</p>
+        <p class="meta" data-subject="chinese">題庫載入中…</p>
         <p>字音字形、成語修辭、文言文、白話文閱讀</p>
         <div class="btn-group">
           <a href="exam.html?subject=chinese" class="btn btn-primary">開始測驗</a>
@@ -46,7 +52,7 @@
 
       <div class="subject-card english">
         <h3>英語科</h3>
-        <p class="meta">題庫 55+ 題｜每次抽 30 題｜60 分鐘</p>
+        <p class="meta" data-subject="english">題庫載入中…</p>
         <p>字彙文法、克漏字、閱讀理解</p>
         <div class="btn-group">
           <a href="exam.html?subject=english" class="btn btn-primary">開始測驗</a>
@@ -56,7 +62,7 @@
 
       <div class="subject-card math">
         <h3>數學科</h3>
-        <p class="meta">題庫 43+ 題｜每次抽 20 選擇 + 2 非選擇｜80 分鐘</p>
+        <p class="meta" data-subject="math">題庫載入中…</p>
         <p>數與量、代數、幾何、統計</p>
         <div class="btn-group">
           <a href="exam.html?subject=math" class="btn btn-primary">開始測驗</a>
@@ -66,7 +72,7 @@
 
       <div class="subject-card science">
         <h3>自然科</h3>
-        <p class="meta">題庫 55+ 題｜每次抽 30 題｜70 分鐘</p>
+        <p class="meta" data-subject="science">題庫載入中…</p>
         <p>物理、化學、生物、地球科學</p>
         <div class="btn-group">
           <a href="exam.html?subject=science" class="btn btn-primary">開始測驗</a>
@@ -76,7 +82,7 @@
 
       <div class="subject-card social">
         <h3>社會科</h3>
-        <p class="meta">題庫 55+ 題｜每次抽 30 題｜70 分鐘</p>
+        <p class="meta" data-subject="social">題庫載入中…</p>
         <p>歷史、地理、公民、圖表判讀</p>
         <div class="btn-group">
           <a href="exam.html?subject=social" class="btn btn-primary">開始測驗</a>
@@ -88,7 +94,7 @@
     <div class="exam-notice">
       <h4>🎲 隨機抽題說明</h4>
       <ul>
-        <li>各科題庫含 43～55 題不等，每次測驗隨機抽取固定題數</li>
+        <li>各科題庫均含 <strong>200 題</strong>，每次測驗隨機抽取固定題數</li>
         <li>閱讀題組會整組出現，確保題目完整</li>
         <li>重新整理頁面不會換題；要換題請點「重新抽題」</li>
         <li>解答頁面會顯示測驗編號，確保對應正確的試卷</li>
@@ -97,7 +103,10 @@
   </div>
 
   <footer class="footer">
-    <p>國中教育會考模擬試題｜隨機抽題版｜供教學使用</p>
+    <p>國中教育會考模擬試題｜各科 200 題題庫｜供教學使用</p>
   </footer>
+
+  <script src="assets/js/bank-manager.js"></script>
+  <script src="assets/js/index.js"></script>
 </body>
 </html>

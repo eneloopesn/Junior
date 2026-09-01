@@ -207,6 +207,35 @@ body {
   color: white;
 }
 
+.hidden {
+  display: none !important;
+}
+
+/* 題庫統計面板 */
+.bank-stats-panel {
+  background: linear-gradient(135deg, #ebf5fb 0%, #d6eaf8 100%);
+  border: 2px solid var(--primary-light);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 25px 0 30px;
+}
+
+.bank-stats-panel h3 {
+  color: var(--primary);
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.bank-stats-list {
+  margin: 12px 0 0 18px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.bank-stats-list li {
+  margin-bottom: 4px;
+}
+
 /* Exam content */
 .exam-notice {
   background: #fff3cd;

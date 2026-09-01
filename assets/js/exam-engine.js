@@ -63,7 +63,7 @@ const ExamEngine = (() => {
   function generateExam(subject) {
     const config = SUBJECTS[subject];
     const bank = window.QuestionBanks?.[subject];
-    if (!config || !bank) return null;
+    if (!config || !bank || bank.length === 0) return null;
 
     const choiceUnits = bank.filter(u => u.type !== 'non-choice');
     const nonChoiceUnits = bank.filter(u => u.type === 'non-choice');
