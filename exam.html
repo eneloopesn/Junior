@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會考模擬試題</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <nav class="nav-bar">
+    <div class="container">
+      <a href="index.html">← 返回首頁</a>
+      <div class="nav-links">
+        <a href="#" id="btn-regenerate" class="no-print">🔄 重新抽題</a>
+        <a href="#" id="btn-answers" class="no-print">查看解答</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="exam-header" id="exam-header">
+    <h1>國中教育會考模擬試題</h1>
+    <p class="subtitle" id="subject-name"></p>
+    <div class="exam-info">
+      <span id="exam-meta"></span>
+      <span id="exam-id" class="exam-session-badge"></span>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="exam-notice no-print">
+      <h4>🎲 隨機抽題模式</h4>
+      <ul>
+        <li>每次進入或點選「重新抽題」都會從題庫隨機抽出不同的題目</li>
+        <li>完成測驗後，請點選「查看解答」對照本次測驗的答案</li>
+        <li>解答頁面僅對應<strong>本次</strong>測驗的題目</li>
+      </ul>
+    </div>
+    <div id="exam-content"></div>
+  </div>
+
+  <footer class="footer">
+    <p id="footer-text"></p>
+  </footer>
+
+  <script src="assets/js/exam-engine.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const subject = params.get('subject');
+    const config = ExamEngine.SUBJECTS[subject];
+
+    if (!config) {
+      document.body.innerHTML = '<div class="container"><h2>找不到此科目，請從<a href="index.html">首頁</a>選擇。</h2></div>';
+    } else {
+      const bankScript = document.createElement('script');
+      bankScript.src = `assets/js/banks/${subject}.js`;
+      bankScript.onload = initExam;
+      bankScript.onerror = () => {
+        document.getElementById('exam-content').innerHTML = '<p>題庫載入失敗，請確認檔案是否存在。</p>';
+      };
+      document.body.appendChild(bankScript);
+
+      function initExam(regenerate) {
+        const forceNew = params.get('new') === '1';
+        if (!regenerate && !forceNew && ExamEngine.getExam(subject)) {
+          render(ExamEngine.getExam(subject));
+        } else {
+          const exam = ExamEngine.generateExam(subject);
+          if (!exam) {
+            document.getElementById('exam-content').innerHTML = '<p>題庫尚未建立，請聯繫管理員。</p>';
+            return;
+          }
+          render(exam);
+        }
+      }
+
+      function render(exam) {
+        document.getElementById('subject-name').textContent = config.name;
+        const total = exam.questions.length;
+        const choiceN = exam.questions.filter(q => !q.isNonChoice).length;
+        const nonChoiceN = total - choiceN;
+        let meta = nonChoiceN > 0
+          ? `選擇題 ${choiceN} 題 + 非選擇題 ${nonChoiceN} 題｜${config.time} 分鐘`
+          : `選擇題 ${total} 題｜${config.time} 分鐘`;
+        document.getElementById('exam-meta').textContent = meta;
+        document.getElementById('exam-id').textContent = `測驗編號：${exam.examId}`;
+        document.getElementById('exam-header').style.background = `linear-gradient(135deg, ${config.color}, ${config.color}cc)`;
+        document.getElementById('footer-text').textContent = `國中教育會考模擬試題｜${config.name}｜— 測驗結束 —`;
+        ExamEngine.renderExam(exam, document.getElementById('exam-content'));
+      }
+
+      document.getElementById('btn-regenerate').addEventListener('click', e => {
+        e.preventDefault();
+        if (confirm('確定要重新抽題嗎？目前的試題將被替換。')) initExam(true);
+      });
+
+      document.getElementById('btn-answers').href = `answers.html?subject=${subject}`;
+    }
+  </script>
+</body>
+</html>
