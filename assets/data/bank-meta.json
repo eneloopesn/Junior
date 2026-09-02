@@ -1,0 +1,29 @@
+{
+  "lastUpdated": "2026-09-02T08:51:19.531Z",
+  "lastUpdatedLocal": "2026/9/2 下午4:51:19",
+  "nextUpdate": "2026-10-01",
+  "version": 202609,
+  "targetPerSubject": 200,
+  "subjects": {
+    "chinese": {
+      "count": 200,
+      "poolSize": 219
+    },
+    "english": {
+      "count": 200,
+      "poolSize": 232
+    },
+    "math": {
+      "count": 200,
+      "poolSize": 221
+    },
+    "science": {
+      "count": 200,
+      "poolSize": 205
+    },
+    "social": {
+      "count": 200,
+      "poolSize": 233
+    }
+  }
+}

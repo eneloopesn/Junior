@@ -120,8 +120,11 @@ const ExamEngine = (() => {
 
   function renderOptions(options, labels = ['A', 'B', 'C', 'D']) {
     return `<ul class="options">${options.map((opt, i) =>
-      `<li><span class="option-label">(${labels[i]})</span> ${opt}</li>`
-    ).join('')}</ul>`;
+      `<li class="option-item" data-index="${i}" role="button" tabindex="0" aria-label="選項 ${labels[i]}">
+        <span class="option-label">(${labels[i]})</span> ${opt}
+      </li>`
+    ).join('')}</ul>
+    <div class="answer-feedback" aria-live="polite"></div>`;
   }
 
   function renderExam(exam, container) {
@@ -129,6 +132,13 @@ const ExamEngine = (() => {
     let html = '';
     let lastSection = '';
     let lastPassage = '';
+    const choiceCount = exam.questions.filter(q => !q.isNonChoice).length;
+
+    html += `<div class="exam-score-bar no-print" id="exam-score-bar">
+      <span>選擇題作答：<strong id="score-answered">0</strong> / ${choiceCount}</span>
+      <span>答對：<strong id="score-correct" class="score-correct">0</strong></span>
+      <span>答錯：<strong id="score-wrong" class="score-wrong">0</strong></span>
+    </div>`;
 
     exam.questions.forEach(q => {
       if (q.section && q.section !== lastSection) {
@@ -148,7 +158,7 @@ const ExamEngine = (() => {
           <div class="answer-space"></div>
         </div>`;
       } else {
-        html += `<div class="question">
+        html += `<div class="question choice-question" data-q-num="${q.number}" data-answer="${q.answer}">
           <div class="question-number">${q.number}.</div>
           <div class="question-text">${q.text}</div>
           ${q.table ? q.table : ''}
@@ -160,6 +170,72 @@ const ExamEngine = (() => {
 
     container.innerHTML = html;
     document.title = `會考模擬試題｜${config.name}`;
+    bindExamInteractions(exam, container);
+  }
+
+  function bindExamInteractions(exam, container) {
+    const labels = ['A', 'B', 'C', 'D'];
+    const scoreBar = container.querySelector('#exam-score-bar');
+    const answeredEl = scoreBar?.querySelector('#score-answered');
+    const correctEl = scoreBar?.querySelector('#score-correct');
+    const wrongEl = scoreBar?.querySelector('#score-wrong');
+
+    let answered = 0;
+    let correct = 0;
+    let wrong = 0;
+
+    function updateScore() {
+      if (answeredEl) answeredEl.textContent = answered;
+      if (correctEl) correctEl.textContent = correct;
+      if (wrongEl) wrongEl.textContent = wrong;
+    }
+
+    container.querySelectorAll('.choice-question').forEach(questionEl => {
+      const qNum = parseInt(questionEl.dataset.qNum, 10);
+      const q = exam.questions.find(item => item.number === qNum);
+      if (!q || q.isNonChoice) return;
+
+      const feedbackEl = questionEl.querySelector('.answer-feedback');
+      const options = questionEl.querySelectorAll('.option-item');
+
+      function handleSelect(optionEl) {
+        if (questionEl.classList.contains('answered')) return;
+
+        const selected = parseInt(optionEl.dataset.index, 10);
+        const isCorrect = selected === q.answer;
+
+        questionEl.classList.add('answered');
+        optionEl.classList.add('selected');
+        answered += 1;
+        if (isCorrect) {
+          correct += 1;
+          questionEl.classList.add('result-correct');
+          optionEl.classList.add('correct');
+          feedbackEl.className = 'answer-feedback feedback-correct';
+          feedbackEl.innerHTML = `<strong>✓ 答對了！</strong>${q.explanation ? `<p class="feedback-explanation">${q.explanation}</p>` : ''}`;
+        } else {
+          wrong += 1;
+          questionEl.classList.add('result-wrong');
+          optionEl.classList.add('wrong');
+          options[q.answer]?.classList.add('correct');
+          feedbackEl.className = 'answer-feedback feedback-wrong';
+          feedbackEl.innerHTML = `<strong>✗ 答錯了</strong>
+            <p class="feedback-correct-answer">正確答案：(${labels[q.answer]}) ${q.options[q.answer]}</p>
+            ${q.explanation ? `<p class="feedback-explanation">${q.explanation}</p>` : ''}`;
+        }
+        updateScore();
+      }
+
+      options.forEach(optionEl => {
+        optionEl.addEventListener('click', () => handleSelect(optionEl));
+        optionEl.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleSelect(optionEl);
+          }
+        });
+      });
+    });
   }
 
   function renderAnswers(exam, container) {
