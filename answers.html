@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>會考模擬試題｜解答</title>
+  <title>模擬試題｜解答</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <nav class="nav-bar">
     <div class="container">
-      <a href="index.html">← 返回首頁</a>
+      <a href="#" id="btn-back">← 返回科目</a>
       <div class="nav-links">
         <a href="#" id="btn-exam">返回試題</a>
-        <a href="#" id="btn-new-exam" class="no-print">🔄 重新抽題測驗</a>
+        <a href="#" id="btn-new-exam" class="no-print">🔄 重新抽題</a>
       </div>
     </div>
   </nav>
 
   <header class="exam-header" id="exam-header" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
-    <h1>國中教育會考模擬試題</h1>
+    <h1 id="exam-title">模擬試題</h1>
     <p class="subtitle" id="subject-name"></p>
     <p class="subtitle">解答與解析</p>
   </header>
@@ -27,30 +27,39 @@
     <div id="answer-content"></div>
   </div>
 
-  <footer class="footer">
-    <p id="footer-text"></p>
-  </footer>
+  <footer class="footer"><p id="footer-text"></p></footer>
 
+  <script src="assets/js/exam-config.js"></script>
   <script src="assets/js/exam-engine.js"></script>
   <script>
     const params = new URLSearchParams(location.search);
+    const level = params.get('level') || 'junior';
     const subject = params.get('subject');
-    const config = ExamEngine.SUBJECTS[subject];
+    const levelInfo = ExamConfig.getLevel(level);
+    const config = ExamConfig.getSubject(level, subject);
 
-    if (!config) {
-      document.getElementById('answer-content').innerHTML = '<p>找不到此科目。</p>';
+    const backLinks = {
+      junior: 'junior/index.html',
+      gsat: 'senior/gsat/index.html',
+      ast: 'senior/ast/index.html'
+    };
+    document.getElementById('btn-back').href = backLinks[level] || 'index.html';
+
+    if (!config || !levelInfo) {
+      document.getElementById('answer-content').innerHTML = '<p>找不到此測驗。</p>';
     } else {
+      document.getElementById('exam-title').textContent = levelInfo.name + '模擬試題';
       document.getElementById('subject-name').textContent = config.name;
-      document.getElementById('footer-text').textContent = `國中教育會考模擬試題｜${config.name}解答`;
-      document.getElementById('btn-exam').href = `exam.html?subject=${subject}`;
-      document.getElementById('btn-new-exam').href = `exam.html?subject=${subject}&new=1`;
+      document.getElementById('footer-text').textContent = `${levelInfo.shortName}｜${config.name}解答`;
+      document.getElementById('btn-exam').href = `exam.html?level=${level}&subject=${subject}`;
+      document.getElementById('btn-new-exam').href = `exam.html?level=${level}&subject=${subject}&new=1`;
 
-      const exam = ExamEngine.getExam(subject);
+      const exam = ExamEngine.getExam(level, subject);
       if (!exam) {
         document.getElementById('answer-content').innerHTML = `
           <div class="exam-notice">
             <h4>尚無測驗紀錄</h4>
-            <p>請先<a href="exam.html?subject=${subject}">開始測驗</a>，完成後再查看解答。</p>
+            <p>請先<a href="exam.html?level=${level}&subject=${subject}">開始測驗</a>。</p>
           </div>`;
       } else {
         ExamEngine.renderAnswers(exam, document.getElementById('answer-content'));

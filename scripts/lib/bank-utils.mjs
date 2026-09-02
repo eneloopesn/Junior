@@ -12,9 +12,25 @@ export function loadBankArray(filePath) {
   const code = fs.readFileSync(filePath, 'utf8');
   const w = { QuestionBanks: {}, QuestionBanksSupplement: {}, QuestionBanksGenerated: {} };
   new Function('window', code)(w);
-  const subject = SUBJECTS.find(s => code.includes(`.${s}`));
-  if (!subject) return [];
-  return w.QuestionBanks[subject] || w.QuestionBanksSupplement[subject] || w.QuestionBanksGenerated[subject] || [];
+
+  for (const level of ['junior', 'gsat', 'ast']) {
+    if (w.QuestionBanks[level]) {
+      for (const sub of Object.keys(w.QuestionBanks[level])) {
+        if (code.includes(`.${sub}`) || code.includes(`${level}.${sub}`)) {
+          return w.QuestionBanks[level][sub] || [];
+        }
+      }
+    }
+  }
+
+  const flatSubjects = ['chinese', 'english', 'math', 'mathA', 'mathB', 'science', 'social',
+    'physics', 'chemistry', 'biology', 'history', 'geography', 'civics'];
+  for (const sub of flatSubjects) {
+    if (w.QuestionBanks[sub]) return w.QuestionBanks[sub];
+    if (w.QuestionBanksSupplement[sub]) return w.QuestionBanksSupplement[sub];
+    if (w.QuestionBanksGenerated[sub]) return w.QuestionBanksGenerated[sub];
+  }
+  return [];
 }
 
 export function countQuestions(units) {
@@ -26,9 +42,25 @@ export function countQuestions(units) {
   return n;
 }
 
+export function questionKey(q) {
+  return (q.text || '')
+    .replace(/\s*（#[^）]+）/g, '')
+    .replace(/\s*\(Q\d+-\d+\)/g, '')
+    .replace(/\s*\[題號 \d+\]/g, '')
+    .replace(/\s*（\d+）\s*$/g, '')
+    .trim();
+}
+
+export function unitQuestionKeys(unit) {
+  if (unit.type === 'group') return unit.questions.map(questionKey);
+  return [questionKey(unit)];
+}
+
 export function dedupeKey(q) {
-  if (q.type === 'group') return 'g:' + (q.passage || '').slice(0, 80);
-  return 's:' + (q.text || '').slice(0, 100);
+  if (q.type === 'group') {
+    return 'g:' + unitQuestionKeys(q).join('|');
+  }
+  return 's:' + questionKey(q);
 }
 
 export function mergeBanks(...arrays) {
@@ -130,9 +162,15 @@ export function serializeQuestion(q, indent = '  ') {
   return `${indent}{ type: 'single', section: ${JSON.stringify(q.section)}, text: ${JSON.stringify(q.text)}, options: ${JSON.stringify(q.options)}, answer: ${q.answer}, explanation: ${JSON.stringify(q.explanation)} }`;
 }
 
-export function writeBank(filePath, subject, units, varName = 'QuestionBanks') {
+export function writeBank(filePath, subject, units, varName = 'QuestionBanks', level = null) {
   const lines = units.map(u => serializeQuestion(u)).join(',\n\n');
-  const content = `window.${varName} = window.${varName} || {};\nwindow.${varName}.${subject} = [\n${lines}\n];\n`;
+  let content;
+  if (level) {
+    content = `window.${varName} = window.${varName} || {};\nwindow.${varName}.${level} = window.${varName}.${level} || {};\nwindow.${varName}.${level}.${subject} = [\n${lines}\n];\n`;
+  } else {
+    content = `window.${varName} = window.${varName} || {};\nwindow.${varName}.${subject} = [\n${lines}\n];\n`;
+  }
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, content, 'utf8');
 }
 

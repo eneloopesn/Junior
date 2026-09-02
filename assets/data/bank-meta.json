@@ -1,29 +1,106 @@
 {
-  "lastUpdated": "2026-09-02T08:51:19.531Z",
-  "lastUpdatedLocal": "2026/9/2 下午4:51:19",
+  "lastUpdated": "2026-09-02T09:39:05.147Z",
+  "lastUpdatedLocal": "2026/9/2 下午5:39:05",
   "nextUpdate": "2026-10-01",
   "version": 202609,
   "targetPerSubject": 200,
-  "subjects": {
-    "chinese": {
-      "count": 200,
-      "poolSize": 219
+  "levels": {
+    "junior": {
+      "subjects": {
+        "chinese": {
+          "count": 200,
+          "poolSize": 210
+        },
+        "english": {
+          "count": 200,
+          "poolSize": 215
+        },
+        "math": {
+          "count": 200,
+          "poolSize": 215
+        },
+        "science": {
+          "count": 200,
+          "poolSize": 204
+        },
+        "social": {
+          "count": 200,
+          "poolSize": 219
+        }
+      },
+      "lastUpdatedLocal": "2026/9/2 下午5:39:05",
+      "version": 202609,
+      "nextUpdate": "2026-10-01"
     },
-    "english": {
-      "count": 200,
-      "poolSize": 232
+    "gsat": {
+      "subjects": {
+        "chinese": {
+          "count": 200,
+          "poolSize": 200
+        },
+        "english": {
+          "count": 200,
+          "poolSize": 200
+        },
+        "mathA": {
+          "count": 200,
+          "poolSize": 200
+        },
+        "mathB": {
+          "count": 200,
+          "poolSize": 200
+        },
+        "science": {
+          "count": 200,
+          "poolSize": 200
+        },
+        "social": {
+          "count": 200,
+          "poolSize": 200
+        }
+      },
+      "lastUpdatedLocal": "2026/9/2 下午5:39:05",
+      "version": 202609,
+      "nextUpdate": "2026-10-01"
     },
-    "math": {
-      "count": 200,
-      "poolSize": 221
-    },
-    "science": {
-      "count": 200,
-      "poolSize": 205
-    },
-    "social": {
-      "count": 200,
-      "poolSize": 233
+    "ast": {
+      "subjects": {
+        "mathA": {
+          "count": 200,
+          "poolSize": 200
+        },
+        "mathB": {
+          "count": 200,
+          "poolSize": 200
+        },
+        "physics": {
+          "count": 200,
+          "poolSize": 200
+        },
+        "chemistry": {
+          "count": 200,
+          "poolSize": 200
+        },
+        "biology": {
+          "count": 200,
+          "poolSize": 200
+        },
+        "history": {
+          "count": 200,
+          "poolSize": 200
+        },
+        "geography": {
+          "count": 200,
+          "poolSize": 200
+        },
+        "civics": {
+          "count": 200,
+          "poolSize": 200
+        }
+      },
+      "lastUpdatedLocal": "2026/9/2 下午5:39:05",
+      "version": 202609,
+      "nextUpdate": "2026-10-01"
     }
   }
 }

@@ -3,111 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>國中教育會考模擬試題 | 首頁</title>
+  <title>模擬考題平台｜首頁</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <header class="exam-header">
-    <h1>國中教育會考模擬試題</h1>
-    <p class="subtitle">參考近十年（105～115年）會考命題趨勢編製｜隨機抽題</p>
+    <h1>模擬考題平台</h1>
+    <p class="subtitle">國中會考 · 高中學測 · 高中分科測驗</p>
     <div class="exam-info">
       <span>🎲 每次題目不同</span>
-      <span>📚 各科 200 題題庫</span>
-      <span>📝 附詳細解答</span>
+      <span>📚 各科 200 題</span>
+      <span>✅ 即時作答回饋</span>
     </div>
   </header>
 
   <div class="container">
     <section class="hero">
-      <h2>歡迎使用會考模擬試題</h2>
-      <p>本系統各科備有 <strong>200 題</strong>完整題庫，每次測驗隨機抽取不同題目，適合反覆練習。點選「開始測驗」即可產生一份全新的試卷。</p>
+      <h2>請選擇測驗類型</h2>
+      <p>本系統參考近十年試題趨勢編製，各科備有 200 題題庫，支援隨機抽題、互動作答與每月自動更新。</p>
     </section>
 
-    <div class="exam-notice">
-      <h4>📋 使用說明</h4>
-      <ul>
-        <li>點選「開始測驗」→ 系統從 200 題題庫中隨機抽出題目</li>
-        <li>測驗頁面可點「🔄 重新抽題」更換題目</li>
-        <li>「查看解答」僅對應<strong>本次</strong>測驗的題目與答案</li>
-        <li>建議測驗時間：國文70分鐘、英文60分鐘、數學80分鐘、自然70分鐘、社會70分鐘</li>
-      </ul>
-    </div>
+    <div class="level-grid">
+      <a href="junior/index.html" class="level-card level-junior">
+        <div class="level-icon">🏫</div>
+        <h3>國中</h3>
+        <p class="level-desc">教育會考模擬試題</p>
+        <ul>
+          <li>國文、英文、數學、自然、社會</li>
+          <li>共 5 科 · 每科 200 題</li>
+        </ul>
+        <span class="btn btn-primary">進入國中測驗 →</span>
+      </a>
 
-    <section class="bank-stats-panel" id="bank-stats-panel">
-      <h3>📚 題庫概覽</h3>
-      <p id="bank-status-text">載入中…</p>
-      <ul class="bank-stats-list" id="bank-stats-list"></ul>
-      <p class="bank-update-info" id="bank-update-info"></p>
-    </section>
-
-    <div class="subject-grid">
-      <div class="subject-card chinese">
-        <h3>國文科</h3>
-        <p class="meta" data-subject="chinese">題庫載入中…</p>
-        <p>字音字形、成語修辭、文言文、白話文閱讀</p>
-        <div class="btn-group">
-          <a href="exam.html?subject=chinese" class="btn btn-primary">開始測驗</a>
-          <a href="answers.html?subject=chinese" class="btn btn-outline">查看解答</a>
-        </div>
-      </div>
-
-      <div class="subject-card english">
-        <h3>英語科</h3>
-        <p class="meta" data-subject="english">題庫載入中…</p>
-        <p>字彙文法、克漏字、閱讀理解</p>
-        <div class="btn-group">
-          <a href="exam.html?subject=english" class="btn btn-primary">開始測驗</a>
-          <a href="answers.html?subject=english" class="btn btn-outline">查看解答</a>
-        </div>
-      </div>
-
-      <div class="subject-card math">
-        <h3>數學科</h3>
-        <p class="meta" data-subject="math">題庫載入中…</p>
-        <p>數與量、代數、幾何、統計</p>
-        <div class="btn-group">
-          <a href="exam.html?subject=math" class="btn btn-primary">開始測驗</a>
-          <a href="answers.html?subject=math" class="btn btn-outline">查看解答</a>
-        </div>
-      </div>
-
-      <div class="subject-card science">
-        <h3>自然科</h3>
-        <p class="meta" data-subject="science">題庫載入中…</p>
-        <p>物理、化學、生物、地球科學</p>
-        <div class="btn-group">
-          <a href="exam.html?subject=science" class="btn btn-primary">開始測驗</a>
-          <a href="answers.html?subject=science" class="btn btn-outline">查看解答</a>
-        </div>
-      </div>
-
-      <div class="subject-card social">
-        <h3>社會科</h3>
-        <p class="meta" data-subject="social">題庫載入中…</p>
-        <p>歷史、地理、公民、圖表判讀</p>
-        <div class="btn-group">
-          <a href="exam.html?subject=social" class="btn btn-primary">開始測驗</a>
-          <a href="answers.html?subject=social" class="btn btn-outline">查看解答</a>
-        </div>
-      </div>
+      <a href="senior/index.html" class="level-card level-senior">
+        <div class="level-icon">🎓</div>
+        <h3>高中</h3>
+        <p class="level-desc">學測 + 分科測驗模擬試題</p>
+        <ul>
+          <li>學測 6 科 + 分科 8 科</li>
+          <li>每科 200 題 · 共 14 科</li>
+        </ul>
+        <span class="btn btn-primary">進入高中測驗 →</span>
+      </a>
     </div>
 
     <div class="exam-notice">
-      <h4>🎲 隨機抽題說明</h4>
+      <h4>📋 平台功能</h4>
       <ul>
-        <li>各科題庫均含 <strong>200 題</strong>，每月 1 日自動更新題庫內容</li>
-        <li>閱讀題組會整組出現，確保題目完整</li>
-        <li>重新整理頁面不會換題；要換題請點「重新抽題」</li>
-        <li>解答頁面會顯示測驗編號，確保對應正確的試卷</li>
+        <li>每次測驗從 200 題題庫中隨機抽題，題目組合不同</li>
+        <li>選擇題可點選作答，立即顯示答對／答錯與解析</li>
+        <li>另附解答頁面，供完整對照與複習</li>
+        <li>每月 1 日自動更新各科題庫（執行 update-monthly.bat）</li>
       </ul>
     </div>
   </div>
 
   <footer class="footer">
-    <p>國中教育會考模擬試題｜各科 200 題題庫｜供教學使用</p>
+    <p>模擬考題平台｜供教學使用</p>
   </footer>
-
-  <script src="assets/js/bank-manager.js"></script>
-  <script src="assets/js/index.js"></script>
 </body>
 </html>

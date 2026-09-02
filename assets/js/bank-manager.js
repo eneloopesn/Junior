@@ -1,60 +1,64 @@
 /**
- * 題庫管理
+ * 題庫管理（支援 junior / gsat / ast）
  */
 const BankManager = (() => {
-  const SUBJECTS = ['chinese', 'english', 'math', 'science', 'social'];
-  const SUBJECT_NAMES = {
-    chinese: '國文', english: '英文', math: '數學', science: '自然', social: '社會'
-  };
+  window.QuestionBanks = window.QuestionBanks || {};
+  let scriptBase = '';
+
+  function setBase(base) {
+    scriptBase = base || '';
+  }
 
   function countUnits(units) {
     let n = 0;
-    (units || []).forEach(u => {
-      if (u.type === 'group') n += u.questions.length;
-      else n += 1;
-    });
+    (units || []).forEach(u => { n += u.type === 'group' ? u.questions.length : 1; });
     return n;
   }
 
-  function getBank(subject) {
-    return window.QuestionBanks?.[subject] || [];
+  function getBank(level, subject) {
+    if (window.QuestionBanks[level]?.[subject]) {
+      return window.QuestionBanks[level][subject];
+    }
+    if (level === 'junior' && window.QuestionBanks[subject]) {
+      return window.QuestionBanks[subject];
+    }
+    return [];
   }
 
-  function getBankStats() {
+  function getBankStats(level) {
+    const levelInfo = ExamConfig.getLevel(level);
     const stats = { total: 0, subjects: {} };
-    SUBJECTS.forEach(s => {
-      const count = countUnits(window.QuestionBanks?.[s]);
-      stats.subjects[s] = { count, name: SUBJECT_NAMES[s] };
+    ExamConfig.getSubjectIds(level).forEach(s => {
+      const count = countUnits(getBank(level, s));
+      stats.subjects[s] = { count, name: levelInfo.subjects[s].name };
       stats.total += count;
     });
     return stats;
   }
 
+  function loadAllBanks(level) {
+    return Promise.all(
+      ExamConfig.getSubjectIds(level).map(s => loadScript(ExamConfig.bankScriptPath(level, s)))
+    );
+  }
+
   function loadScript(src) {
+    const url = src.startsWith('http') || src.startsWith('/') ? src : `${scriptBase}${src}`;
     return new Promise((resolve, reject) => {
-      if (document.querySelector(`script[src="${src}"]`)) {
-        resolve();
-        return;
-      }
+      if (document.querySelector(`script[src="${url}"]`)) { resolve(); return; }
       const s = document.createElement('script');
-      s.src = src;
+      s.src = url;
       s.onload = resolve;
-      s.onerror = () => reject(new Error(`無法載入 ${src}`));
+      s.onerror = () => reject(new Error(`無法載入 ${url}`));
       document.body.appendChild(s);
     });
   }
 
-  function loadAllBanks() {
-    return Promise.all(SUBJECTS.map(s => loadScript(`assets/js/banks/${s}.js`)));
+  function initForExam(level, subject) {
+    return loadScript(ExamConfig.bankScriptPath(level, subject));
   }
 
-  function initForExam(subject) {
-    return loadScript(`assets/js/banks/${subject}.js`);
-  }
-
-  return {
-    SUBJECTS, SUBJECT_NAMES, getBank, getBankStats, loadAllBanks, initForExam, countUnits
-  };
+  return { setBase, countUnits, getBank, getBankStats, loadAllBanks, initForExam };
 })();
 
 window.BankManager = BankManager;

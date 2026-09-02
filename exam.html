@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>會考模擬試題</title>
+  <title>模擬試題</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <nav class="nav-bar">
     <div class="container">
-      <a href="index.html">← 返回首頁</a>
+      <a href="#" id="btn-back">← 返回</a>
       <div class="nav-links">
         <a href="#" id="btn-regenerate" class="no-print">🔄 重新抽題</a>
         <a href="#" id="btn-answers" class="no-print">查看解答</a>
@@ -18,7 +18,7 @@
   </nav>
 
   <header class="exam-header" id="exam-header">
-    <h1>國中教育會考模擬試題</h1>
+    <h1 id="exam-title">模擬試題</h1>
     <p class="subtitle" id="subject-name"></p>
     <div class="exam-info">
       <span id="exam-meta"></span>
@@ -30,41 +30,49 @@
     <div class="exam-notice no-print">
       <h4>📝 互動作答模式</h4>
       <ul>
-        <li>點選選項即可作答，選完後<strong>立即顯示答對或答錯</strong></li>
-        <li>答錯時會顯示正確答案與解析</li>
-        <li>上方統計列會即時更新作答進度</li>
-        <li>非選擇題請在紙上作答，完成後點「查看解答」對照</li>
+        <li>點選選項作答，<strong>立即顯示答對或答錯</strong></li>
+        <li>非選擇題請在紙上作答，完成後點「查看解答」</li>
       </ul>
     </div>
     <div id="exam-content"></div>
   </div>
 
-  <footer class="footer">
-    <p id="footer-text"></p>
-  </footer>
+  <footer class="footer"><p id="footer-text"></p></footer>
 
+  <script src="assets/js/exam-config.js"></script>
   <script src="assets/js/bank-manager.js"></script>
   <script src="assets/js/exam-engine.js"></script>
   <script>
     const params = new URLSearchParams(location.search);
+    const level = params.get('level') || 'junior';
     const subject = params.get('subject');
-    const config = ExamEngine.SUBJECTS[subject];
+    const levelInfo = ExamConfig.getLevel(level);
+    const config = ExamConfig.getSubject(level, subject);
 
-    if (!config) {
-      document.body.innerHTML = '<div class="container"><h2>找不到此科目，請從<a href="index.html">首頁</a>選擇。</h2></div>';
+    const backLinks = {
+      junior: 'junior/index.html',
+      gsat: 'senior/gsat/index.html',
+      ast: 'senior/ast/index.html'
+    };
+    document.getElementById('btn-back').href = backLinks[level] || 'index.html';
+
+    if (!config || !levelInfo) {
+      document.body.innerHTML = '<div class="container"><h2>找不到此測驗，請從<a href="index.html">首頁</a>選擇。</h2></div>';
     } else {
-      BankManager.initForExam(subject).then(() => initExam()).catch(() => {
-        document.getElementById('exam-content').innerHTML = '<p>題庫載入失敗，請確認檔案是否存在。</p>';
+      document.getElementById('exam-title').textContent = levelInfo.name + '模擬試題';
+
+      BankManager.initForExam(level, subject).then(() => initExam()).catch(() => {
+        document.getElementById('exam-content').innerHTML = '<p>題庫載入失敗。</p>';
       });
 
       function initExam(regenerate) {
         const forceNew = params.get('new') === '1';
-        if (!regenerate && !forceNew && ExamEngine.getExam(subject)) {
-          render(ExamEngine.getExam(subject));
+        if (!regenerate && !forceNew && ExamEngine.getExam(level, subject)) {
+          render(ExamEngine.getExam(level, subject));
         } else {
-          const exam = ExamEngine.generateExam(subject);
+          const exam = ExamEngine.generateExam(level, subject);
           if (!exam) {
-            document.getElementById('exam-content').innerHTML = '<p>題庫尚未建立，請聯繫管理員。</p>';
+            document.getElementById('exam-content').innerHTML = '<p>題庫尚未建立。</p>';
             return;
           }
           render(exam);
@@ -76,23 +84,23 @@
         const total = exam.questions.length;
         const choiceN = exam.questions.filter(q => !q.isNonChoice).length;
         const nonChoiceN = total - choiceN;
-        const bankSize = BankManager.countUnits(BankManager.getBank(subject));
+        const bankSize = BankManager.countUnits(BankManager.getBank(level, subject));
         let meta = nonChoiceN > 0
           ? `選擇題 ${choiceN} 題 + 非選擇題 ${nonChoiceN} 題｜${config.time} 分鐘｜題庫 ${bankSize} 題`
           : `選擇題 ${total} 題｜${config.time} 分鐘｜題庫 ${bankSize} 題`;
         document.getElementById('exam-meta').textContent = meta;
         document.getElementById('exam-id').textContent = `測驗編號：${exam.examId}`;
         document.getElementById('exam-header').style.background = `linear-gradient(135deg, ${config.color}, ${config.color}cc)`;
-        document.getElementById('footer-text').textContent = `國中教育會考模擬試題｜${config.name}｜— 測驗結束 —`;
+        document.getElementById('footer-text').textContent = `${levelInfo.shortName}模擬試題｜${config.name}`;
         ExamEngine.renderExam(exam, document.getElementById('exam-content'));
       }
 
       document.getElementById('btn-regenerate').addEventListener('click', e => {
         e.preventDefault();
-        if (confirm('確定要重新抽題嗎？目前的試題將被替換。')) initExam(true);
+        if (confirm('確定要重新抽題嗎？')) initExam(true);
       });
 
-      document.getElementById('btn-answers').href = `answers.html?subject=${subject}`;
+      document.getElementById('btn-answers').href = `answers.html?level=${level}&subject=${subject}`;
     }
   </script>
 </body>

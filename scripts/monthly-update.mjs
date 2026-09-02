@@ -1,21 +1,20 @@
 /**
- * 每月自動更新各科題庫（各 200 題）
- * 用法：node scripts/monthly-update.mjs
+ * 每月自動更新全部級別題庫（各科 200 題）
  */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {
-  SUBJECTS, TARGET, loadBankArray, countQuestions, mergeBanks,
+  TARGET, loadBankArray, countQuestions, mergeBanks,
   seededShuffle, trimToTarget, writeBank, getMonthSeed, getNextUpdateDate
 } from './lib/bank-utils.mjs';
 import { generateMonthlyQuestions } from './lib/generators.mjs';
+import { generateBank } from './lib/hs-generators.mjs';
+import { EXAM_LEVELS } from './lib/exam-levels.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
 const BANKS = path.join(ROOT, 'assets/js/banks');
-const SUPPLEMENT = path.join(BANKS, 'supplement');
-const GENERATED = path.join(BANKS, 'generated');
 const META = path.join(ROOT, 'assets/data/bank-meta.json');
 const LOG = path.join(ROOT, 'logs/monthly-update.log');
 
@@ -26,8 +25,8 @@ function log(msg) {
   fs.appendFileSync(LOG, line + '\n');
 }
 
-function loadGeneratedPool(subject) {
-  const dir = path.join(GENERATED, subject);
+function loadGeneratedPool(level, subject) {
+  const dir = path.join(BANKS, level, 'generated', subject);
   if (!fs.existsSync(dir)) return [];
   const all = [];
   fs.readdirSync(dir).filter(f => f.endsWith('.js')).forEach(f => {
@@ -36,29 +35,30 @@ function loadGeneratedPool(subject) {
   return all;
 }
 
-function saveGeneratedBatch(subject, seed, questions) {
-  const dir = path.join(GENERATED, subject);
+function saveGeneratedBatch(level, subject, seed, questions) {
+  const dir = path.join(BANKS, level, 'generated', subject);
   fs.mkdirSync(dir, { recursive: true });
   const file = path.join(dir, `${seed}.js`);
-  writeBank(file, subject, questions, 'QuestionBanksGenerated');
-  log(`  新增生成題 ${questions.length} 題 → ${path.relative(ROOT, file)}`);
+  writeBank(file, subject, questions, 'QuestionBanksGenerated', level);
+  log(`  新增生成題 ${questions.length} 題`);
 }
 
-function buildPool(subject) {
-  const main = loadBankArray(path.join(BANKS, `${subject}.js`));
-  const supplement = loadBankArray(path.join(SUPPLEMENT, `${subject}.js`));
-  const generated = loadGeneratedPool(subject);
+function buildPool(level, subject) {
+  const basePath = path.join(BANKS, level, `${subject}.js`);
+  const main = loadBankArray(basePath);
+  const supplement = loadBankArray(path.join(BANKS, level, 'supplement', `${subject}.js`));
+  const generated = loadGeneratedPool(level, subject);
   return mergeBanks(supplement, generated, main);
 }
 
-function selectForMonth(pool, subject, seed) {
+function selectForMonth(pool, subject, seed, nonChoiceCount = 0) {
   const nonChoice = pool.filter(u => u.type === 'non-choice');
   const choice = pool.filter(u => u.type !== 'non-choice');
+  const choiceTarget = TARGET - nonChoiceCount;
 
   const shuffled = seededShuffle(choice, seed + subject.charCodeAt(0));
   let selected = [];
   let count = 0;
-  const choiceTarget = subject === 'math' ? TARGET - 2 : TARGET;
 
   for (const unit of shuffled) {
     if (count >= choiceTarget) break;
@@ -79,66 +79,83 @@ function selectForMonth(pool, subject, seed) {
 
   selected = trimToTarget(selected, choiceTarget);
 
-  if (subject === 'math' && nonChoice.length > 0) {
-    const nc = seededShuffle(nonChoice, seed + 99).slice(0, 2);
-    selected = [...selected, ...nc];
+  if (nonChoiceCount > 0 && nonChoice.length > 0) {
+    selected = [...selected, ...seededShuffle(nonChoice, seed + 99).slice(0, nonChoiceCount)];
   }
 
   return trimToTarget(selected, TARGET);
 }
 
-function writeMeta(results) {
-  const now = new Date();
-  const meta = {
-    lastUpdated: now.toISOString(),
-    lastUpdatedLocal: now.toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
-    nextUpdate: getNextUpdateDate(now),
-    version: getMonthSeed(now),
-    targetPerSubject: TARGET,
-    subjects: results
-  };
-  fs.mkdirSync(path.dirname(META), { recursive: true });
-  fs.writeFileSync(META, JSON.stringify(meta, null, 2), 'utf8');
-  log(`題庫版本：${meta.version}，下次更新：${meta.nextUpdate}`);
+function getNonChoiceCount(level, subject) {
+  if (level === 'junior' && subject === 'math') return 2;
+  if (level === 'gsat' && subject === 'mathA') return 2;
+  if (level === 'ast' && (subject === 'mathA' || subject === 'mathB')) return 3;
+  if (level === 'ast' && ['physics', 'chemistry', 'biology'].includes(subject)) return 2;
+  return 0;
 }
 
 async function main() {
   const seed = getMonthSeed();
-  log(`=== 開始每月題庫更新（版本 ${seed}）===`);
+  log(`=== 每月題庫更新 版本 ${seed} ===`);
 
-  const results = {};
+  const meta = {
+    lastUpdated: new Date().toISOString(),
+    lastUpdatedLocal: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
+    nextUpdate: getNextUpdateDate(),
+    version: seed,
+    targetPerSubject: TARGET,
+    levels: {}
+  };
 
-  for (const subject of SUBJECTS) {
-    log(`處理 ${subject}...`);
+  for (const [level, cfg] of Object.entries(EXAM_LEVELS)) {
+    log(`--- ${level} ---`);
+    meta.levels[level] = { subjects: {} };
 
-    const newGenerated = generateMonthlyQuestions(subject, seed);
-    if (newGenerated.length > 0) {
-      saveGeneratedBatch(subject, seed, newGenerated);
+    for (const subject of cfg.subjects) {
+      log(`${level}/${subject}:`);
+
+      let newGenerated = [];
+      if (level === 'junior') {
+        newGenerated = generateMonthlyQuestions(subject, seed) || [];
+      } else {
+        newGenerated = generateBank(level, subject, 25, seed * 1000 + subject.charCodeAt(0));
+      }
+      if (newGenerated.length > 0) {
+        saveGeneratedBatch(level, subject, seed, newGenerated);
+      }
+
+      let pool = buildPool(level, subject);
+      log(`  題池 ${countQuestions(pool)} 題`);
+
+      if (countQuestions(pool) < TARGET) {
+        const extra = level === 'junior'
+          ? generateMonthlyQuestions(subject, seed + 999)
+          : generateBank(level, subject, TARGET - countQuestions(pool) + 10, seed + 5000);
+        pool = mergeBanks(pool, extra);
+      }
+
+      const nc = getNonChoiceCount(level, subject);
+      let selected = selectForMonth(pool, subject, seed, nc);
+      let count = countQuestions(selected);
+
+      if (count < TARGET) {
+        selected = trimToTarget(mergeBanks(selected, pool), TARGET);
+        count = countQuestions(selected);
+      }
+
+      writeBank(path.join(BANKS, level, `${subject}.js`), subject, selected, 'QuestionBanks', level);
+      log(`  ✓ 輸出 ${count} 題`);
+      meta.levels[level].subjects[subject] = { count, poolSize: countQuestions(pool) };
     }
 
-    const pool = buildPool(subject);
-    log(`  題池共 ${countQuestions(pool)} 題`);
-
-    let selected = selectForMonth(pool, subject, seed);
-    let count = countQuestions(selected);
-
-    if (count < TARGET) {
-      const main = loadBankArray(path.join(BANKS, `${subject}.js`));
-      selected = trimToTarget(mergeBanks(selected, main, pool), TARGET);
-      count = countQuestions(selected);
-    }
-
-    if (count < TARGET) {
-      log(`  ⚠ 題池僅 ${countQuestions(pool)} 題，輸出 ${count} 題（已盡可能補足）`);
-    }
-
-    writeBank(path.join(BANKS, `${subject}.js`), subject, selected);
-    log(`  ✓ 輸出 ${count} 題`);
-    results[subject] = { count, poolSize: countQuestions(pool) };
+    meta.levels[level].lastUpdatedLocal = meta.lastUpdatedLocal;
+    meta.levels[level].version = seed;
+    meta.levels[level].nextUpdate = meta.nextUpdate;
   }
 
-  writeMeta(results);
-  log('=== 更新完成 ===\n');
+  fs.mkdirSync(path.dirname(META), { recursive: true });
+  fs.writeFileSync(META, JSON.stringify(meta, null, 2));
+  log(`完成。下次更新：${meta.nextUpdate}\n`);
 }
 
 main().catch(err => {

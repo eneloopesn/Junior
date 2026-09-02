@@ -1,17 +1,7 @@
 /**
- * 會考模擬考 - 隨機抽題引擎
+ * 重構 exam-engine 支援 junior / gsat / ast
  */
 const ExamEngine = (() => {
-  const SUBJECTS = {
-    chinese: { name: '國文科', color: '#c0392b', choiceCount: 30, time: 70, nonChoiceCount: 0 },
-    english: { name: '英語科', color: '#27ae60', choiceCount: 30, time: 60, nonChoiceCount: 0 },
-    math: { name: '數學科', color: '#2980b9', choiceCount: 20, time: 80, nonChoiceCount: 2 },
-    science: { name: '自然科', color: '#8e44ad', choiceCount: 30, time: 70, nonChoiceCount: 0 },
-    social: { name: '社會科', color: '#d35400', choiceCount: 30, time: 70, nonChoiceCount: 0 }
-  };
-
-  const STORAGE_PREFIX = 'cap_exam_';
-
   function shuffle(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -35,87 +25,123 @@ const ExamEngine = (() => {
           });
         });
       } else if (unit.type === 'non-choice') {
-        result.push({
-          ...unit,
-          unitId: unitIdx,
-          isNonChoice: true
-        });
+        result.push({ ...unit, unitId: unitIdx, isNonChoice: true });
       } else {
-        result.push({
-          ...unit,
-          unitId: unitIdx,
-          isNonChoice: false
-        });
+        result.push({ ...unit, unitId: unitIdx, isNonChoice: false });
       }
     });
     return result;
   }
 
-  function countQuestions(units) {
-    let n = 0;
-    units.forEach(u => {
-      if (u.type === 'group') n += u.questions.length;
-      else n += 1;
-    });
-    return n;
+  function questionKey(q) {
+    return (q.text || '')
+      .replace(/\s*（#[^）]+）/g, '')
+      .replace(/\s*\(Q\d+-\d+\)/g, '')
+      .replace(/\s*\[題號 \d+\]/g, '')
+      .replace(/\s*（\d+）\s*$/g, '')
+      .trim();
   }
 
-  function generateExam(subject) {
-    const config = SUBJECTS[subject];
-    const bank = window.QuestionBanks?.[subject];
-    if (!config || !bank || bank.length === 0) return null;
+  function unitQuestionKeys(unit) {
+    if (unit.type === 'group') return unit.questions.map(questionKey);
+    return [questionKey(unit)];
+  }
 
-    const choiceUnits = bank.filter(u => u.type !== 'non-choice');
-    const nonChoiceUnits = bank.filter(u => u.type === 'non-choice');
+  function hasDuplicateKeys(unit, seen) {
+    return unitQuestionKeys(unit).some(k => !k || seen.has(k));
+  }
 
-    const shuffled = shuffle(choiceUnits);
-    const selectedUnits = [];
-    let questionCount = 0;
+  function markUnitKeys(unit, seen) {
+    unitQuestionKeys(unit).forEach(k => { if (k) seen.add(k); });
+  }
+
+  function unitSize(unit) {
+    return unit.type === 'group' ? unit.questions.length : 1;
+  }
+
+  function selectUniqueUnits(units, targetCount) {
+    const shuffled = shuffle(units);
+    const selected = [];
+    const seen = new Set();
+    let count = 0;
 
     for (const unit of shuffled) {
-      if (questionCount >= config.choiceCount) break;
-      const size = unit.type === 'group' ? unit.questions.length : 1;
-      if (questionCount + size <= config.choiceCount) {
-        selectedUnits.push(unit);
-        questionCount += size;
+      if (count >= targetCount) break;
+      if (hasDuplicateKeys(unit, seen)) continue;
+      const size = unitSize(unit);
+      if (unit.type === 'group' && count + size > targetCount) continue;
+      if (count + size <= targetCount) {
+        markUnitKeys(unit, seen);
+        selected.push(unit);
+        count += size;
       }
     }
 
-    if (questionCount < config.choiceCount) {
+    if (count < targetCount) {
       for (const unit of shuffled) {
-        if (selectedUnits.includes(unit)) continue;
-        if (questionCount >= config.choiceCount) break;
+        if (count >= targetCount) break;
+        if (selected.includes(unit) || hasDuplicateKeys(unit, seen)) continue;
         if (unit.type === 'single') {
-          selectedUnits.push(unit);
-          questionCount += 1;
+          markUnitKeys(unit, seen);
+          selected.push(unit);
+          count += 1;
         }
       }
     }
 
+    return { selected, count };
+  }
+
+  function generateExam(level, subject) {
+    const config = ExamConfig.getSubject(level, subject);
+    const bank = BankManager.getBank(level, subject);
+    if (!config || !bank || bank.length === 0) return null;
+
+    const choiceUnits = bank.filter(u => u.type !== 'non-choice');
+    const nonChoiceUnits = bank.filter(u => u.type === 'non-choice');
+    const { selected: selectedUnits, count: questionCount } = selectUniqueUnits(choiceUnits, config.choiceCount);
+
     let selectedNonChoice = [];
     if (config.nonChoiceCount > 0 && nonChoiceUnits.length > 0) {
-      selectedNonChoice = shuffle(nonChoiceUnits).slice(0, config.nonChoiceCount);
+      const seen = new Set();
+      selectedUnits.forEach(u => markUnitKeys(u, seen));
+      const shuffledNc = shuffle(nonChoiceUnits);
+      for (const unit of shuffledNc) {
+        if (selectedNonChoice.length >= config.nonChoiceCount) break;
+        if (hasDuplicateKeys(unit, seen)) continue;
+        markUnitKeys(unit, seen);
+        selectedNonChoice.push(unit);
+      }
     }
 
-    const choiceQuestions = flattenUnits(selectedUnits).slice(0, config.choiceCount);
-    const nonChoiceQuestions = flattenUnits(selectedNonChoice);
-    const questions = [...choiceQuestions, ...nonChoiceQuestions];
+    const questions = [
+      ...flattenUnits(selectedUnits).slice(0, config.choiceCount),
+      ...flattenUnits(selectedNonChoice)
+    ];
 
     const exam = {
-      subject,
+      level, subject,
       generatedAt: new Date().toISOString(),
       examId: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
       questions: questions.map((q, i) => ({ ...q, number: i + 1 }))
     };
 
-    sessionStorage.setItem(STORAGE_PREFIX + subject, JSON.stringify(exam));
+    sessionStorage.setItem(ExamConfig.storageKey(level, subject), JSON.stringify(exam));
     return exam;
   }
 
-  function getExam(subject) {
-    const raw = sessionStorage.getItem(STORAGE_PREFIX + subject);
+  function getExam(level, subject) {
+    const raw = sessionStorage.getItem(ExamConfig.storageKey(level, subject));
     if (!raw) return null;
     try { return JSON.parse(raw); } catch { return null; }
+  }
+
+  function formatChoiceAnswer(q, labels = ['A', 'B', 'C', 'D']) {
+    const idx = q.answer;
+    if (idx == null || idx < 0 || !q.options?.[idx]) {
+      return q.explanation ? `請參考解析：${q.explanation}` : '（答案資料異常，請重新抽題）';
+    }
+    return `(${labels[idx]}) ${q.options[idx]}`;
   }
 
   function renderOptions(options, labels = ['A', 'B', 'C', 'D']) {
@@ -128,7 +154,8 @@ const ExamEngine = (() => {
   }
 
   function renderExam(exam, container) {
-    const config = SUBJECTS[exam.subject];
+    const config = ExamConfig.getSubject(exam.level, exam.subject);
+    const levelInfo = ExamConfig.getLevel(exam.level);
     let html = '';
     let lastSection = '';
     let lastPassage = '';
@@ -169,20 +196,16 @@ const ExamEngine = (() => {
     });
 
     container.innerHTML = html;
-    document.title = `會考模擬試題｜${config.name}`;
+    document.title = `${levelInfo.shortName}模擬試題｜${config.name}`;
     bindExamInteractions(exam, container);
   }
 
   function bindExamInteractions(exam, container) {
     const labels = ['A', 'B', 'C', 'D'];
-    const scoreBar = container.querySelector('#exam-score-bar');
-    const answeredEl = scoreBar?.querySelector('#score-answered');
-    const correctEl = scoreBar?.querySelector('#score-correct');
-    const wrongEl = scoreBar?.querySelector('#score-wrong');
-
-    let answered = 0;
-    let correct = 0;
-    let wrong = 0;
+    const answeredEl = container.querySelector('#score-answered');
+    const correctEl = container.querySelector('#score-correct');
+    const wrongEl = container.querySelector('#score-wrong');
+    let answered = 0, correct = 0, wrong = 0;
 
     function updateScore() {
       if (answeredEl) answeredEl.textContent = answered;
@@ -200,10 +223,8 @@ const ExamEngine = (() => {
 
       function handleSelect(optionEl) {
         if (questionEl.classList.contains('answered')) return;
-
         const selected = parseInt(optionEl.dataset.index, 10);
         const isCorrect = selected === q.answer;
-
         questionEl.classList.add('answered');
         optionEl.classList.add('selected');
         answered += 1;
@@ -220,7 +241,7 @@ const ExamEngine = (() => {
           options[q.answer]?.classList.add('correct');
           feedbackEl.className = 'answer-feedback feedback-wrong';
           feedbackEl.innerHTML = `<strong>✗ 答錯了</strong>
-            <p class="feedback-correct-answer">正確答案：(${labels[q.answer]}) ${q.options[q.answer]}</p>
+            <p class="feedback-correct-answer">正確答案：${formatChoiceAnswer(q, labels)}</p>
             ${q.explanation ? `<p class="feedback-explanation">${q.explanation}</p>` : ''}`;
         }
         updateScore();
@@ -229,16 +250,14 @@ const ExamEngine = (() => {
       options.forEach(optionEl => {
         optionEl.addEventListener('click', () => handleSelect(optionEl));
         optionEl.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            handleSelect(optionEl);
-          }
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleSelect(optionEl); }
         });
       });
     });
   }
 
   function renderAnswers(exam, container) {
+    const config = ExamConfig.getSubject(exam.level, exam.subject);
     const labels = ['A', 'B', 'C', 'D'];
     let summaryRows = '';
     const choiceQs = exam.questions.filter(q => !q.isNonChoice);
@@ -248,39 +267,36 @@ const ExamEngine = (() => {
       summaryRows += '<tr><th>題號</th>';
       chunk.forEach(q => { summaryRows += `<td>${q.number}</td>`; });
       summaryRows += '</tr><tr><th>答案</th>';
-      chunk.forEach(q => { summaryRows += `<td>${labels[q.answer]}</td>`; });
+      chunk.forEach(q => {
+        const idx = q.answer;
+        summaryRows += `<td>${idx != null && idx >= 0 && labels[idx] ? labels[idx] : '—'}</td>`;
+      });
       summaryRows += '</tr>';
     }
 
     let detailHtml = '';
     exam.questions.forEach(q => {
       if (q.isNonChoice) {
-        detailHtml += `<div class="question">
-          <div class="question-number">${q.number}.</div>
+        detailHtml += `<div class="question"><div class="question-number">${q.number}.</div>
           <p class="correct-answer">參考解答：</p>
-          <div class="explanation">${q.answerText || q.explanation}</div>
-        </div>`;
+          <div class="explanation">${q.answerText || q.explanation}</div></div>`;
       } else {
-        detailHtml += `<div class="question">
-          <div class="question-number">${q.number}.</div>
-          <p class="correct-answer">答案：(${labels[q.answer]}) ${q.options[q.answer]}</p>
-          <div class="explanation">${q.explanation || ''}</div>
-        </div>`;
+        detailHtml += `<div class="question"><div class="question-number">${q.number}.</div>
+          <p class="correct-answer">答案：${formatChoiceAnswer(q, labels)}</p>
+          <div class="explanation">${q.explanation || ''}</div></div>`;
       }
     });
 
     container.innerHTML = `
       <div class="answer-summary">
-        <h3>答案速查表</h3>
+        <h3>${config.name}｜答案速查表</h3>
         <p class="exam-session-info">測驗編號：${exam.examId}｜產生時間：${new Date(exam.generatedAt).toLocaleString('zh-TW')}</p>
         <table>${summaryRows}</table>
       </div>
-      <h2 class="section-title">詳細解析</h2>
-      ${detailHtml}
-    `;
+      <h2 class="section-title">詳細解析</h2>${detailHtml}`;
   }
 
-  return { SUBJECTS, generateExam, getExam, renderExam, renderAnswers, shuffle };
+  return { generateExam, getExam, renderExam, renderAnswers, shuffle };
 })();
 
 window.ExamEngine = ExamEngine;
