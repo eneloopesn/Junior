@@ -1,0 +1,282 @@
+{
+  "lastUpdated": "2026-09-04T07:55:11.573Z",
+  "lastUpdatedLocal": "2026/9/4 下午3:55:11",
+  "nextUpdate": "2026-10-01",
+  "version": 202609,
+  "targetPerSubject": 200,
+  "difficulties": [
+    "easy",
+    "normal",
+    "hard"
+  ],
+  "levels": {
+    "junior": {
+      "subjects": {
+        "chinese": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "english": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "math": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "science": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "social": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        }
+      },
+      "lastUpdatedLocal": "2026/9/4 下午3:55:11",
+      "version": 202609,
+      "nextUpdate": "2026-10-01"
+    },
+    "gsat": {
+      "subjects": {
+        "chinese": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "english": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "mathA": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "mathB": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "science": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "social": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        }
+      },
+      "lastUpdatedLocal": "2026/9/4 下午3:55:11",
+      "version": 202609,
+      "nextUpdate": "2026-10-01"
+    },
+    "ast": {
+      "subjects": {
+        "mathA": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "mathB": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "physics": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "chemistry": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "biology": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "history": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "geography": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        },
+        "civics": {
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
+        }
+      },
+      "lastUpdatedLocal": "2026/9/4 下午3:55:11",
+      "version": 202609,
+      "nextUpdate": "2026-10-01"
+    }
+  }
+}
