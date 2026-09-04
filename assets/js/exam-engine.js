@@ -92,14 +92,30 @@ const ExamEngine = (() => {
     return { selected, count };
   }
 
-  function generateExam(level, subject) {
+  function isUsableUnit(unit) {
+    if (unit.type === 'group') {
+      return Array.isArray(unit.questions) && unit.questions.every(q =>
+        (q.text || '').trim().length >= 8 &&
+        Array.isArray(q.options) && q.options.length >= 2 &&
+        !/補充題/.test(q.text || '')
+      );
+    }
+    const text = (unit.text || '').trim();
+    if (text.length < 8 || /補充題/.test(text)) return false;
+    if (unit.type === 'non-choice') return true;
+    return Array.isArray(unit.options) && unit.options.length >= 2 &&
+      !unit.options.every(o => /^[A-D]$/.test(String(o).trim()));
+  }
+
+  function generateExam(level, subject, difficulty) {
     const config = ExamConfig.getSubject(level, subject);
-    const bank = BankManager.getBank(level, subject);
+    const diff = ExamConfig.normalizeDifficulty(difficulty);
+    const bank = BankManager.getBank(level, subject, diff).filter(isUsableUnit);
     if (!config || !bank || bank.length === 0) return null;
 
     const choiceUnits = bank.filter(u => u.type !== 'non-choice');
     const nonChoiceUnits = bank.filter(u => u.type === 'non-choice');
-    const { selected: selectedUnits, count: questionCount } = selectUniqueUnits(choiceUnits, config.choiceCount);
+    const { selected: selectedUnits } = selectUniqueUnits(choiceUnits, config.choiceCount);
 
     let selectedNonChoice = [];
     if (config.nonChoiceCount > 0 && nonChoiceUnits.length > 0) {
@@ -120,18 +136,18 @@ const ExamEngine = (() => {
     ];
 
     const exam = {
-      level, subject,
+      level, subject, difficulty: diff,
       generatedAt: new Date().toISOString(),
       examId: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
       questions: questions.map((q, i) => ({ ...q, number: i + 1 }))
     };
 
-    sessionStorage.setItem(ExamConfig.storageKey(level, subject), JSON.stringify(exam));
+    sessionStorage.setItem(ExamConfig.storageKey(level, subject, diff), JSON.stringify(exam));
     return exam;
   }
 
-  function getExam(level, subject) {
-    const raw = sessionStorage.getItem(ExamConfig.storageKey(level, subject));
+  function getExam(level, subject, difficulty) {
+    const raw = sessionStorage.getItem(ExamConfig.storageKey(level, subject, difficulty));
     if (!raw) return null;
     try { return JSON.parse(raw); } catch { return null; }
   }

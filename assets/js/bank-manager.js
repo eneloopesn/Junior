@@ -1,5 +1,5 @@
 /**
- * 題庫管理（支援 junior / gsat / ast）
+ * 題庫管理（支援 junior / gsat / ast × easy / normal / hard）
  */
 const BankManager = (() => {
   window.QuestionBanks = window.QuestionBanks || {};
@@ -15,31 +15,47 @@ const BankManager = (() => {
     return n;
   }
 
-  function getBank(level, subject) {
-    if (window.QuestionBanks[level]?.[subject]) {
-      return window.QuestionBanks[level][subject];
+  function getBank(level, subject, difficulty) {
+    const d = ExamConfig.normalizeDifficulty(difficulty);
+    const nested = window.QuestionBanks[level]?.[subject];
+    if (nested && !Array.isArray(nested) && Array.isArray(nested[d])) {
+      return nested[d];
     }
-    if (level === 'junior' && window.QuestionBanks[subject]) {
+    if (Array.isArray(nested)) return nested;
+    if (level === 'junior' && Array.isArray(window.QuestionBanks[subject])) {
       return window.QuestionBanks[subject];
     }
     return [];
   }
 
-  function getBankStats(level) {
+  function getBankStats(level, difficulty) {
     const levelInfo = ExamConfig.getLevel(level);
-    const stats = { total: 0, subjects: {} };
+    const stats = { total: 0, subjects: {}, byDifficulty: {} };
+
+    ExamConfig.getDifficultyIds().forEach(d => {
+      stats.byDifficulty[d] = { total: 0, subjects: {} };
+    });
+
     ExamConfig.getSubjectIds(level).forEach(s => {
-      const count = countUnits(getBank(level, s));
-      stats.subjects[s] = { count, name: levelInfo.subjects[s].name };
+      const perDiff = {};
+      let subjectTotal = 0;
+      ExamConfig.getDifficultyIds().forEach(d => {
+        const count = countUnits(getBank(level, s, d));
+        perDiff[d] = count;
+        subjectTotal += count;
+        stats.byDifficulty[d].subjects[s] = count;
+        stats.byDifficulty[d].total += count;
+      });
+      const focus = difficulty ? ExamConfig.normalizeDifficulty(difficulty) : null;
+      const count = focus ? perDiff[focus] : subjectTotal;
+      stats.subjects[s] = {
+        count,
+        perDiff,
+        name: levelInfo.subjects[s].name
+      };
       stats.total += count;
     });
     return stats;
-  }
-
-  function loadAllBanks(level) {
-    return Promise.all(
-      ExamConfig.getSubjectIds(level).map(s => loadScript(ExamConfig.bankScriptPath(level, s)))
-    );
   }
 
   function loadScript(src) {
@@ -54,8 +70,18 @@ const BankManager = (() => {
     });
   }
 
-  function initForExam(level, subject) {
-    return loadScript(ExamConfig.bankScriptPath(level, subject));
+  function loadAllBanks(level) {
+    const tasks = [];
+    ExamConfig.getSubjectIds(level).forEach(s => {
+      ExamConfig.getDifficultyIds().forEach(d => {
+        tasks.push(loadScript(ExamConfig.bankScriptPath(level, s, d)));
+      });
+    });
+    return Promise.all(tasks);
+  }
+
+  function initForExam(level, subject, difficulty) {
+    return loadScript(ExamConfig.bankScriptPath(level, subject, difficulty));
   }
 
   return { setBase, countUnits, getBank, getBankStats, loadAllBanks, initForExam };

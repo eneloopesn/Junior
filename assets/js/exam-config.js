@@ -1,7 +1,15 @@
 /**
- * 全級別測驗設定
+ * 全級別測驗設定（含難度：簡單 / 普通 / 困難）
  */
 const ExamConfig = (() => {
+  const DIFFICULTIES = {
+    easy: { id: 'easy', name: '簡單', color: '#27ae60' },
+    normal: { id: 'normal', name: '普通', color: '#2980b9' },
+    hard: { id: 'hard', name: '困難', color: '#c0392b' }
+  };
+
+  const DIFFICULTY_IDS = ['easy', 'normal', 'hard'];
+
   const LEVELS = {
     junior: {
       id: 'junior',
@@ -64,17 +72,34 @@ const ExamConfig = (() => {
     return Object.values(LEVELS);
   }
 
-  function storageKey(levelId, subjectId) {
-    return `exam_${levelId}_${subjectId}`;
+  function getDifficulty(diffId) {
+    return DIFFICULTIES[diffId] || DIFFICULTIES.normal;
   }
 
-  function bankScriptPath(levelId, subjectId) {
+  function getDifficultyIds() {
+    return DIFFICULTY_IDS.slice();
+  }
+
+  function normalizeDifficulty(diffId) {
+    return DIFFICULTIES[diffId] ? diffId : 'normal';
+  }
+
+  function storageKey(levelId, subjectId, difficulty) {
+    const d = normalizeDifficulty(difficulty);
+    return `exam_${levelId}_${subjectId}_${d}`;
+  }
+
+  function bankScriptPath(levelId, subjectId, difficulty) {
     const level = LEVELS[levelId];
-    return `assets/js/banks/${level.bankPath}/${subjectId}.js`;
+    const d = normalizeDifficulty(difficulty);
+    return `assets/js/banks/${level.bankPath}/${subjectId}/${d}.js`;
   }
 
   return {
-    LEVELS, getLevel, getSubject, getSubjectIds, getAllLevels, storageKey, bankScriptPath
+    LEVELS, DIFFICULTIES, DIFFICULTY_IDS,
+    getLevel, getSubject, getSubjectIds, getAllLevels,
+    getDifficulty, getDifficultyIds, normalizeDifficulty,
+    storageKey, bankScriptPath
   };
 })();
 
