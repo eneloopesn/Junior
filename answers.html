@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模擬試題｜解答</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <nav class="nav-bar">
+    <div class="container">
+      <a href="#" id="btn-back">← 返回科目</a>
+      <div class="nav-links">
+        <a href="#" id="btn-exam">返回試題</a>
+        <a href="#" id="btn-new-exam" class="no-print">🔄 重新抽題</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="exam-header" id="exam-header" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+    <h1 id="exam-title">模擬試題</h1>
+    <p class="subtitle" id="subject-name"></p>
+    <p class="subtitle">解答與解析</p>
+  </header>
+
+  <div class="container answer-key">
+    <div id="answer-content"></div>
+  </div>
+
+  <footer class="footer"><p id="footer-text"></p></footer>
+
+  <script src="assets/js/exam-config.js"></script>
+  <script src="assets/js/exam-engine.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const level = params.get('level') || 'junior';
+    const subject = params.get('subject');
+    const difficulty = ExamConfig.normalizeDifficulty(params.get('difficulty'));
+    const levelInfo = ExamConfig.getLevel(level);
+    const config = ExamConfig.getSubject(level, subject);
+    const diffInfo = ExamConfig.getDifficulty(difficulty);
+
+    const backLinks = {
+      junior: 'junior/index.html',
+      gsat: 'senior/gsat/index.html',
+      ast: 'senior/ast/index.html'
+    };
+    document.getElementById('btn-back').href = backLinks[level] || 'index.html';
+
+    if (!config || !levelInfo) {
+      document.getElementById('answer-content').innerHTML = '<p>找不到此測驗。</p>';
+    } else {
+      document.getElementById('exam-title').textContent = levelInfo.name + '模擬試題';
+      document.getElementById('subject-name').textContent = `${config.name}｜難度：${diffInfo.name}`;
+      document.getElementById('footer-text').textContent =
+        `${levelInfo.shortName}｜${config.name}｜${diffInfo.name}解答`;
+      document.getElementById('exam-header').style.background =
+        `linear-gradient(135deg, ${diffInfo.color}, #27ae60)`;
+      document.getElementById('btn-exam').href =
+        `exam.html?level=${level}&subject=${subject}&difficulty=${difficulty}`;
+      document.getElementById('btn-new-exam').href =
+        `exam.html?level=${level}&subject=${subject}&difficulty=${difficulty}&new=1`;
+
+      const exam = ExamEngine.getExam(level, subject, difficulty);
+      if (!exam) {
+        document.getElementById('answer-content').innerHTML = `
+          <div class="exam-notice">
+            <h4>尚無測驗紀錄</h4>
+            <p>請先<a href="exam.html?level=${level}&subject=${subject}&difficulty=${difficulty}">開始測驗</a>。</p>
+          </div>`;
+      } else {
+        ExamEngine.renderAnswers(exam, document.getElementById('answer-content'));
+      }
+    }
+  </script>
+</body>
+</html>
