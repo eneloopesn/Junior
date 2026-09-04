@@ -35,8 +35,10 @@
     const params = new URLSearchParams(location.search);
     const level = params.get('level') || 'junior';
     const subject = params.get('subject');
+    const difficulty = ExamConfig.normalizeDifficulty(params.get('difficulty'));
     const levelInfo = ExamConfig.getLevel(level);
     const config = ExamConfig.getSubject(level, subject);
+    const diffInfo = ExamConfig.getDifficulty(difficulty);
 
     const backLinks = {
       junior: 'junior/index.html',
@@ -49,17 +51,22 @@
       document.getElementById('answer-content').innerHTML = '<p>找不到此測驗。</p>';
     } else {
       document.getElementById('exam-title').textContent = levelInfo.name + '模擬試題';
-      document.getElementById('subject-name').textContent = config.name;
-      document.getElementById('footer-text').textContent = `${levelInfo.shortName}｜${config.name}解答`;
-      document.getElementById('btn-exam').href = `exam.html?level=${level}&subject=${subject}`;
-      document.getElementById('btn-new-exam').href = `exam.html?level=${level}&subject=${subject}&new=1`;
+      document.getElementById('subject-name').textContent = `${config.name}｜難度：${diffInfo.name}`;
+      document.getElementById('footer-text').textContent =
+        `${levelInfo.shortName}｜${config.name}｜${diffInfo.name}解答`;
+      document.getElementById('exam-header').style.background =
+        `linear-gradient(135deg, ${diffInfo.color}, #27ae60)`;
+      document.getElementById('btn-exam').href =
+        `exam.html?level=${level}&subject=${subject}&difficulty=${difficulty}`;
+      document.getElementById('btn-new-exam').href =
+        `exam.html?level=${level}&subject=${subject}&difficulty=${difficulty}&new=1`;
 
-      const exam = ExamEngine.getExam(level, subject);
+      const exam = ExamEngine.getExam(level, subject, difficulty);
       if (!exam) {
         document.getElementById('answer-content').innerHTML = `
           <div class="exam-notice">
             <h4>尚無測驗紀錄</h4>
-            <p>請先<a href="exam.html?level=${level}&subject=${subject}">開始測驗</a>。</p>
+            <p>請先<a href="exam.html?level=${level}&subject=${subject}&difficulty=${difficulty}">開始測驗</a>。</p>
           </div>`;
       } else {
         ExamEngine.renderAnswers(exam, document.getElementById('answer-content'));

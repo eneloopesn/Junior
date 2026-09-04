@@ -14,4 +14,5 @@ export const EXAM_LEVELS = {
   }
 };
 
+export const DIFFICULTIES = ['easy', 'normal', 'hard'];
 export const TARGET = 200;

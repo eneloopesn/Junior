@@ -46,8 +46,10 @@
     const params = new URLSearchParams(location.search);
     const level = params.get('level') || 'junior';
     const subject = params.get('subject');
+    const difficulty = ExamConfig.normalizeDifficulty(params.get('difficulty'));
     const levelInfo = ExamConfig.getLevel(level);
     const config = ExamConfig.getSubject(level, subject);
+    const diffInfo = ExamConfig.getDifficulty(difficulty);
 
     const backLinks = {
       junior: 'junior/index.html',
@@ -61,18 +63,18 @@
     } else {
       document.getElementById('exam-title').textContent = levelInfo.name + '模擬試題';
 
-      BankManager.initForExam(level, subject).then(() => initExam()).catch(() => {
+      BankManager.initForExam(level, subject, difficulty).then(() => initExam()).catch(() => {
         document.getElementById('exam-content').innerHTML = '<p>題庫載入失敗。</p>';
       });
 
       function initExam(regenerate) {
         const forceNew = params.get('new') === '1';
-        if (!regenerate && !forceNew && ExamEngine.getExam(level, subject)) {
-          render(ExamEngine.getExam(level, subject));
+        if (!regenerate && !forceNew && ExamEngine.getExam(level, subject, difficulty)) {
+          render(ExamEngine.getExam(level, subject, difficulty));
         } else {
-          const exam = ExamEngine.generateExam(level, subject);
+          const exam = ExamEngine.generateExam(level, subject, difficulty);
           if (!exam) {
-            document.getElementById('exam-content').innerHTML = '<p>題庫尚未建立。</p>';
+            document.getElementById('exam-content').innerHTML = '<p>題庫尚未建立或題目不足。</p>';
             return;
           }
           render(exam);
@@ -80,18 +82,20 @@
       }
 
       function render(exam) {
-        document.getElementById('subject-name').textContent = config.name;
+        document.getElementById('subject-name').textContent = `${config.name}｜難度：${diffInfo.name}`;
         const total = exam.questions.length;
         const choiceN = exam.questions.filter(q => !q.isNonChoice).length;
         const nonChoiceN = total - choiceN;
-        const bankSize = BankManager.countUnits(BankManager.getBank(level, subject));
+        const bankSize = BankManager.countUnits(BankManager.getBank(level, subject, difficulty));
         let meta = nonChoiceN > 0
           ? `選擇題 ${choiceN} 題 + 非選擇題 ${nonChoiceN} 題｜${config.time} 分鐘｜題庫 ${bankSize} 題`
           : `選擇題 ${total} 題｜${config.time} 分鐘｜題庫 ${bankSize} 題`;
         document.getElementById('exam-meta').textContent = meta;
         document.getElementById('exam-id').textContent = `測驗編號：${exam.examId}`;
-        document.getElementById('exam-header').style.background = `linear-gradient(135deg, ${config.color}, ${config.color}cc)`;
-        document.getElementById('footer-text').textContent = `${levelInfo.shortName}模擬試題｜${config.name}`;
+        document.getElementById('exam-header').style.background =
+          `linear-gradient(135deg, ${diffInfo.color}, ${config.color})`;
+        document.getElementById('footer-text').textContent =
+          `${levelInfo.shortName}模擬試題｜${config.name}｜${diffInfo.name}`;
         ExamEngine.renderExam(exam, document.getElementById('exam-content'));
       }
 
@@ -100,7 +104,8 @@
         if (confirm('確定要重新抽題嗎？')) initExam(true);
       });
 
-      document.getElementById('btn-answers').href = `answers.html?level=${level}&subject=${subject}`;
+      document.getElementById('btn-answers').href =
+        `answers.html?level=${level}&subject=${subject}&difficulty=${difficulty}`;
     }
   </script>
 </body>

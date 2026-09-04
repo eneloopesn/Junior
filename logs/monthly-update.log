@@ -230,3 +230,123 @@
 [2026-09-02T09:39:05.375Z]   ✓ 輸出 200 題
 [2026-09-02T09:39:05.375Z] 完成。下次更新：2026-10-01
 
+[2026-09-04T07:55:11.569Z] === 每月題庫更新 版本 202609（含難度三級）===
+[2026-09-04T07:55:11.617Z] --- junior ---
+[2026-09-04T07:55:11.617Z] junior/chinese/easy:
+[2026-09-04T07:55:11.622Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\chinese\easy.js
+[2026-09-04T07:55:11.622Z] junior/chinese/normal:
+[2026-09-04T07:55:11.624Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\chinese\normal.js
+[2026-09-04T07:55:11.624Z] junior/chinese/hard:
+[2026-09-04T07:55:11.627Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\chinese\hard.js
+[2026-09-04T07:55:11.627Z] junior/english/easy:
+[2026-09-04T07:55:11.629Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\english\easy.js
+[2026-09-04T07:55:11.629Z] junior/english/normal:
+[2026-09-04T07:55:11.631Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\english\normal.js
+[2026-09-04T07:55:11.632Z] junior/english/hard:
+[2026-09-04T07:55:11.633Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\english\hard.js
+[2026-09-04T07:55:11.633Z] junior/math/easy:
+[2026-09-04T07:55:11.637Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\math\easy.js
+[2026-09-04T07:55:11.637Z] junior/math/normal:
+[2026-09-04T07:55:11.640Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\math\normal.js
+[2026-09-04T07:55:11.640Z] junior/math/hard:
+[2026-09-04T07:55:11.642Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\math\hard.js
+[2026-09-04T07:55:11.642Z] junior/science/easy:
+[2026-09-04T07:55:11.645Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\science\easy.js
+[2026-09-04T07:55:11.645Z] junior/science/normal:
+[2026-09-04T07:55:11.648Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\science\normal.js
+[2026-09-04T07:55:11.648Z] junior/science/hard:
+[2026-09-04T07:55:11.650Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\science\hard.js
+[2026-09-04T07:55:11.650Z] junior/social/easy:
+[2026-09-04T07:55:11.652Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\social\easy.js
+[2026-09-04T07:55:11.653Z] junior/social/normal:
+[2026-09-04T07:55:11.654Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\social\normal.js
+[2026-09-04T07:55:11.654Z] junior/social/hard:
+[2026-09-04T07:55:11.656Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\junior\social\hard.js
+[2026-09-04T07:55:11.656Z] --- gsat ---
+[2026-09-04T07:55:11.657Z] gsat/chinese/easy:
+[2026-09-04T07:55:11.659Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\chinese\easy.js
+[2026-09-04T07:55:11.659Z] gsat/chinese/normal:
+[2026-09-04T07:55:11.662Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\chinese\normal.js
+[2026-09-04T07:55:11.662Z] gsat/chinese/hard:
+[2026-09-04T07:55:11.664Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\chinese\hard.js
+[2026-09-04T07:55:11.665Z] gsat/english/easy:
+[2026-09-04T07:55:11.666Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\english\easy.js
+[2026-09-04T07:55:11.666Z] gsat/english/normal:
+[2026-09-04T07:55:11.667Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\english\normal.js
+[2026-09-04T07:55:11.667Z] gsat/english/hard:
+[2026-09-04T07:55:11.668Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\english\hard.js
+[2026-09-04T07:55:11.669Z] gsat/mathA/easy:
+[2026-09-04T07:55:11.678Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\mathA\easy.js
+[2026-09-04T07:55:11.678Z] gsat/mathA/normal:
+[2026-09-04T07:55:11.682Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\mathA\normal.js
+[2026-09-04T07:55:11.682Z] gsat/mathA/hard:
+[2026-09-04T07:55:11.685Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\mathA\hard.js
+[2026-09-04T07:55:11.685Z] gsat/mathB/easy:
+[2026-09-04T07:55:11.692Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\mathB\easy.js
+[2026-09-04T07:55:11.692Z] gsat/mathB/normal:
+[2026-09-04T07:55:11.696Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\mathB\normal.js
+[2026-09-04T07:55:11.697Z] gsat/mathB/hard:
+[2026-09-04T07:55:11.700Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\mathB\hard.js
+[2026-09-04T07:55:11.700Z] gsat/science/easy:
+[2026-09-04T07:55:11.701Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\science\easy.js
+[2026-09-04T07:55:11.701Z] gsat/science/normal:
+[2026-09-04T07:55:11.703Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\science\normal.js
+[2026-09-04T07:55:11.703Z] gsat/science/hard:
+[2026-09-04T07:55:11.705Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\science\hard.js
+[2026-09-04T07:55:11.705Z] gsat/social/easy:
+[2026-09-04T07:55:11.706Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\social\easy.js
+[2026-09-04T07:55:11.706Z] gsat/social/normal:
+[2026-09-04T07:55:11.709Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\social\normal.js
+[2026-09-04T07:55:11.709Z] gsat/social/hard:
+[2026-09-04T07:55:11.711Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\gsat\social\hard.js
+[2026-09-04T07:55:11.711Z] --- ast ---
+[2026-09-04T07:55:11.711Z] ast/mathA/easy:
+[2026-09-04T07:55:11.717Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\mathA\easy.js
+[2026-09-04T07:55:11.717Z] ast/mathA/normal:
+[2026-09-04T07:55:11.722Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\mathA\normal.js
+[2026-09-04T07:55:11.722Z] ast/mathA/hard:
+[2026-09-04T07:55:11.725Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\mathA\hard.js
+[2026-09-04T07:55:11.725Z] ast/mathB/easy:
+[2026-09-04T07:55:11.731Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\mathB\easy.js
+[2026-09-04T07:55:11.731Z] ast/mathB/normal:
+[2026-09-04T07:55:11.735Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\mathB\normal.js
+[2026-09-04T07:55:11.735Z] ast/mathB/hard:
+[2026-09-04T07:55:11.738Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\mathB\hard.js
+[2026-09-04T07:55:11.738Z] ast/physics/easy:
+[2026-09-04T07:55:11.740Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\physics\easy.js
+[2026-09-04T07:55:11.740Z] ast/physics/normal:
+[2026-09-04T07:55:11.742Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\physics\normal.js
+[2026-09-04T07:55:11.742Z] ast/physics/hard:
+[2026-09-04T07:55:11.745Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\physics\hard.js
+[2026-09-04T07:55:11.745Z] ast/chemistry/easy:
+[2026-09-04T07:55:11.748Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\chemistry\easy.js
+[2026-09-04T07:55:11.748Z] ast/chemistry/normal:
+[2026-09-04T07:55:11.749Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\chemistry\normal.js
+[2026-09-04T07:55:11.749Z] ast/chemistry/hard:
+[2026-09-04T07:55:11.751Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\chemistry\hard.js
+[2026-09-04T07:55:11.751Z] ast/biology/easy:
+[2026-09-04T07:55:11.754Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\biology\easy.js
+[2026-09-04T07:55:11.754Z] ast/biology/normal:
+[2026-09-04T07:55:11.756Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\biology\normal.js
+[2026-09-04T07:55:11.757Z] ast/biology/hard:
+[2026-09-04T07:55:11.760Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\biology\hard.js
+[2026-09-04T07:55:11.760Z] ast/history/easy:
+[2026-09-04T07:55:11.762Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\history\easy.js
+[2026-09-04T07:55:11.762Z] ast/history/normal:
+[2026-09-04T07:55:11.764Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\history\normal.js
+[2026-09-04T07:55:11.765Z] ast/history/hard:
+[2026-09-04T07:55:11.766Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\history\hard.js
+[2026-09-04T07:55:11.766Z] ast/geography/easy:
+[2026-09-04T07:55:11.768Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\geography\easy.js
+[2026-09-04T07:55:11.768Z] ast/geography/normal:
+[2026-09-04T07:55:11.769Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\geography\normal.js
+[2026-09-04T07:55:11.769Z] ast/geography/hard:
+[2026-09-04T07:55:11.771Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\geography\hard.js
+[2026-09-04T07:55:11.771Z] ast/civics/easy:
+[2026-09-04T07:55:11.773Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\civics\easy.js
+[2026-09-04T07:55:11.773Z] ast/civics/normal:
+[2026-09-04T07:55:11.775Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\civics\normal.js
+[2026-09-04T07:55:11.775Z] ast/civics/hard:
+[2026-09-04T07:55:11.777Z]   ✓ 輸出 200 題 → D:\Junior\assets\js\banks\ast\civics\hard.js
+[2026-09-04T07:55:11.778Z] 完成。下次更新：2026-10-01
+

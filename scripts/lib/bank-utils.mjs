@@ -150,22 +150,30 @@ export function trimToTarget(units, target) {
 }
 
 export function serializeQuestion(q, indent = '  ') {
+  const diffPart = q.difficulty != null ? `, difficulty: ${JSON.stringify(q.difficulty)}` : '';
   if (q.type === 'group') {
-    const qs = q.questions.map(sq =>
-      `{ text: ${JSON.stringify(sq.text)}, options: ${JSON.stringify(sq.options)}, answer: ${sq.answer}, explanation: ${JSON.stringify(sq.explanation)} }`
-    ).join(',\n      ');
-    return `${indent}{\n${indent}  type: 'group', section: ${JSON.stringify(q.section)},\n${indent}  passage: ${JSON.stringify(q.passage)},\n${indent}  questions: [\n      ${qs}\n${indent}  ]\n${indent}}`;
+    const qs = q.questions.map(sq => {
+      const sqDiff = sq.difficulty != null ? `, difficulty: ${JSON.stringify(sq.difficulty)}` : '';
+      return `{ text: ${JSON.stringify(sq.text)}, options: ${JSON.stringify(sq.options)}, answer: ${sq.answer}, explanation: ${JSON.stringify(sq.explanation)}${sqDiff} }`;
+    }).join(',\n      ');
+    return `${indent}{\n${indent}  type: 'group', section: ${JSON.stringify(q.section)},\n${indent}  passage: ${JSON.stringify(q.passage)},\n${indent}  questions: [\n      ${qs}\n${indent}  ]${diffPart}\n${indent}}`;
   }
   if (q.type === 'non-choice') {
-    return `${indent}{ type: 'non-choice', section: ${JSON.stringify(q.section)}, text: ${JSON.stringify(q.text)}, answerText: ${JSON.stringify(q.answerText)}, explanation: ${JSON.stringify(q.explanation)} }`;
+    return `${indent}{ type: 'non-choice', section: ${JSON.stringify(q.section)}, text: ${JSON.stringify(q.text)}, answerText: ${JSON.stringify(q.answerText)}, explanation: ${JSON.stringify(q.explanation)}${diffPart} }`;
   }
-  return `${indent}{ type: 'single', section: ${JSON.stringify(q.section)}, text: ${JSON.stringify(q.text)}, options: ${JSON.stringify(q.options)}, answer: ${q.answer}, explanation: ${JSON.stringify(q.explanation)} }`;
+  return `${indent}{ type: 'single', section: ${JSON.stringify(q.section)}, text: ${JSON.stringify(q.text)}, options: ${JSON.stringify(q.options)}, answer: ${q.answer}, explanation: ${JSON.stringify(q.explanation)}${diffPart} }`;
 }
 
-export function writeBank(filePath, subject, units, varName = 'QuestionBanks', level = null) {
+export function writeBank(filePath, subject, units, varName = 'QuestionBanks', level = null, difficulty = null) {
   const lines = units.map(u => serializeQuestion(u)).join(',\n\n');
   let content;
-  if (level) {
+  if (level && difficulty) {
+    content =
+      `window.${varName} = window.${varName} || {};\n` +
+      `window.${varName}.${level} = window.${varName}.${level} || {};\n` +
+      `window.${varName}.${level}.${subject} = window.${varName}.${level}.${subject} || {};\n` +
+      `window.${varName}.${level}.${subject}.${difficulty} = [\n${lines}\n];\n`;
+  } else if (level) {
     content = `window.${varName} = window.${varName} || {};\nwindow.${varName}.${level} = window.${varName}.${level} || {};\nwindow.${varName}.${level}.${subject} = [\n${lines}\n];\n`;
   } else {
     content = `window.${varName} = window.${varName} || {};\nwindow.${varName}.${subject} = [\n${lines}\n];\n`;
