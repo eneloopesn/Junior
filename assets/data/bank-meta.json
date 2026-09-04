@@ -1,104 +1,280 @@
 {
-  "lastUpdated": "2026-09-02T09:39:05.147Z",
-  "lastUpdatedLocal": "2026/9/2 下午5:39:05",
+  "lastUpdated": "2026-09-04T07:55:11.573Z",
+  "lastUpdatedLocal": "2026/9/4 下午3:55:11",
   "nextUpdate": "2026-10-01",
   "version": 202609,
   "targetPerSubject": 200,
+  "difficulties": [
+    "easy",
+    "normal",
+    "hard"
+  ],
   "levels": {
     "junior": {
       "subjects": {
         "chinese": {
-          "count": 200,
-          "poolSize": 210
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "english": {
-          "count": 200,
-          "poolSize": 215
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "math": {
-          "count": 200,
-          "poolSize": 215
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "science": {
-          "count": 200,
-          "poolSize": 204
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "social": {
-          "count": 200,
-          "poolSize": 219
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         }
       },
-      "lastUpdatedLocal": "2026/9/2 下午5:39:05",
+      "lastUpdatedLocal": "2026/9/4 下午3:55:11",
       "version": 202609,
       "nextUpdate": "2026-10-01"
     },
     "gsat": {
       "subjects": {
         "chinese": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "english": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "mathA": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "mathB": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "science": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "social": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         }
       },
-      "lastUpdatedLocal": "2026/9/2 下午5:39:05",
+      "lastUpdatedLocal": "2026/9/4 下午3:55:11",
       "version": 202609,
       "nextUpdate": "2026-10-01"
     },
     "ast": {
       "subjects": {
         "mathA": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "mathB": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "physics": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "chemistry": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "biology": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "history": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "geography": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         },
         "civics": {
-          "count": 200,
-          "poolSize": 200
+          "difficulties": {
+            "easy": {
+              "count": 200
+            },
+            "normal": {
+              "count": 200
+            },
+            "hard": {
+              "count": 200
+            }
+          }
         }
       },
-      "lastUpdatedLocal": "2026/9/2 下午5:39:05",
+      "lastUpdatedLocal": "2026/9/4 下午3:55:11",
       "version": 202609,
       "nextUpdate": "2026-10-01"
     }
