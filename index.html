@@ -24,7 +24,7 @@
     </section>
 
     <div class="level-grid">
-      <a href="junior/index.html" class="level-card level-junior">
+      <a href="junior/index.html" class="level-card level-junior" data-auth-zone="junior">
         <div class="level-icon">🏫</div>
         <h3>國中</h3>
         <p class="level-desc">教育會考模擬試題</p>
@@ -35,7 +35,7 @@
         <span class="btn btn-primary">進入國中測驗 →</span>
       </a>
 
-      <a href="senior/index.html" class="level-card level-senior">
+      <a href="senior/index.html" class="level-card level-senior" data-auth-zone="senior">
         <div class="level-icon">🎓</div>
         <h3>高中</h3>
         <p class="level-desc">學測 + 分科測驗模擬試題</p>
@@ -50,11 +50,12 @@
     <div class="exam-notice">
       <h4>📋 平台功能</h4>
       <ul>
+        <li>進入國中／高中測驗區需輸入密碼</li>
         <li>各科依難度分為簡單、普通、困難，每級獨立 200 題題庫</li>
         <li>每次測驗從該難度題庫隨機抽題，題目組合不同且不重複</li>
         <li>選擇題可點選作答，立即顯示答對／答錯與解析</li>
         <li>另附解答頁面，供完整對照與複習</li>
-       <!-- <li>每月 1 日自動更新各科各難度題庫（執行 update-monthly.bat）</li> -->
+        <li>每月 1 日自動更新各科各難度題庫（執行 update-monthly.bat）</li>
       </ul>
     </div>
   </div>
@@ -62,5 +63,9 @@
   <footer class="footer">
     <p>模擬考題平台｜供教學使用</p>
   </footer>
+
+  <script src="assets/js/auth-config.js"></script>
+  <script src="assets/js/auth-gate.js"></script>
+  <script>AuthGate.bindHomeLinks();</script>
 </body>
 </html>

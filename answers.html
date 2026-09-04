@@ -29,27 +29,36 @@
 
   <footer class="footer"><p id="footer-text"></p></footer>
 
+  <script src="assets/js/auth-config.js"></script>
+  <script src="assets/js/auth-gate.js"></script>
   <script src="assets/js/exam-config.js"></script>
   <script src="assets/js/exam-engine.js"></script>
   <script>
-    const params = new URLSearchParams(location.search);
-    const level = params.get('level') || 'junior';
-    const subject = params.get('subject');
-    const difficulty = ExamConfig.normalizeDifficulty(params.get('difficulty'));
-    const levelInfo = ExamConfig.getLevel(level);
-    const config = ExamConfig.getSubject(level, subject);
-    const diffInfo = ExamConfig.getDifficulty(difficulty);
+    (async function () {
+      const params = new URLSearchParams(location.search);
+      const level = params.get('level') || 'junior';
+      const zone = level === 'junior' ? 'junior' : 'senior';
+      const ok = await AuthGate.guardPage({ zone, homeUrl: 'index.html' });
+      if (!ok) return;
 
-    const backLinks = {
-      junior: 'junior/index.html',
-      gsat: 'senior/gsat/index.html',
-      ast: 'senior/ast/index.html'
-    };
-    document.getElementById('btn-back').href = backLinks[level] || 'index.html';
+      const subject = params.get('subject');
+      const difficulty = ExamConfig.normalizeDifficulty(params.get('difficulty'));
+      const levelInfo = ExamConfig.getLevel(level);
+      const config = ExamConfig.getSubject(level, subject);
+      const diffInfo = ExamConfig.getDifficulty(difficulty);
 
-    if (!config || !levelInfo) {
-      document.getElementById('answer-content').innerHTML = '<p>找不到此測驗。</p>';
-    } else {
+      const backLinks = {
+        junior: 'junior/index.html',
+        gsat: 'senior/gsat/index.html',
+        ast: 'senior/ast/index.html'
+      };
+      document.getElementById('btn-back').href = backLinks[level] || 'index.html';
+
+      if (!config || !levelInfo) {
+        document.getElementById('answer-content').innerHTML = '<p>找不到此測驗。</p>';
+        return;
+      }
+
       document.getElementById('exam-title').textContent = levelInfo.name + '模擬試題';
       document.getElementById('subject-name').textContent = `${config.name}｜難度：${diffInfo.name}`;
       document.getElementById('footer-text').textContent =
@@ -71,7 +80,7 @@
       } else {
         ExamEngine.renderAnswers(exam, document.getElementById('answer-content'));
       }
-    }
+    })();
   </script>
 </body>
 </html>

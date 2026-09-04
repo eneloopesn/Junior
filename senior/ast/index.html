@@ -31,8 +31,22 @@
 
   <footer class="footer"><p>高中分科測驗模擬試題</p></footer>
 
-  <script src="../../assets/js/exam-config.js"></script>
-  <script src="../../assets/js/bank-manager.js"></script>
-  <script src="../../assets/js/level-index.js"></script>
+  <script src="../../assets/js/auth-config.js"></script>
+  <script src="../../assets/js/auth-gate.js"></script>
+  <script>
+    AuthGate.guardPage({ zone: 'senior', homeUrl: '../../index.html' }).then(ok => {
+      if (!ok) return;
+      const s1 = document.createElement('script'); s1.src = '../../assets/js/exam-config.js';
+      s1.onload = () => {
+        const s2 = document.createElement('script'); s2.src = '../../assets/js/bank-manager.js';
+        s2.onload = () => {
+          const s3 = document.createElement('script'); s3.src = '../../assets/js/level-index.js';
+          document.body.appendChild(s3);
+        };
+        document.body.appendChild(s2);
+      };
+      document.body.appendChild(s1);
+    });
+  </script>
 </body>
 </html>
