@@ -4,12 +4,12 @@
  */
 const AuthConfig = {
   junior: {
-    password: 'Junior2026',
+    password: '0717',
     label: '國中測驗',
     storageKey: 'exam_auth_junior'
   },
   senior: {
-    password: 'Senior2026',
+    password: '0717',
     label: '高中測驗',
     storageKey: 'exam_auth_senior'
   }
