@@ -3,6 +3,9 @@
  */
 import fs from 'fs';
 import path from 'path';
+import { normalizedStemKey } from './stem-key.mjs';
+
+export { normalizedStemKey } from './stem-key.mjs';
 
 export const SUBJECTS = ['chinese', 'english', 'math', 'science', 'social'];
 export const TARGET = 200;
@@ -51,30 +54,17 @@ export function questionKey(q) {
     .trim();
 }
 
-/** 考試抽題用：去掉裝飾標籤後比對，避免同卷抽到包裝不同、內容相同的題 */
-export function normalizedStemKey(q) {
-  return (q.text || '')
-    .replace(/【[^】]*】/g, '')
-    .replace(/^(?:Basic|Practice|Advanced):\s*/i, '')
-    .replace(/\[Q\d+\]\s*/gi, '')
-    .replace(/\s*（#[^）]+）/g, '')
-    .replace(/\s*\(Q\d+-\d+\)/g, '')
-    .replace(/\s*\[題號 \d+\]/g, '')
-    .replace(/\s*（\d+）\s*$/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
+/** 去重鍵：以正規化題幹為準（忽略裝飾包裝） */
 export function unitQuestionKeys(unit) {
-  if (unit.type === 'group') return unit.questions.map(questionKey);
-  return [questionKey(unit)];
+  if (unit.type === 'group') return unit.questions.map(normalizedStemKey);
+  return [normalizedStemKey(unit)];
 }
 
 export function dedupeKey(q) {
   if (q.type === 'group') {
     return 'g:' + unitQuestionKeys(q).join('|');
   }
-  return 's:' + questionKey(q);
+  return 's:' + normalizedStemKey(q);
 }
 
 export function mergeBanks(...arrays) {
