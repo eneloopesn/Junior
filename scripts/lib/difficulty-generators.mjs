@@ -3,6 +3,14 @@
  * 禁止「補充題」與 options:['A','B','C','D']
  */
 import { questionKey, unitQuestionKeys } from './bank-utils.mjs';
+import {
+  JUNIOR_SCIENCE_FACTS,
+  GSAT_SCIENCE_FACTS,
+  JUNIOR_SOCIAL_FACTS,
+  GSAT_SOCIAL_FACTS,
+  JUNIOR_ENGLISH_VOCAB,
+  GSAT_ENGLISH_VOCAB,
+} from './level-fact-pools.mjs';
 
 export const DIFFICULTIES = ['easy', 'normal', 'hard'];
 
@@ -343,58 +351,6 @@ const ENGLISH_VOCAB = [
   ['solution', 'an answer to a problem', 'a question', 'a mistake', 'a delay'],
 ];
 
-const SCIENCE_FACTS = [
-  ['物理', '力的 SI 單位為何？', '牛頓', '焦耳', '瓦特', '帕斯卡', '力的 SI 單位為牛頓（N）。'],
-  ['物理', '光在真空中約每秒走多少公里？', '30 萬', '3 萬', '3000', '300', '光速約每秒 30 萬公里。'],
-  ['物理', '下列何者為電的良導體？', '銅', '橡膠', '玻璃', '塑膠', '銅為良導體。'],
-  ['物理', '物體慣性與何者有關？', '質量', '速度', '顏色', '溫度', '慣性取決於質量。'],
-  ['物理', '功的單位為何？', '焦耳', '牛頓', '安培', '伏特', '功的單位為焦耳。'],
-  ['物理', '聲音無法在何處傳播？', '真空', '空氣', '水', '鋼鐵', '真空中無介質，聲音無法傳播。'],
-  ['物理', '磁鐵一定會指向哪一方？', '北方', '南方', '東方', '西方', '磁針 N 極大致指向北方。'],
-  ['化學', '下列何者為純物質？', '蒸餾水', '空氣', '牛奶', '海水', '蒸餾水為純物質。'],
-  ['化學', '氧氣的化學式為何？', 'O₂', 'CO₂', 'H₂O', 'NaCl', '氧氣為 O₂。'],
-  ['化學', '下列何者為物理變化？', '冰融化', '鐵生鏽', '燃燒', '發霉', '冰融化為物理變化。'],
-  ['化學', '酸的水溶液能使藍色石蕊試紙變成？', '紅色', '藍色', '綠色', '黃色', '酸使藍石蕊變紅。'],
-  ['化學', '水的化學式為何？', 'H₂O', 'CO₂', 'O₂', 'NaOH', '水為 H₂O。'],
-  ['化學', '下列何者屬於金屬？', '鐵', '硫', '碳', '氧', '鐵為金屬。'],
-  ['生物', '光合作用主要在哪個構造進行？', '葉綠體', '粒線體', '細胞核', '液胞', '葉綠體進行光合作用。'],
-  ['生物', '人體血液循環的主要器官為何？', '心臟', '肺', '肝', '腎', '心臟推動血液循環。'],
-  ['生物', '下列何者為消費者？', '兔子', '草', '藻類', '藍綠菌', '兔子以植物為食，為消費者。'],
-  ['生物', '細胞的遺傳物質主要位於？', '細胞核', '細胞膜', '細胞壁', '液胞', '遺傳物質主要在細胞核。'],
-  ['生物', '人體吸收養分的主要器官是？', '小腸', '大腸', '胃', '食道', '小腸是主要吸收器官。'],
-  ['地科', '地球內部由外而內第一層為何？', '地殼', '地函', '地核', '大氣圈', '最外層為地殼。'],
-  ['地科', '颱風主要生成於哪類地區？', '熱帶海洋', '極地', '沙漠', '高海拔山區', '颱風生成於熱帶海洋。'],
-  ['地科', '化石主要保存在哪類岩石中？', '沉積岩', '火成岩', '變質岩', '玄武岩', '化石主要在沉積岩。'],
-  ['地科', '月球本身不發光，我們看見月光是因為？', '反射太陽光', '月球燃燒', '地球發光', '星光折射', '月光為反射太陽光。'],
-  ['地科', '四季變化主要與何者有關？', '地球公轉與傾角', '月球圓缺', '潮汐', '火山', '四季與公轉及地軸傾角有關。'],
-  ['物理', '電壓的單位為何？', '伏特', '安培', '歐姆', '瓦特', '電壓單位為伏特（V）。'],
-  ['化學', '中和反應的產物通常包含？', '鹽與水', '只有酸', '只有鹼', '只有氣體', '酸鹼中和常生成鹽與水。'],
-  ['生物', '呼吸作用主要在哪個胞器進行？', '粒線體', '葉綠體', '核糖體', '高基氏體', '粒線體進行細胞呼吸。'],
-];
-
-const SOCIAL_FACTS = [
-  ['歷史', '鄭成功驅逐荷蘭人的年份約為？', '1661', '1624', '1683', '1895', '1661 年鄭成功攻台。'],
-  ['歷史', '甲午戰爭戰敗後，清廷簽訂？', '馬關條約', '南京條約', '天津條約', '辛丑條約', '甲午戰爭後簽馬關條約。'],
-  ['歷史', '臺灣日治時期開始於？', '1895', '1661', '1945', '1911', '1895 年開始日治。'],
-  ['歷史', '中華民國建立於？', '1911', '1895', '1949', '1945', '1911 年辛亥革命後建立。'],
-  ['地理', '臺灣最高峰是？', '玉山', '雪山', '阿里山', '大霸尖山', '玉山為臺灣最高峰。'],
-  ['地理', '臺灣位於哪兩板塊交界附近？', '歐亞板塊與菲律賓海板塊', '印度與非洲', '北美與太平洋', '南美與南極', '臺灣位於歐亞與菲律賓海板塊交界。'],
-  ['地理', '臺灣氣候大致屬？', '亞熱帶季風', '極地氣候', '沙漠氣候', '地中海型', '臺灣大致為亞熱帶季風氣候。'],
-  ['公民', '民主政治強調的核心價值之一是？', '主權在民', '世襲君主', '軍閥統治', '封閉言論', '民主強調主權在民。'],
-  ['公民', '我國最高立法機關是？', '立法院', '行政院', '司法院', '考試院', '立法院為最高立法機關。'],
-  ['公民', '憲法保障人民的基本權利，下列何者屬之？', '言論自由', '違法特權', '任意侵權', '逃稅自由', '言論自由為基本權利。'],
-  ['歷史', '二二八事件發生於？', '1947', '1945', '1949', '1950', '二二八事件發生於 1947。'],
-  ['地理', '濁水溪大致流經臺灣哪個區域？', '中部', '最北端', '最南端', '外島', '濁水溪位於臺灣中部。'],
-  ['公民', '三權分立主要指？', '行政、立法、司法', '軍、警、情', '中央、地方、村里', '士、農、工', '三權為行政立法司法。'],
-  ['歷史', '開羅宣言與臺灣地位相關討論常提及於？', '二次大戰後期', '明朝', '清初', '日治初期', '開羅宣言屬二戰後期。'],
-  ['地理', '台灣海峽分隔臺灣與？', '中國大陸', '日本', '菲律賓', '韓國', '台灣海峽分隔臺灣與大陸。'],
-  ['公民', '地方自治的意義接近？', '地方事務由地方處理', '全部由中央決定', '軍隊管理地方', '禁止選舉', '地方自治強調地方自主。'],
-  ['歷史', '臺灣光復年為？', '1945', '1895', '1911', '1949', '1945 年臺灣光復。'],
-  ['地理', '東北季風主要盛行於？', '冬季', '夏季', '全年無風', '僅春季', '東北季風冬季盛行。'],
-  ['公民', '投票權屬於？', '參政權', '社會權以外的無關權利', '財產權唯一內容', '義務而非權利', '投票屬參政權。'],
-  ['歷史', '荷據時期主要據點包含？', '大員（安平）', '淡水紅毛城以外無關', '僅花蓮', '僅澎湖外海無據點', '荷據以大員為中心。'],
-];
-
 const AST_HISTORY = [
   ['春秋戰國時期「百家爭鳴」反映什麼現象？', '思想文化多元發展', '軍事完全統一', '商業停滯', '文字消失', '諸子百家並起。'],
   ['秦朝統一後推行的重要制度之一是？', '中央集權與郡縣制', '封建分封擴大', '取消文字', '廢除法律', '秦行郡縣、中央集權。'],
@@ -422,136 +378,218 @@ const AST_GEO = [
 ];
 
 function makeChineseQuestion(r, seed, idx, difficulty, level) {
+  const isJunior = level === 'junior';
+  // 國中用較常見成語／基礎論語；高中用後段較文言、素養表述
+  const idioms = isJunior
+    ? CHINESE_IDIOMS.slice(0, 20)
+    : CHINESE_IDIOMS.slice(15);
+  const phonetics = isJunior
+    ? CHINESE_PHONETICS.slice(0, 14)
+    : CHINESE_PHONETICS.slice(10);
+  const rhetoric = isJunior
+    ? RHETORIC.slice(0, 12)
+    : RHETORIC.slice(8);
+  const classics = isJunior
+    ? CLASSIC_LINES.slice(0, 12)
+    : CLASSIC_LINES.slice(8);
   const kind = (seed + idx * 17) % 5;
   const tone = difficulty === 'easy' ? '基礎' : difficulty === 'hard' ? '進階綜合' : '應用理解';
-  const frame = pick(r, ['課堂練習', '模擬測驗', '單元評量', '綜合複習', '素養挑題']);
-  const setId = idx + 1;
+  const frame = pick(r, isJunior
+    ? ['課堂練習', '段考複習', '會考練習', '單元評量']
+    : ['學測模擬', '素養挑題', '綜合複習', '進階評量']);
+  const levelTag = isJunior ? '國中會考' : '高中學測';
 
   if (kind === 0) {
-    const item = CHINESE_IDIOMS[(idx + seed) % CHINESE_IDIOMS.length];
+    const item = idioms[(idx + seed) % idioms.length];
     const [idiom, correct, w1, w2, w3] = item;
-    const ctx = pick(r, ['語意理解', '成語運用', '閱讀素養', '文句判讀']);
+    const ctx = pick(r, isJunior
+      ? ['日常對話', '課堂造句', '閱讀短文', '寫作修改']
+      : ['語文素養', '古今對讀', '議論應用', '篇章判讀']);
+    const text = isJunior
+      ? `【${levelTag}・${tone}・${idx + 1}】在「${ctx}」練習中，「${idiom}」的意思最接近下列何者？`
+      : `【${levelTag}・${tone}・${idx + 1}】就「${ctx}」判斷，「${idiom}」最恰當的詮釋是？`;
     return withMeta({
       type: 'single', section: '成語',
-      text: `【${level === 'junior' ? '國中' : '高中'}・${tone}・${frame}${setId}】「${idiom}」在${ctx}情境中，最接近的意思是下列何者？`,
+      text,
       options: [correct, w1, w2, w3], answer: 0,
       explanation: `「${idiom}」意指「${correct}」。`,
     }, difficulty);
   }
   if (kind === 1) {
-    const item = CHINESE_PHONETICS[(idx * 3 + seed) % CHINESE_PHONETICS.length];
+    const item = phonetics[(idx * 3 + seed) % phonetics.length];
     const [ch, phrase, correct, w1, w2, w3] = item;
+    const text = isJunior
+      ? `【${levelTag}・${tone}・${idx + 1}】字音練習（${frame}）：「${phrase}」的「${ch}」讀音何者正確？`
+      : `【${levelTag}・${tone}・${idx + 1}】多音字辨識（${frame}）：「${phrase}」中「${ch}」的正確讀音為？`;
     return withMeta({
       type: 'single', section: '字音字形',
-      text: `【${tone}・${frame}${setId}】「${phrase}」中的「${ch}」讀音下列何者正確？`,
+      text,
       options: [correct, w1, w2, w3], answer: 0,
       explanation: `「${ch}」在「${phrase}」中讀作 ${correct}。`,
     }, difficulty);
   }
   if (kind === 2) {
-    const item = RHETORIC[(idx * 5 + 1) % RHETORIC.length];
+    const item = rhetoric[(idx * 5 + 1) % rhetoric.length];
     const [line, correct, w1, w2, w3] = item;
+    const text = isJunior
+      ? `【${levelTag}・${tone}・${idx + 1}】修辭辨認（${frame}）：「${line}」主要使用哪種修辭？`
+      : `【${levelTag}・${tone}・${idx + 1}】修辭精準度（${frame}）：詩文「${line}」的手法何者最精準？`;
     return withMeta({
       type: 'single', section: '修辭',
-      text: `【${tone}・${frame}${setId}】詩文「${line}」主要運用的修辭手法最接近下列何者？`,
+      text,
       options: [correct, w1, w2, w3], answer: 0,
       explanation: `「${line}」主要運用「${correct}」。`,
     }, difficulty);
   }
   if (kind === 3) {
-    const item = CLASSIC_LINES[(idx * 7) % CLASSIC_LINES.length];
+    const item = classics[(idx * 7) % classics.length];
     const [line, focus, correct, w1, w2, w3, expl] = item;
+    const text = isJunior
+      ? `【${levelTag}・${tone}・${idx + 1}】文言理解（${frame}）：「${line}」中關於「${focus}」何者正確？`
+      : `【${levelTag}・${tone}・${idx + 1}】文言詮釋（${frame}）：「${line}」之「${focus}」下列何者最恰當？`;
     return withMeta({
       type: 'single', section: '文言文',
-      text: `【${tone}・${frame}${setId}】就「${line}」而言，關於「${focus}」的理解下列何者最恰當？`,
+      text,
       options: [correct, w1, w2, w3], answer: 0,
       explanation: expl,
     }, difficulty);
   }
-  const themes = [
+  const juniorThemes = [
     ['閱讀能拓展視野', '拓展視野', '只為考試分數', '打發時間', '取代所有經驗'],
-    ['好文章能引發共鳴', '產生相同感受', '聲音變大', '意見衝突', '完全無理解'],
-    ['數位時代仍需深度閱讀', '重視理解與思辨', '不必閱讀', '只看短影音即可', '紙本已無價值'],
     ['寫作要先確立主旨', '先有清楚中心思想', '堆砌成語即可', '越長越好', '不必修改'],
     ['標點能幫助語意表達', '正確使用標點有助理解', '標點可完全省略', '只用逗號', '標點無作用'],
-    ['議論需有論據支撐', '主張須有理由與證據', '只要語氣強硬', '引用越多越好不管相關', '結論可無前提'],
     ['摘要應抓住關鍵訊息', '保留核心、刪去枝節', '逐字抄錄全文', '只抄第一句', '完全改寫無關內容'],
+    ['好朋友應彼此尊重', '相互尊重與傾聽', '只顧自己', '嘲笑對方', '不必溝通'],
   ];
+  const gsatThemes = [
+    ['好文章能引發共鳴', '產生相同感受', '聲音變大', '意見衝突', '完全無理解'],
+    ['數位時代仍需深度閱讀', '重視理解與思辨', '不必閱讀', '只看短影音即可', '紙本已無價值'],
+    ['議論需有論據支撐', '主張須有理由與證據', '只要語氣強硬', '引用越多越好不管相關', '結論可無前提'],
+    ['文本互文能深化詮釋', '連結相關文本以豐富理解', '只需看標題', '拒絕比較', '只背作者生平'],
+    ['批判思考強調檢視前提', '檢視假設與推論是否成立', '全盤接受權威', '只看結論', '拒絕證據'],
+  ];
+  const themes = isJunior ? juniorThemes : gsatThemes;
   const t = themes[idx % themes.length];
   return withMeta({
     type: 'single', section: '白話文',
-    text: `【${tone}・${frame}${setId}】下列對「${t[0]}」的詮釋，何者最適切？`,
+    text: `【${levelTag}・${tone}・${idx + 1}】${frame}：下列對「${t[0]}」的詮釋，何者最適切？`,
     options: [t[1], t[2], t[3], t[4]], answer: 0,
     explanation: `主旨側重「${t[1]}」。`,
   }, difficulty);
 }
 
 function makeEnglishQuestion(r, seed, idx, difficulty, level) {
+  const isJunior = level === 'junior';
   const kind = (seed + idx * 19) % 4;
   const hardPrefix = difficulty === 'hard' ? 'Advanced: ' : difficulty === 'normal' ? 'Practice: ' : 'Basic: ';
   const setId = idx + 1;
+  const vocab = isJunior ? JUNIOR_ENGLISH_VOCAB : GSAT_ENGLISH_VOCAB;
 
   if (kind === 0) {
     const v = ENGLISH_VERBS[(idx + seed) % ENGLISH_VERBS.length];
     const [base, third, ing, past] = v;
     const place = pick(r, ['school', 'the library', 'the park', 'class', 'home']);
     if (difficulty === 'easy') {
+      const text = isJunior
+        ? `${hardPrefix}[Q${setId}] Amy _____ to ${place} every day. (verb: ${base})`
+        : `${hardPrefix}[Q${setId}] The researcher _____ toward ${place} every morning. (verb: ${base})`;
       return withMeta({
         type: 'single', section: '文法',
-        text: `${hardPrefix}[Q${setId}] She _____ to ${place} every day. (verb: ${base})`,
+        text,
         options: [third, base, ing, past], answer: 0,
         explanation: `第三人稱單數現在式用 ${third}。`,
       }, difficulty);
     }
-    if (difficulty === 'normal') {
+    if (difficulty === 'normal' || isJunior) {
+      // 國中困難題仍用完成式／被動，不用倒裝
+      if (difficulty === 'hard' && isJunior) {
+        return withMeta({
+          type: 'single', section: '文法',
+          text: `${hardPrefix}[Q${setId}] The book was _____ by the students last week. (verb: ${base})`,
+          options: [v[4] === past && past.endsWith('ed') ? past : v[4], ing, base, third],
+          answer: 0,
+          explanation: `被動語態：be + p.p.，答案為 ${v[4]}。`,
+        }, difficulty);
+      }
+      const text = isJunior
+        ? `${hardPrefix}[Q${setId}] They have _____ the ${base} homework already.`
+        : `${hardPrefix}[Q${setId}] Scholars have _____ the ${base} proposal already.`;
       return withMeta({
         type: 'single', section: '文法',
-        text: `${hardPrefix}[Q${setId}] They have _____ the ${base} project already.`,
+        text,
         options: [v[4], ing, base, third], answer: 0,
         explanation: `現在完成式 have + p.p.，答案為 ${v[4]}。`,
       }, difficulty);
     }
+    // 高中困難：倒裝
     return withMeta({
       type: 'single', section: '文法',
-      text: `${hardPrefix}[Q${setId}] Not until yesterday _____ how important it was to ${base} carefully.`,
+      text: `${hardPrefix}[Q${setId}] (GSAT) Not until yesterday _____ how important it was to ${base} carefully.`,
       options: [`did he realize`, `he realized`, `he realizes`, `has he realized`], answer: 0,
       explanation: 'Not until 置於句首時需倒裝。',
     }, difficulty);
   }
   if (kind === 1) {
-    const item = ENGLISH_VOCAB[(idx * 3 + 1) % ENGLISH_VOCAB.length];
+    const item = vocab[(idx * 3 + 1) % vocab.length];
     const [word, correct, w1, w2, w3] = item;
+    const ctx = isJunior ? 'in daily school English' : 'in an academic context';
     return withMeta({
       type: 'single', section: '字彙',
-      text: `${hardPrefix}[Q${setId}] Which meaning best matches the word "${word}" in an academic context?`,
+      text: `${hardPrefix}[Q${setId}] Which meaning best matches the word "${word}" ${ctx}?`,
       options: [correct, w1, w2, w3], answer: 0,
       explanation: `"${word}" means: ${correct}.`,
     }, difficulty);
   }
   if (kind === 2) {
     const n = 2 + (idx % 11);
-    const subjects = ['science', 'history', 'art', 'music', 'geography', 'math', 'biology'];
+    const subjects = isJunior
+      ? ['English', 'math', 'science', 'history', 'art', 'music', 'PE']
+      : ['economics', 'literature', 'biology', 'physics', 'chemistry', 'geography', 'civics'];
     const subj = subjects[idx % subjects.length];
+    if (isJunior && difficulty === 'hard') {
+      return withMeta({
+        type: 'single', section: '文法',
+        text: `${hardPrefix}[Q${setId}] (Junior) He is the student _____ won the ${subj} contest for ${n} years.`,
+        options: ['who', 'which', 'where', 'when'], answer: 0,
+        explanation: '修飾人用關係代名詞 who。',
+      }, difficulty);
+    }
     return withMeta({
       type: 'single', section: '文法',
-      text: `${hardPrefix}[Q${setId}] If it rains tomorrow, we _____ at home and review ${subj} for ${n} hours.`,
-      options: ['will stay', 'stayed', 'stay', 'staying'], answer: 0,
-      explanation: 'If + 現在式，主要子句用 will + V。',
+      text: `${hardPrefix}[Q${setId}] ${isJunior ? 'If it rains tomorrow, we' : 'Should it rain tomorrow, we'} _____ at home and review ${subj} for ${n} hours.`,
+      options: isJunior
+        ? ['will stay', 'stayed', 'stay', 'staying']
+        : ['will stay', 'stayed', 'would stay', 'staying'],
+      answer: 0,
+      explanation: isJunior
+        ? 'If + 現在式，主要子句用 will + V。'
+        : '條件語氣／未來條件，主要子句用 will + V。',
     }, difficulty);
   }
-  const topics = [
+  const juniorTopics = [
     ['What is a deadline?', 'The last day to finish something', 'A fishing line', 'A sports rule', 'A food name'],
     ['What does recycle mean?', 'To use materials again', 'To throw everything away', 'To buy only new items', 'To break objects'],
     ['What is a volunteer?', 'Someone who helps without pay', 'A full-time boss only', 'A paid athlete only', 'A tourist guide only'],
+    ['What does improve mean?', 'To make better', 'To make worse', 'To stop suddenly', 'To copy exactly'],
+    ['What is a library?', 'A place to borrow books', 'A place to buy cars', 'A sports stadium only', 'A kitchen'],
+    ['What does weather mean?', 'Conditions like rain or sunshine', 'A school subject only', 'A type of food', 'A music show'],
+  ];
+  const gsatTopics = [
     ['What does sustainable mean?', 'Able to continue long-term', 'Very expensive always', 'Useful only once', 'Completely new'],
     ['What is evidence?', 'Information that supports a claim', 'A random guess', 'A rumor', 'An advertisement only'],
-    ['What does improve mean?', 'To make better', 'To make worse', 'To stop suddenly', 'To copy exactly'],
-    ['What is a solution?', 'An answer to a problem', 'A new question', 'A random delay', 'An advertisement'],
+    ['What does ambiguous mean?', 'Having more than one possible meaning', 'Always clear', 'Always silent', 'Always correct'],
+    ['What is a hypothesis?', 'A proposed explanation to be tested', 'A proven law only', 'A finished product', 'A random joke'],
+    ['What does inevitable mean?', 'Certain to happen', 'Unlikely ever', 'Optional always', 'Already finished'],
+    ['What is a consequence?', 'A result that follows an action', 'A starting point only', 'An unrelated hobby', 'A weather report'],
   ];
+  const topics = isJunior ? juniorTopics : gsatTopics;
   const t = topics[idx % topics.length];
+  const scene = pick(r, isJunior
+    ? ['in a classroom dialogue', 'in a short story', 'on a school notice', 'in a conversation with friends']
+    : ['in an editorial', 'in a research abstract', 'in a debate speech', 'in a news analysis']);
   return withMeta({
     type: 'single', section: '閱讀',
-    text: `${hardPrefix}[Q${setId}] ${t[0]}`,
+    text: `${hardPrefix}${isJunior ? '(Junior)' : '(GSAT)'} ${t[0]} (${scene})`,
     options: [t[1], t[2], t[3], t[4]], answer: 0,
     explanation: `正解：${t[1]}`,
   }, difficulty);
@@ -1048,14 +1086,20 @@ function hsMathNonChoice(r, seed, idx, difficulty, track) {
 }
 
 // ── 自然／社會／分科 ──────────────────────────────────────────
-function makeScienceLike(r, seed, idx, difficulty, pool, sectionPrefix) {
-  const item = pool[(idx * 3 + seed) % pool.length];
-  const [section, text, c, w1, w2, w3, expl] = item;
+function makeScienceLike(r, seed, idx, difficulty, pool, sectionPrefix, levelTag = '') {
+  const item = pool[idx % pool.length];
+  const [section, stem, c, w1, w2, w3, expl] = item;
   const tone = difficulty === 'easy' ? '基礎概念' : difficulty === 'hard' ? '綜合應用' : '進階理解';
+  const tag = levelTag ? `${levelTag}・` : '';
+  const intros = levelTag === '會考'
+    ? ['課堂提問：', '段考練習：', '實驗討論：', '生活應用：', '概念確認：', '復習測驗：', '素養情境：', '單元檢核：']
+    : ['跨科整合：', '學測取向：', '素養情境：', '進階推理：', '實驗分析：', '觀念辯證：', '資料判讀：', '綜合應用：'];
+  const intro = intros[Math.floor(idx / pool.length) % intros.length];
+  const serial = (idx % 97) + 1;
   return withMeta({
     type: 'single',
     section: sectionPrefix || section,
-    text: `【${tone}・第 ${idx + 1} 題】${text}`,
+    text: `【${tag}${tone}・${serial}】${intro}${stem}`,
     options: [c, w1, w2, w3], answer: 0,
     explanation: expl,
   }, difficulty);
@@ -1120,32 +1164,40 @@ const BIO_ITEMS = [
   ['細胞膜主要成分含？', '磷脂雙層與蛋白質等', '只有纖維素', '只有核酸', '只有澱粉', '細胞膜為磷脂雙層。'],
 ];
 
-function scienceNumeric(r, seed, idx, difficulty, subjectFilter = null) {
+function scienceNumeric(r, seed, idx, difficulty, subjectFilter = null, level = 'gsat') {
+  const isJunior = level === 'junior';
+  // 國中：密度、電路、勻速、簡單能量；高中才用莫耳、pH
   let kind = (seed + idx) % 6;
+  if (isJunior) kind = [0, 1, 3, 4, 6, 7][(seed + idx) % 6];
   if (subjectFilter === 'physics') kind = [0, 1, 4][(seed + idx) % 3];
-  if (subjectFilter === 'chemistry') kind = [2, 5][(seed + idx) % 2];
+  if (subjectFilter === 'chemistry') kind = isJunior ? 7 : [2, 5][(seed + idx) % 2];
   if (subjectFilter === 'biology') kind = 3;
+
   if (kind === 0) {
-    const m = randInt(r, 2, 10);
-    const a = randInt(r, 1, 5);
+    const m = randInt(r, isJunior ? 2 : 3, isJunior ? 8 : 12);
+    const a = randInt(r, 1, isJunior ? 4 : 6);
     const F = m * a;
     const { options, answer } = makeOptions(r, seed + idx, F, [F + m, m + a, F - 1]);
+    const text = isJunior
+      ? `（會考）質量 ${m} kg 的物體加速度 ${a} m/s²，所受合力為多少 N？`
+      : `（學測）質量 ${m} kg、加速度 ${a} m/s²，依 F=ma 求合力（N）。`;
     return withMeta({
       type: 'single', section: '物理',
-      text: `質量 ${m} kg 的物體加速度 ${a} m/s²，合力大小為多少 N？`,
-      options, answer, explanation: `F=ma=${F}。`,
+      text, options, answer, explanation: `F=ma=${F}。`,
     }, difficulty);
   }
   if (kind === 1) {
-    const V = randInt(r, 6, 24);
-    const R = randInt(r, 2, 8);
+    const V = randInt(r, isJunior ? 6 : 8, isJunior ? 18 : 28);
+    const R = randInt(r, 2, isJunior ? 6 : 9);
     const I = V / R;
     const ans = Number.isInteger(I) ? I : fmtNum(I);
     const { options, answer } = makeOptions(r, seed + idx, ans, [V + R, V * R, fmtNum(V / (R + 1))]);
+    const text = isJunior
+      ? `（會考）電壓 ${V} V、電阻 ${R} Ω，電流為多少 A？`
+      : `（學測）歐姆定律：V=${V}、R=${R}，求電流（A）。`;
     return withMeta({
       type: 'single', section: '物理',
-      text: `電壓 ${V} V、電阻 ${R} Ω，電流為多少 A？`,
-      options, answer, explanation: `I=V/R=${ans}。`,
+      text, options, answer, explanation: `I=V/R=${ans}。`,
     }, difficulty);
   }
   if (kind === 2) {
@@ -1155,38 +1207,65 @@ function scienceNumeric(r, seed, idx, difficulty, subjectFilter = null) {
     const { options, answer } = makeOptions(r, seed + idx, n, [fmtNum(m * M), fmtNum(M / m), String(m)]);
     return withMeta({
       type: 'single', section: '化學',
-      text: `質量 ${m} g、莫耳質量 ${M} g/mol，約為多少莫耳？`,
+      text: `（學測）質量 ${m} g、莫耳質量 ${M} g/mol，約為多少莫耳？`,
       options, answer, explanation: `n=m/M=${n}。`,
     }, difficulty);
   }
   if (kind === 3) {
-    const gen = randInt(r, 2, 5);
+    const gen = randInt(r, 2, isJunior ? 4 : 5);
     const energy = Math.round(1000 / (10 ** (gen - 1)));
     const { options, answer } = makeOptions(r, seed + idx, energy, [energy * 2, 1000, energy + 10]);
+    const text = isJunior
+      ? `（會考）食物鏈能量：第一營養級 1000，效率 10%，第 ${gen} 級約剩多少？`
+      : `（學測）生態能量金字塔：基底 1000、傳遞率 10%，第 ${gen} 營養級能量約？`;
     return withMeta({
       type: 'single', section: '生物',
-      text: `若第一營養級能量為 1000，能量傳遞效率 10%，第 ${gen} 營養級約剩多少？`,
-      options, answer, explanation: `逐級 ×0.1，得 ${energy}。`,
+      text, options, answer, explanation: `逐級 ×0.1，得 ${energy}。`,
     }, difficulty);
   }
   if (kind === 4) {
-    const v = randInt(r, 5, 20);
-    const t = randInt(r, 2, 8);
+    const v = randInt(r, isJunior ? 4 : 6, isJunior ? 15 : 24);
+    const t = randInt(r, 2, isJunior ? 6 : 9);
     const s = v * t;
     const { options, answer } = makeOptions(r, seed + idx, s, [v + t, s + v, v * t + 1]);
+    const text = isJunior
+      ? `（會考）以 ${v} m/s 勻速運動 ${t} s，位移多少 m？`
+      : `（學測）勻速運動 v=${v} m/s、t=${t} s，位移大小？`;
     return withMeta({
       type: 'single', section: '物理',
-      text: `勻速 ${v} m/s 運動 ${t} s，位移大小為多少 m？`,
-      options, answer, explanation: `s=vt=${s}。`,
+      text, options, answer, explanation: `s=vt=${s}。`,
     }, difficulty);
   }
-  const pH = randInt(r, 1, 6);
-  const factor = 10 ** (7 - pH);
-  const { options, answer } = makeOptions(r, seed + idx, `10^${7 - pH}`, [`10^${pH}`, '1', `10^${pH - 7}`]);
+  if (kind === 5) {
+    const pH = randInt(r, 1, 6);
+    const { options, answer } = makeOptions(r, seed + idx, `10^${7 - pH}`, [`10^${pH}`, '1', `10^${pH - 7}`]);
+    return withMeta({
+      type: 'single', section: '化學',
+      text: `（學測）pH=${pH} 的溶液，[H⁺] 約為多少 M？（相對中性）`,
+      options, answer, explanation: `[H⁺]=10^{-${pH}}。`,
+    }, difficulty);
+  }
+  if (kind === 6) {
+    // 國中：密度
+    const mass = randInt(r, 20, 80);
+    const vol = pick(r, [2, 4, 5, 8, 10]);
+    const dens = fmtNum(mass / vol);
+    const { options, answer } = makeOptions(r, seed + idx, dens, [fmtNum(mass * vol), String(mass), String(vol)]);
+    return withMeta({
+      type: 'single', section: '物理',
+      text: `（會考）質量 ${mass} g、體積 ${vol} cm³，密度為多少 g/cm³？`,
+      options, answer, explanation: `密度=質量/體積=${dens}。`,
+    }, difficulty);
+  }
+  // kind === 7 國中化學：混合／比例或簡單溫度差
+  const hot = randInt(r, 40, 80);
+  const cold = randInt(r, 10, 30);
+  const avg = Math.round((hot + cold) / 2);
+  const { options, answer } = makeOptions(r, seed + idx, avg, [hot, cold, hot - cold]);
   return withMeta({
     type: 'single', section: '化學',
-    text: `pH=${pH} 的溶液，[H⁺] 約為多少 M？（相對中性）`,
-    options, answer, explanation: `[H⁺]=10^{-${pH}}。`,
+    text: `（會考）兩杯等量水溫分別為 ${hot}℃ 與 ${cold}℃，混合後約為多少℃？（忽略熱損失）`,
+    options, answer, explanation: `等量混合約取平均 ${avg}℃。`,
   }, difficulty);
 }
 
@@ -1234,14 +1313,15 @@ const CLEAN_CIVICS = [
 ];
 
 function makeTemplatedHumanities(r, seed, idx, difficulty, templates, section) {
-  const t = templates[(idx * 5 + seed) % templates.length];
+  const t = templates[idx % templates.length];
   const variantWords = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
-  const tag = variantWords[idx % variantWords.length];
-  const year = 1990 + (idx % 35);
+  const tag = variantWords[Math.floor(idx / templates.length) % variantWords.length];
+  const year = 1990 + ((idx * 3) % 35);
   const tone = difficulty === 'easy' ? '基礎' : difficulty === 'hard' ? '綜合' : '應用';
+  const angle = ['判讀', '推理', '比較', '應用', '檢核'][idx % 5];
   return withMeta({
     type: 'single', section,
-    text: `【${tone}・${tag}${year}・第${idx + 1}題】${t[0]}`,
+    text: `【${tone}】${tag}${year}${angle}：${t[0]}`,
     options: [t[1], t[2], t[3], t[4]], answer: 0,
     explanation: t[5],
   }, difficulty);
@@ -1260,22 +1340,26 @@ function makeOne(level, subject, difficulty, seed, idx) {
   }
 
   if (subject === 'science') {
-    if (idx % 3 === 0) return scienceNumeric(r, seed, idx, difficulty);
-    return makeScienceLike(r, seed, idx, difficulty, SCIENCE_FACTS);
+    const pool = level === 'junior' ? JUNIOR_SCIENCE_FACTS : GSAT_SCIENCE_FACTS;
+    const tag = level === 'junior' ? '會考' : '學測';
+    if (idx % 3 === 0) return scienceNumeric(r, seed, idx, difficulty, null, level);
+    return makeScienceLike(r, seed, idx, difficulty, pool, null, tag);
   }
   if (subject === 'social') {
-    return makeScienceLike(r, seed, idx, difficulty, SOCIAL_FACTS.map(x => [x[0], x[1], x[2], x[3], x[4], x[5], x[6]]));
+    const pool = level === 'junior' ? JUNIOR_SOCIAL_FACTS : GSAT_SOCIAL_FACTS;
+    const tag = level === 'junior' ? '會考' : '學測';
+    return makeScienceLike(r, seed, idx, difficulty, pool, null, tag);
   }
   if (subject === 'physics') {
-    if (idx % 2 === 0) return scienceNumeric(r, seed, idx, difficulty, 'physics');
+    if (idx % 2 === 0) return scienceNumeric(r, seed, idx, difficulty, 'physics', level);
     return makeTemplatedHumanities(r, seed, idx, difficulty, PHYSICS_ITEMS, '物理');
   }
   if (subject === 'chemistry') {
-    if (idx % 3 === 0) return scienceNumeric(r, seed, idx, difficulty, 'chemistry');
+    if (idx % 3 === 0) return scienceNumeric(r, seed, idx, difficulty, 'chemistry', level);
     return makeTemplatedHumanities(r, seed, idx, difficulty, CHEM_ITEMS, '化學');
   }
   if (subject === 'biology') {
-    if (idx % 4 === 0) return scienceNumeric(r, seed, idx, difficulty, 'biology');
+    if (idx % 4 === 0) return scienceNumeric(r, seed, idx, difficulty, 'biology', level);
     return makeTemplatedHumanities(r, seed, idx, difficulty, BIO_ITEMS, '生物');
   }
   if (subject === 'history') {

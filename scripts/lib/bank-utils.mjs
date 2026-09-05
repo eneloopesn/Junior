@@ -51,6 +51,20 @@ export function questionKey(q) {
     .trim();
 }
 
+/** 考試抽題用：去掉裝飾標籤後比對，避免同卷抽到包裝不同、內容相同的題 */
+export function normalizedStemKey(q) {
+  return (q.text || '')
+    .replace(/【[^】]*】/g, '')
+    .replace(/^(?:Basic|Practice|Advanced):\s*/i, '')
+    .replace(/\[Q\d+\]\s*/gi, '')
+    .replace(/\s*（#[^）]+）/g, '')
+    .replace(/\s*\(Q\d+-\d+\)/g, '')
+    .replace(/\s*\[題號 \d+\]/g, '')
+    .replace(/\s*（\d+）\s*$/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export function unitQuestionKeys(unit) {
   if (unit.type === 'group') return unit.questions.map(questionKey);
   return [questionKey(unit)];
