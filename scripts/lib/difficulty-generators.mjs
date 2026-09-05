@@ -383,8 +383,6 @@ function makeChineseQuestion(r, seed, idx, difficulty, level) {
   const phonetics = isJunior ? CHINESE_PHONETICS.slice(0, 18) : CHINESE_PHONETICS.slice(6);
   const rhetoric = isJunior ? RHETORIC.slice(0, 14) : RHETORIC.slice(5);
   const classics = isJunior ? CLASSIC_LINES.slice(0, 14) : CLASSIC_LINES.slice(5);
-  const tone = difficulty === 'easy' ? '基礎' : difficulty === 'hard' ? '進階綜合' : '應用理解';
-  const levelTag = isJunior ? '國中會考' : '高中學測';
   const juniorThemes = [
     ['閱讀能拓展視野', '拓展視野', '只為考試分數', '打發時間', '取代所有經驗'],
     ['寫作要先確立主旨', '先有清楚中心思想', '堆砌成語即可', '越長越好', '不必修改'],
@@ -414,7 +412,7 @@ function makeChineseQuestion(r, seed, idx, difficulty, level) {
       : `語文素養：「${idiom}」最恰當的詮釋是？`;
     return withMeta({
       type: 'single', section: '成語',
-      text: `【${levelTag}・${tone}】${stem}`,
+      text: stem,
       options: [correct, w1, w2, w3], answer: 0,
       explanation: `「${idiom}」意指「${correct}」。`,
     }, difficulty);
@@ -425,7 +423,7 @@ function makeChineseQuestion(r, seed, idx, difficulty, level) {
     const [idiom, correct, w1, w2, w3] = idioms[idx - cursor];
     return withMeta({
       type: 'single', section: '成語',
-      text: `【${levelTag}・${tone}】下列哪一情況最適合用「${idiom}」形容？`,
+      text: `下列哪一情況最適合用「${idiom}」形容？`,
       options: [`出現「${correct}」的情形`, w1, w2, w3], answer: 0,
       explanation: `「${idiom}」用於「${correct}」。`,
     }, difficulty);
@@ -435,7 +433,7 @@ function makeChineseQuestion(r, seed, idx, difficulty, level) {
     const [ch, phrase, correct, w1, w2, w3] = phonetics[idx - cursor];
     return withMeta({
       type: 'single', section: '字音字形',
-      text: `【${levelTag}・${tone}】「${phrase}」中的「${ch}」讀音何者正確？`,
+      text: `「${phrase}」中的「${ch}」讀音何者正確？`,
       options: [correct, w1, w2, w3], answer: 0,
       explanation: `「${ch}」在「${phrase}」中讀作 ${correct}。`,
     }, difficulty);
@@ -445,7 +443,7 @@ function makeChineseQuestion(r, seed, idx, difficulty, level) {
     const [line, correct, w1, w2, w3] = rhetoric[idx - cursor];
     return withMeta({
       type: 'single', section: '修辭',
-      text: `【${levelTag}・${tone}】「${line}」主要使用哪種修辭？`,
+      text: `「${line}」主要使用哪種修辭？`,
       options: [correct, w1, w2, w3], answer: 0,
       explanation: `「${line}」主要運用「${correct}」。`,
     }, difficulty);
@@ -455,7 +453,7 @@ function makeChineseQuestion(r, seed, idx, difficulty, level) {
     const [line, focus, correct, w1, w2, w3, expl] = classics[idx - cursor];
     return withMeta({
       type: 'single', section: '文言文',
-      text: `【${levelTag}・${tone}】「${line}」中關於「${focus}」的理解何者正確？`,
+      text: `「${line}」中關於「${focus}」的理解何者正確？`,
       options: [correct, w1, w2, w3], answer: 0,
       explanation: expl,
     }, difficulty);
@@ -465,7 +463,7 @@ function makeChineseQuestion(r, seed, idx, difficulty, level) {
     const t = themes[idx - cursor];
     return withMeta({
       type: 'single', section: '白話文',
-      text: `【${levelTag}・${tone}】下列對「${t[0]}」的詮釋，何者最適切？`,
+      text: `下列對「${t[0]}」的詮釋，何者最適切？`,
       options: [t[1], t[2], t[3], t[4]], answer: 0,
       explanation: `主旨側重「${t[1]}」。`,
     }, difficulty);
@@ -479,7 +477,7 @@ function makeChineseQuestion(r, seed, idx, difficulty, level) {
   const n = Math.floor((idx - cursor) / pairs.length) + 1;
   return withMeta({
     type: 'single', section: '字音字形',
-    text: `【${levelTag}・${tone}】辨字組 ${n}：「${p[0]}／${p[1]}」——${p[2]}，正確應選？`,
+    text: `辨字組 ${n}：「${p[0]}／${p[1]}」——${p[2]}，正確應選？`,
     options: [p[0], p[1], `${p[0]}${p[1]}`, '兩者皆可任意'], answer: 0,
     explanation: p[2],
   }, difficulty);
@@ -487,7 +485,7 @@ function makeChineseQuestion(r, seed, idx, difficulty, level) {
 
 function makeEnglishQuestion(r, seed, idx, difficulty, level) {
   const isJunior = level === 'junior';
-  const hardPrefix = difficulty === 'hard' ? 'Advanced: ' : difficulty === 'normal' ? 'Practice: ' : 'Basic: ';
+  const hardPrefix = '';
   const vocab = isJunior ? JUNIOR_ENGLISH_VOCAB : GSAT_ENGLISH_VOCAB;
   const places = isJunior
     ? ['school', 'the library', 'the park', 'class', 'home', 'the museum', 'the station']
@@ -1112,12 +1110,10 @@ function makeScienceLike(r, seed, idx, difficulty, pool, sectionPrefix, levelTag
   const item = pool[idx];
   if (!item) return null;
   const [section, stem, c, w1, w2, w3, expl] = item;
-  const tone = difficulty === 'easy' ? '基礎概念' : difficulty === 'hard' ? '綜合應用' : '進階理解';
-  const tag = levelTag ? `${levelTag}・` : '';
   return withMeta({
     type: 'single',
     section: sectionPrefix || section,
-    text: `【${tag}${tone}】${stem}`,
+    text: stem,
     options: [c, w1, w2, w3], answer: 0,
     explanation: expl,
   }, difficulty);
@@ -1235,10 +1231,9 @@ function makeFactBank(r, seed, idx, difficulty, rows, defaultSection) {
   const d2 = row.length >= 7 ? row[4] : row[3];
   const d3 = row.length >= 7 ? row[5] : row[4];
   const explanation = row.length >= 7 ? row[6] : row[5];
-  const tone = difficulty === 'easy' ? '基礎' : difficulty === 'hard' ? '挑戰' : '進階';
   return withMeta({
     type: 'single', section: section || defaultSection,
-    text: `【${tone}】${stem}`,
+    text: stem,
     options: [correct, d1, d2, d3], answer: 0,
     explanation,
   }, difficulty);
@@ -1297,8 +1292,8 @@ function scienceNumeric(r, seed, idx, difficulty, subjectFilter = null, level = 
     const F = m * a;
     const { options, answer } = makeOptions(r, seed + idx, F, [F + m, m + a, Math.max(1, F - 1)]);
     const text = isJunior
-      ? `（會考）質量 ${m} kg 的物體加速度 ${a} m/s²，所受合力為多少 N？`
-      : `（學測）質量 ${m} kg、加速度 ${a} m/s²，依 F=ma 求合力（N）。`;
+      ? `質量 ${m} kg 的物體加速度 ${a} m/s²，所受合力為多少 N？`
+      : `質量 ${m} kg、加速度 ${a} m/s²，依 F=ma 求合力（N）。`;
     return withMeta({ type: 'single', section: '物理', text, options, answer, explanation: `F=ma=${F}。` }, difficulty);
   }
   if (kind === 1) {
@@ -1308,8 +1303,8 @@ function scienceNumeric(r, seed, idx, difficulty, subjectFilter = null, level = 
     const ans = Number.isInteger(I) ? I : fmtNum(I);
     const { options, answer } = makeOptions(r, seed + idx, ans, [V + R, V * R, fmtNum(V / (R + 1))]);
     const text = isJunior
-      ? `（會考）電壓 ${V} V、電阻 ${R} Ω，電流為多少 A？`
-      : `（學測）歐姆定律：V=${V}、R=${R}，求電流（A）。`;
+      ? `電壓 ${V} V、電阻 ${R} Ω，電流為多少 A？`
+      : `歐姆定律：V=${V}、R=${R}，求電流（A）。`;
     return withMeta({ type: 'single', section: '物理', text, options, answer, explanation: `I=V/R=${ans}。` }, difficulty);
   }
   if (kind === 2) {
@@ -1321,7 +1316,7 @@ function scienceNumeric(r, seed, idx, difficulty, subjectFilter = null, level = 
     const { options, answer } = makeOptions(r, seed + idx, n, [fmtNum(m * M), fmtNum(M / m), String(m)]);
     return withMeta({
       type: 'single', section: '化學',
-      text: `（學測）質量 ${m} g、莫耳質量 ${M} g/mol，約為多少莫耳？`,
+      text: `質量 ${m} g、莫耳質量 ${M} g/mol，約為多少莫耳？`,
       options, answer, explanation: `n=m/M=${n}。`,
     }, difficulty);
   }
@@ -1333,8 +1328,8 @@ function scienceNumeric(r, seed, idx, difficulty, subjectFilter = null, level = 
     const energy2 = Math.round(base / (factor ** (gen - 1)));
     const { options, answer } = makeOptions(r, seed + idx, energy2, [energy2 * 2, base, energy2 + 10]);
     const text = isJunior
-      ? `（會考）食物鏈能量：第一營養級 ${base}，效率 ${rate}%，第 ${gen} 級約剩多少？`
-      : `（學測）生態能量金字塔：基底 ${base}、傳遞率 ${rate}%，第 ${gen} 營養級能量約？`;
+      ? `食物鏈能量：第一營養級 ${base}，效率 ${rate}%，第 ${gen} 級約剩多少？`
+      : `生態能量金字塔：基底 ${base}、傳遞率 ${rate}%，第 ${gen} 營養級能量約？`;
     return withMeta({
       type: 'single', section: '生物',
       text, options, answer, explanation: `逐級 ×${rate / 100}，得 ${energy2}。`,
@@ -1346,8 +1341,8 @@ function scienceNumeric(r, seed, idx, difficulty, subjectFilter = null, level = 
     const s = v * t;
     const { options, answer } = makeOptions(r, seed + idx, s, [v + t, s + v, s + 1]);
     const text = isJunior
-      ? `（會考）以 ${v} m/s 勻速運動 ${t} s，位移多少 m？`
-      : `（學測）勻速運動 v=${v} m/s、t=${t} s，位移大小？`;
+      ? `以 ${v} m/s 勻速運動 ${t} s，位移多少 m？`
+      : `勻速運動 v=${v} m/s、t=${t} s，位移大小？`;
     return withMeta({ type: 'single', section: '物理', text, options, answer, explanation: `s=vt=${s}。` }, difficulty);
   }
   if (kind === 5) {
@@ -1355,7 +1350,7 @@ function scienceNumeric(r, seed, idx, difficulty, subjectFilter = null, level = 
     const { options, answer } = makeOptions(r, seed + idx, `10^${7 - pH}`, [`10^${pH}`, '1', `10^${pH - 7}`]);
     return withMeta({
       type: 'single', section: '化學',
-      text: `（學測）pH=${pH} 的溶液，[H⁺] 約為多少 M？（相對中性）`,
+      text: `pH=${pH} 的溶液，[H⁺] 約為多少 M？（相對中性）`,
       options, answer, explanation: `[H⁺]=10^{-${pH}}。`,
     }, difficulty);
   }
@@ -1367,7 +1362,7 @@ function scienceNumeric(r, seed, idx, difficulty, subjectFilter = null, level = 
     const { options, answer } = makeOptions(r, seed + idx, dens, [fmtNum(mass * vol), String(mass), String(vol)]);
     return withMeta({
       type: 'single', section: '物理',
-      text: `${isJunior ? '（會考）' : '（學測）'}質量 ${mass} g、體積 ${vol} cm³，密度為多少 g/cm³？`,
+      text: `質量 ${mass} g、體積 ${vol} cm³，密度為多少 g/cm³？`,
       options, answer, explanation: `密度=質量/體積=${dens}。`,
     }, difficulty);
   }
@@ -1377,7 +1372,7 @@ function scienceNumeric(r, seed, idx, difficulty, subjectFilter = null, level = 
   const { options, answer } = makeOptions(r, seed + idx, avg, [hot, cold, Math.abs(hot - cold)]);
   return withMeta({
     type: 'single', section: '化學',
-    text: `${isJunior ? '（會考）' : '（學測）'}兩杯等量水溫分別為 ${hot}℃ 與 ${cold}℃，混合後約為多少℃？（忽略熱損失）`,
+    text: `兩杯等量水溫分別為 ${hot}℃ 與 ${cold}℃，混合後約為多少℃？（忽略熱損失）`,
     options, answer, explanation: `等量混合約取平均 ${avg}℃。`,
   }, difficulty);
 }
@@ -1428,10 +1423,9 @@ const CLEAN_CIVICS = [
 function makeTemplatedHumanities(r, seed, idx, difficulty, templates, section) {
   const t = templates[idx];
   if (!t) return null;
-  const tone = difficulty === 'easy' ? '基礎' : difficulty === 'hard' ? '綜合' : '應用';
   return withMeta({
     type: 'single', section,
-    text: `【${tone}】${t[0]}`,
+    text: t[0],
     options: [t[1], t[2], t[3], t[4]], answer: 0,
     explanation: t[5],
   }, difficulty);
@@ -1492,7 +1486,7 @@ function makeOne(level, subject, difficulty, seed, idx) {
   const { options, answer } = makeOptions(r, seed + idx, a + b, [a + b + 1, a - b, a * b]);
   return withMeta({
     type: 'single', section: '綜合',
-    text: `【${level}/${subject}】計算 ${a}+${b}=？`,
+    text: `計算 ${a}+${b}=？`,
     options, answer, explanation: `${a}+${b}=${a + b}。`,
   }, difficulty);
 }
