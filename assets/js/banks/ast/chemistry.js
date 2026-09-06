@@ -1,13 +1,13 @@
 window.QuestionBanks = window.QuestionBanks || {};
 window.QuestionBanks.ast = window.QuestionBanks.ast || {};
 window.QuestionBanks.ast.chemistry = [
-  { type: 'single', section: "物質", text: "莫耳濃度 M 的定義？（1247549915）", options: ["公升/莫耳","公克/公升","莫耳/公克","莫耳數/公升"], answer: 3, explanation: "M = mol/L。" },
+  { type: 'single', section: "物質", text: "莫耳濃度 M 的定義？", options: ["公升/莫耳","公克/公升","莫耳/公克","莫耳數/公升"], answer: 3, explanation: "M = mol/L。" },
 
-  { type: 'single', section: "反應", text: "氧化還原反應中，被氧化者？（1247549916）", options: ["得到質子","得到電子","失去電子","失去質子"], answer: 2, explanation: "被氧化者失去電子。" },
+  { type: 'single', section: "反應", text: "氧化還原反應中，被氧化者？", options: ["得到質子","得到電子","失去電子","失去質子"], answer: 2, explanation: "被氧化者失去電子。" },
 
-  { type: 'single', section: "有機", text: "烷烴的通式？（1247549917）", options: ["CnH2n-2","CnH2n+2","CnHn","CnH2n"], answer: 1, explanation: "烷烴通式 CnH2n+2。" },
+  { type: 'single', section: "有機", text: "烷烴的通式？", options: ["CnH2n-2","CnH2n+2","CnHn","CnH2n"], answer: 1, explanation: "烷烴通式 CnH2n+2。" },
 
-  { type: 'single', section: "反應", text: "觸媒的作用是？（1247549918）", options: ["改變反應速率","增加產物量","改變平衡常數","提供能量"], answer: 0, explanation: "觸媒改變反應速率。" },
+  { type: 'single', section: "反應", text: "觸媒的作用是？", options: ["改變反應速率","增加產物量","改變平衡常數","提供能量"], answer: 0, explanation: "觸媒改變反應速率。" },
 
   { type: 'single', section: "補充", text: "[題號 1247550315] 補充題 400（seed 1247549915）", options: ["A","B","C","D"], answer: 0, explanation: "自動補充題。" },
 

@@ -1,13 +1,13 @@
 window.QuestionBanks = window.QuestionBanks || {};
 window.QuestionBanks.ast = window.QuestionBanks.ast || {};
 window.QuestionBanks.ast.biology = [
-  { type: 'single', section: "細胞", text: "粒線體的主要功能？（615319988）", options: ["呼吸作用","蛋白質合成","DNA複製","光合作用"], answer: 0, explanation: "粒線體進行呼吸作用。" },
+  { type: 'single', section: "細胞", text: "粒線體的主要功能？", options: ["呼吸作用","蛋白質合成","DNA複製","光合作用"], answer: 0, explanation: "粒線體進行呼吸作用。" },
 
-  { type: 'single', section: "遺傳", text: "孟德爾遺傳定律中，F1 表現？（615319989）", options: ["中間型","全隱性","隱性性狀","顯性性狀"], answer: 3, explanation: "F1 表現顯性。" },
+  { type: 'single', section: "遺傳", text: "孟德爾遺傳定律中，F1 表現？", options: ["中間型","全隱性","隱性性狀","顯性性狀"], answer: 3, explanation: "F1 表現顯性。" },
 
-  { type: 'single', section: "生態", text: "食物鏈中，分解者為？（615319990）", options: ["肉食動物","生產者","細菌真菌","草食動物"], answer: 2, explanation: "細菌真菌為分解者。" },
+  { type: 'single', section: "生態", text: "食物鏈中，分解者為？", options: ["肉食動物","生產者","細菌真菌","草食動物"], answer: 2, explanation: "細菌真菌為分解者。" },
 
-  { type: 'single', section: "細胞", text: "有絲分裂最後期？（615319991）", options: ["配對","細胞質分裂","染色體排列","複製DNA"], answer: 1, explanation: "最後為細胞質分裂。" },
+  { type: 'single', section: "細胞", text: "有絲分裂最後期？", options: ["配對","細胞質分裂","染色體排列","複製DNA"], answer: 1, explanation: "最後為細胞質分裂。" },
 
   { type: 'single', section: "補充", text: "[題號 615320388] 補充題 400（seed 615319988）", options: ["A","B","C","D"], answer: 0, explanation: "自動補充題。" },
 

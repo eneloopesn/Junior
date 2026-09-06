@@ -22,39 +22,39 @@ window.QuestionBanksGenerated.gsat.chinese = [
     ]
   },
 
-  { type: 'single', section: "修辭", text: "「時間就是金錢」運用何種修辭？（1337228279）", options: ["借代","誇飾","譬喻","設問"], answer: 2, explanation: "本題考查 修辭，種子 1337228253 第 3 題。" },
+  { type: 'single', section: "修辭", text: "「時間就是金錢」運用何種修辭？", options: ["借代","誇飾","譬喻","設問"], answer: 2, explanation: "本題考查 修辭，種子 1337228253 第 3 題。" },
 
-  { type: 'single', section: "文言文", text: "「學而時習之，不亦說乎？」的「說」通何字？（1337228292）", options: ["閱","悅","脫","銳"], answer: 1, explanation: "本題考查 文言文，種子 1337228253 第 4 題。" },
+  { type: 'single', section: "文言文", text: "「學而時習之，不亦說乎？」的「說」通何字？", options: ["閱","悅","脫","銳"], answer: 1, explanation: "本題考查 文言文，種子 1337228253 第 4 題。" },
 
-  { type: 'single', section: "白話文", text: "「閱讀是與作者對話的過程」強調閱讀的何種特質？（1337228305）", options: ["互動性與思考","背誦","速度","娛樂"], answer: 0, explanation: "本題考查 白話文，種子 1337228253 第 5 題。" },
+  { type: 'single', section: "白話文", text: "「閱讀是與作者對話的過程」強調閱讀的何種特質？", options: ["互動性與思考","背誦","速度","娛樂"], answer: 0, explanation: "本題考查 白話文，種子 1337228253 第 5 題。" },
 
-  { type: 'single', section: "語文素養", text: "下列何者為形聲字？（1337228318）", options: ["上","日","刃","河"], answer: 3, explanation: "本題考查 語文素養，種子 1337228253 第 6 題。" },
+  { type: 'single', section: "語文素養", text: "下列何者為形聲字？", options: ["上","日","刃","河"], answer: 3, explanation: "本題考查 語文素養，種子 1337228253 第 6 題。" },
 
-  { type: 'single', section: "字音字形", text: "「一曝十寒」的「曝」讀音為何？（1337228331）", options: ["ㄆㄡˋ","ㄅㄨˋ","ㄆㄨˋ","ㄅㄠˋ"], answer: 2, explanation: "本題考查 字音字形，種子 1337228253 第 7 題。" },
+  { type: 'single', section: "字音字形", text: "「一曝十寒」的「曝」讀音為何？", options: ["ㄆㄡˋ","ㄅㄨˋ","ㄆㄨˋ","ㄅㄠˋ"], answer: 2, explanation: "本題考查 字音字形，種子 1337228253 第 7 題。" },
 
-  { type: 'single', section: "成語", text: "「破釜沉舟」表現什麼？（1337228344）", options: ["節約用水","背水一戰的決心","優柔寡斷","烹飪技術"], answer: 1, explanation: "本題考查 成語，種子 1337228253 第 8 題。" },
+  { type: 'single', section: "成語", text: "「破釜沉舟」表現什麼？", options: ["節約用水","背水一戰的決心","優柔寡斷","烹飪技術"], answer: 1, explanation: "本題考查 成語，種子 1337228253 第 8 題。" },
 
-  { type: 'single', section: "修辭", text: "「風兒輕撫臉龐」運用何種修辭？（1337228357）", options: ["轉化","誇飾","對偶","譬喻"], answer: 0, explanation: "本題考查 修辭，種子 1337228253 第 9 題。" },
+  { type: 'single', section: "修辭", text: "「風兒輕撫臉龐」運用何種修辭？", options: ["轉化","誇飾","對偶","譬喻"], answer: 0, explanation: "本題考查 修辭，種子 1337228253 第 9 題。" },
 
-  { type: 'single', section: "文言文", text: "「溫故而知新」的「故」指什麼？（1337228370）", options: ["所以","故意","故鄉","舊知識"], answer: 3, explanation: "本題考查 文言文，種子 1337228253 第 10 題。" },
+  { type: 'single', section: "文言文", text: "「溫故而知新」的「故」指什麼？", options: ["所以","故意","故鄉","舊知識"], answer: 3, explanation: "本題考查 文言文，種子 1337228253 第 10 題。" },
 
-  { type: 'single', section: "字音字形", text: "下列「　」中的字，何者讀音正確？（1337228383）", options: ["妥協（ㄒㄧㄝˋ）","參差（ㄘㄢ）","狹隘（ㄧˋ）","機會（ㄏㄨㄟˋ）"], answer: 2, explanation: "本題考查 字音字形，種子 1337228253 第 11 題。" },
+  { type: 'single', section: "字音字形", text: "下列「　」中的字，何者讀音正確？", options: ["妥協（ㄒㄧㄝˋ）","參差（ㄘㄢ）","狹隘（ㄧˋ）","機會（ㄏㄨㄟˋ）"], answer: 2, explanation: "本題考查 字音字形，種子 1337228253 第 11 題。" },
 
-  { type: 'single', section: "成語", text: "「曲高和寡」比喻什麼？（1337228396）", options: ["道路狹窄","作品高深，能欣賞者少","音樂動聽","人數眾多"], answer: 1, explanation: "本題考查 成語，種子 1337228253 第 12 題。" },
+  { type: 'single', section: "成語", text: "「曲高和寡」比喻什麼？", options: ["道路狹窄","作品高深，能欣賞者少","音樂動聽","人數眾多"], answer: 1, explanation: "本題考查 成語，種子 1337228253 第 12 題。" },
 
-  { type: 'single', section: "修辭", text: "「時間就是金錢」運用何種修辭？（1337228409）", options: ["譬喻","設問","借代","誇飾"], answer: 0, explanation: "本題考查 修辭，種子 1337228253 第 13 題。" },
+  { type: 'single', section: "修辭", text: "「時間就是金錢」運用何種修辭？", options: ["譬喻","設問","借代","誇飾"], answer: 0, explanation: "本題考查 修辭，種子 1337228253 第 13 題。" },
 
-  { type: 'single', section: "文言文", text: "「學而時習之，不亦說乎？」的「說」通何字？（1337228422）", options: ["銳","脫","閱","悅"], answer: 3, explanation: "本題考查 文言文，種子 1337228253 第 14 題。" },
+  { type: 'single', section: "文言文", text: "「學而時習之，不亦說乎？」的「說」通何字？", options: ["銳","脫","閱","悅"], answer: 3, explanation: "本題考查 文言文，種子 1337228253 第 14 題。" },
 
-  { type: 'single', section: "白話文", text: "「閱讀是與作者對話的過程」強調閱讀的何種特質？（1337228435）", options: ["娛樂","速度","互動性與思考","背誦"], answer: 2, explanation: "本題考查 白話文，種子 1337228253 第 15 題。" },
+  { type: 'single', section: "白話文", text: "「閱讀是與作者對話的過程」強調閱讀的何種特質？", options: ["娛樂","速度","互動性與思考","背誦"], answer: 2, explanation: "本題考查 白話文，種子 1337228253 第 15 題。" },
 
-  { type: 'single', section: "語文素養", text: "下列何者為形聲字？（1337228448）", options: ["刃","河","日","上"], answer: 1, explanation: "本題考查 語文素養，種子 1337228253 第 16 題。" },
+  { type: 'single', section: "語文素養", text: "下列何者為形聲字？", options: ["刃","河","日","上"], answer: 1, explanation: "本題考查 語文素養，種子 1337228253 第 16 題。" },
 
-  { type: 'single', section: "字音字形", text: "「一曝十寒」的「曝」讀音為何？（1337228461）", options: ["ㄆㄨˋ","ㄅㄨˋ","ㄅㄠˋ","ㄆㄡˋ"], answer: 0, explanation: "本題考查 字音字形，種子 1337228253 第 17 題。" },
+  { type: 'single', section: "字音字形", text: "「一曝十寒」的「曝」讀音為何？", options: ["ㄆㄨˋ","ㄅㄨˋ","ㄅㄠˋ","ㄆㄡˋ"], answer: 0, explanation: "本題考查 字音字形，種子 1337228253 第 17 題。" },
 
-  { type: 'single', section: "成語", text: "「破釜沉舟」表現什麼？（1337228474）", options: ["節約用水","烹飪技術","優柔寡斷","背水一戰的決心"], answer: 3, explanation: "本題考查 成語，種子 1337228253 第 18 題。" },
+  { type: 'single', section: "成語", text: "「破釜沉舟」表現什麼？", options: ["節約用水","烹飪技術","優柔寡斷","背水一戰的決心"], answer: 3, explanation: "本題考查 成語，種子 1337228253 第 18 題。" },
 
-  { type: 'single', section: "修辭", text: "「風兒輕撫臉龐」運用何種修辭？（1337228487）", options: ["誇飾","譬喻","轉化","對偶"], answer: 2, explanation: "本題考查 修辭，種子 1337228253 第 19 題。" },
+  { type: 'single', section: "修辭", text: "「風兒輕撫臉龐」運用何種修辭？", options: ["誇飾","譬喻","轉化","對偶"], answer: 2, explanation: "本題考查 修辭，種子 1337228253 第 19 題。" },
 
-  { type: 'single', section: "文言文", text: "「溫故而知新」的「故」指什麼？（1337228500）", options: ["故鄉","舊知識","故意","所以"], answer: 1, explanation: "本題考查 文言文，種子 1337228253 第 20 題。" }
+  { type: 'single', section: "文言文", text: "「溫故而知新」的「故」指什麼？", options: ["故鄉","舊知識","故意","所以"], answer: 1, explanation: "本題考查 文言文，種子 1337228253 第 20 題。" }
 ];

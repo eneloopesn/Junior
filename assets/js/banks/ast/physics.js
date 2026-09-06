@@ -1,15 +1,15 @@
 window.QuestionBanks = window.QuestionBanks || {};
 window.QuestionBanks.ast = window.QuestionBanks.ast || {};
 window.QuestionBanks.ast.physics = [
-  { type: 'single', section: "力學", text: "牛頓第一運動定律又稱？（136278334）", options: ["作用反作用","加速度定律","慣性定律","萬有引力"], answer: 2, explanation: "第一定律為慣性定律。" },
+  { type: 'single', section: "力學", text: "牛頓第一運動定律又稱？", options: ["作用反作用","加速度定律","慣性定律","萬有引力"], answer: 2, explanation: "第一定律為慣性定律。" },
 
-  { type: 'single', section: "力學", text: "動量守恆適用於？（136278335）", options: ["只有彈性碰撞","孤立系統","只有非彈性","任何系統"], answer: 1, explanation: "孤立系統動量守恆。" },
+  { type: 'single', section: "力學", text: "動量守恆適用於？", options: ["只有彈性碰撞","孤立系統","只有非彈性","任何系統"], answer: 1, explanation: "孤立系統動量守恆。" },
 
-  { type: 'single', section: "電磁", text: "庫侖定律描述？（136278336）", options: ["靜電力","重力","磁場力","浮力"], answer: 0, explanation: "庫侖定律描述靜電力。" },
+  { type: 'single', section: "電磁", text: "庫侖定律描述？", options: ["靜電力","重力","磁場力","浮力"], answer: 0, explanation: "庫侖定律描述靜電力。" },
 
-  { type: 'single', section: "波動", text: "聲波在空氣中屬於？（136278337）", options: ["電磁波","橫波","物質波","縱波"], answer: 3, explanation: "聲波為縱波。" },
+  { type: 'single', section: "波動", text: "聲波在空氣中屬於？", options: ["電磁波","橫波","物質波","縱波"], answer: 3, explanation: "聲波為縱波。" },
 
-  { type: 'single', section: "近代物理", text: "光電效應支持？（136278338）", options: ["連續說","波動說","光量子說","熱說"], answer: 2, explanation: "光電效應支持光量子說。" },
+  { type: 'single', section: "近代物理", text: "光電效應支持？", options: ["連續說","波動說","光量子說","熱說"], answer: 2, explanation: "光電效應支持光量子說。" },
 
   { type: 'single', section: "補充", text: "[題號 136278734] 補充題 400（seed 136278334）", options: ["A","B","C","D"], answer: 0, explanation: "自動補充題。" },
 

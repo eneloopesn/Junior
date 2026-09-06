@@ -1,13 +1,13 @@
 window.QuestionBanks = window.QuestionBanks || {};
 window.QuestionBanks.ast = window.QuestionBanks.ast || {};
 window.QuestionBanks.ast.civics = [
-  { type: 'single', section: "憲法", text: "中華民國憲法規定國體為？（1157062130）", options: ["聯邦制","單一制","民主共和國","君主立憲"], answer: 2, explanation: "憲法考點。" },
+  { type: 'single', section: "憲法", text: "中華民國憲法規定國體為？", options: ["聯邦制","單一制","民主共和國","君主立憲"], answer: 2, explanation: "憲法考點。" },
 
-  { type: 'single', section: "政治", text: "五權分立的五權不包括？（1157062131）", options: ["立法","外交權","行政","司法"], answer: 1, explanation: "政治考點。" },
+  { type: 'single', section: "政治", text: "五權分立的五權不包括？", options: ["立法","外交權","行政","司法"], answer: 1, explanation: "政治考點。" },
 
-  { type: 'single', section: "法律", text: "民法與刑法的差異？（1157062132）", options: ["民法調整私權、刑法處罰犯罪","刑法調整契約","完全相同","民法處罰犯罪"], answer: 0, explanation: "法律考點。" },
+  { type: 'single', section: "法律", text: "民法與刑法的差異？", options: ["民法調整私權、刑法處罰犯罪","刑法調整契約","完全相同","民法處罰犯罪"], answer: 0, explanation: "法律考點。" },
 
-  { type: 'single', section: "經濟", text: "GDP 是指？（1157062133）", options: ["政府支出","國民所得","出口總額","國內生產毛額"], answer: 3, explanation: "經濟考點。" },
+  { type: 'single', section: "經濟", text: "GDP 是指？", options: ["政府支出","國民所得","出口總額","國內生產毛額"], answer: 3, explanation: "經濟考點。" },
 
   { type: 'single', section: "補充", text: "[題號 1157062530] 補充題 400（seed 1157062130）", options: ["A","B","C","D"], answer: 0, explanation: "自動補充題。" },
 

@@ -1,13 +1,13 @@
 window.QuestionBanks = window.QuestionBanks || {};
 window.QuestionBanks.ast = window.QuestionBanks.ast || {};
 window.QuestionBanks.ast.geography = [
-  { type: 'single', section: "自然地理", text: "季風氣候的主要特徵？（1795301555）", options: ["四季分明","終年高溫","終年乾燥","夏吹海洋風、冬吹陸地風"], answer: 3, explanation: "自然地理考點。" },
+  { type: 'single', section: "自然地理", text: "季風氣候的主要特徵？", options: ["四季分明","終年高溫","終年乾燥","夏吹海洋風、冬吹陸地風"], answer: 3, explanation: "自然地理考點。" },
 
-  { type: 'single', section: "人文地理", text: "都市化是指？（1795301556）", options: ["工業衰退","農村人口增加","都市人口比例增加","人口減少"], answer: 2, explanation: "人文地理考點。" },
+  { type: 'single', section: "人文地理", text: "都市化是指？", options: ["工業衰退","農村人口增加","都市人口比例增加","人口減少"], answer: 2, explanation: "人文地理考點。" },
 
-  { type: 'single', section: "自然地理", text: "板塊交界處常發生？（1795301557）", options: ["只有颱風","地震","只有乾旱","無地震"], answer: 1, explanation: "自然地理考點。" },
+  { type: 'single', section: "自然地理", text: "板塊交界處常發生？", options: ["只有颱風","地震","只有乾旱","無地震"], answer: 1, explanation: "自然地理考點。" },
 
-  { type: 'single', section: "人文地理", text: "人口轉型第三階段特徵？（1795301558）", options: ["出生率下降、死亡率低","高出生低死亡","低出生高死亡","高出生高死亡"], answer: 0, explanation: "人文地理考點。" },
+  { type: 'single', section: "人文地理", text: "人口轉型第三階段特徵？", options: ["出生率下降、死亡率低","高出生低死亡","低出生高死亡","高出生高死亡"], answer: 0, explanation: "人文地理考點。" },
 
   { type: 'single', section: "補充", text: "[題號 1795301955] 補充題 400（seed 1795301555）", options: ["A","B","C","D"], answer: 0, explanation: "自動補充題。" },
 

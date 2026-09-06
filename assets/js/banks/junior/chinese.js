@@ -23,7 +23,7 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "成語", text: "「曲高和寡」比喻什麼？", options: ["作品高深，能欣賞的人少","音樂非常動聽","唱歌的人很少","道路狹窄難行"], answer: 0, explanation: "「曲高和寡」比喻言論或作品高深，能理解和附和的人很少。" },
 
-  { type: 'single', section: "字音字形", text: "「一曝十寒」的「曝」讀音為何？（202609-7）", options: ["ㄆㄨˋ","ㄅㄠˋ","ㄆㄡˋ","ㄅㄨˋ"], answer: 0, explanation: "本題為 202609 年 字音字形 自動更新題。" },
+  { type: 'single', section: "字音字形", text: "「一曝十寒」的「曝」讀音為何？", options: ["ㄆㄨˋ","ㄅㄠˋ","ㄆㄡˋ","ㄅㄨˋ"], answer: 0, explanation: "本題為 202609 年 字音字形 自動更新題。" },
 
   { type: 'single', section: "字音字形", text: "「走馬看花」的「看」字，讀音為何？", options: ["ㄎㄢˋ","ㄎㄢ","ㄎㄢˇ","ㄎㄢˋˇ"], answer: 1, explanation: "「走馬看花」的「看」讀ㄎㄢ，輕聲。" },
 
@@ -62,7 +62,7 @@ window.QuestionBanks.junior.chinese = [
     ]
   },
 
-  { type: 'single', section: "白話文", text: "「好的文章能引發共鳴」中的「共鳴」最接近何意？（202609-11）", options: ["產生相同感受","聲音變大","意見衝突","完全理解"], answer: 0, explanation: "本題為 202609 年 白話文 自動更新題。" },
+  { type: 'single', section: "白話文", text: "「好的文章能引發共鳴」中的「共鳴」最接近何意？", options: ["產生相同感受","聲音變大","意見衝突","完全理解"], answer: 0, explanation: "本題為 202609 年 白話文 自動更新題。" },
 
   { type: 'single', section: "語文素養", text: "「春眠不覺曉」的「覺」字，讀音為何？", options: ["ㄐㄧㄠˋ","ㄐㄩㄝˊ","ㄐㄧㄠˇ","ㄐㄩㄝˋ"], answer: 1, explanation: "「不覺曉」的「覺」讀ㄐㄩㄝˊ，意為醒來。" },
 
@@ -83,7 +83,7 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "成語", text: "「這件事已是木已成舟，無法改變了。」「木已成舟」的意思是？", options: ["事情已成定局","船隻建造完成","木材已經腐爛","計畫尚未完成"], answer: 0, explanation: "「木已成舟」比喻事情已成定局，無法改變。" },
 
-  { type: 'single', section: "修辭", text: "「時間就是金錢」運用何種修辭？（202609-3）", options: ["譬喻","誇飾","設問","借代"], answer: 0, explanation: "本題為 202609 年 修辭 自動更新題。" },
+  { type: 'single', section: "修辭", text: "「時間就是金錢」運用何種修辭？", options: ["譬喻","誇飾","設問","借代"], answer: 0, explanation: "本題為 202609 年 修辭 自動更新題。" },
 
   { type: 'single', section: "成語", text: "「臥薪嘗膽」表現的是什麼精神？", options: ["安逸享樂","刻苦自勵、立志報仇","逃避現實","驕傲自滿"], answer: 1, explanation: "「臥薪嘗膽」比喻刻苦自勵，立志報仇雪恥。" },
 
@@ -97,7 +97,7 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "字音字形", text: "「再接再厲」中「厲」與下列何字同義？", options: ["厲害","磨礪","厲聲","嚴厲"], answer: 1, explanation: "「厲」在此有磨快之意，與「礪」同義。" },
 
-  { type: 'single', section: "語文素養", text: "「刎頸之交」形容什麼？（202609-12）", options: ["生死之交","點頭之交","商業夥伴","師生關係"], answer: 0, explanation: "本題為 202609 年 語文素養 自動更新題。" },
+  { type: 'single', section: "語文素養", text: "「刎頸之交」形容什麼？", options: ["生死之交","點頭之交","商業夥伴","師生關係"], answer: 0, explanation: "本題為 202609 年 語文素養 自動更新題。" },
 
   { type: 'single', section: "文言文", text: "「不患人之不己知，患不知人也。」中「患」的意思是？", options: ["擔心","災患","患病","厭惡"], answer: 0, explanation: "「患」在此指擔心、憂慮。" },
 
@@ -111,7 +111,7 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "白話文", text: "「他背著行囊，頭也不回地走向遠方。」暗示什麼？", options: ["決絕離去或追尋理想","忘記帶東西","迷路了","很開心"], answer: 0, explanation: "頭也不回地走向遠方，暗示決絕離去或追尋理想。" },
 
-  { type: 'single', section: "語文素養", text: "下列何者為形聲字？（202609-18）", options: ["河","日","上","刃"], answer: 0, explanation: "本題為 202609 年 語文素養 自動更新題。" },
+  { type: 'single', section: "語文素養", text: "下列何者為形聲字？", options: ["河","日","上","刃"], answer: 0, explanation: "本題為 202609 年 語文素養 自動更新題。" },
 
   { type: 'single', section: "白話文", text: "「他望著窗外綿延的雨絲，心中湧起一股說不出的惆悵。」此句氛圍為何？", options: ["歡樂熱鬧","惆悵感傷","緊張刺激","平靜安詳"], answer: 1, explanation: "雨絲、說不出的惆悵，營造感傷氛圍。" },
 
@@ -139,7 +139,7 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "字音字形", text: "「勉強」與「強迫」的「強」字，讀音分別為何？", options: ["皆讀ㄑㄧㄤˇ","皆讀ㄑㄧㄤˊ","勉強ㄑㄧㄤˇ、強迫ㄑㄧㄤˇ","勉強ㄑㄧㄤˇ、強迫ㄑㄧㄤˊ"], answer: 2, explanation: "「勉強」「強迫」的「強」均讀ㄑㄧㄤˇ。" },
 
-  { type: 'single', section: "字音字形", text: "「參加」的「參」讀音為何？（202609-13）", options: ["ㄘㄢ","ㄕㄣ","ㄘㄣ","ㄙㄣ"], answer: 0, explanation: "本題為 202609 年 字音字形 自動更新題。" },
+  { type: 'single', section: "字音字形", text: "「參加」的「參」讀音為何？", options: ["ㄘㄢ","ㄕㄣ","ㄘㄣ","ㄙㄣ"], answer: 0, explanation: "本題為 202609 年 字音字形 自動更新題。" },
 
   { type: 'single', section: "白話文", text: "「他雖然家境清寒，卻從不向命運低頭，努力向學。」表現主角什麼特質？", options: ["消極悲觀","堅毅不屈","驕傲自大","隨遇而安"], answer: 1, explanation: "不向命運低頭、努力向學，表現堅毅不屈。" },
 
@@ -176,7 +176,7 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "字音字形", text: "「參差」的「差」字，在此讀音為何？", options: ["ㄔㄚ","ㄔㄚˋ","ㄔㄞ","ㄘㄣ"], answer: 2, explanation: "「參差」的「差」讀ㄔㄞ。" },
 
-  { type: 'single', section: "修辭", text: "「紅豆生南國」中「紅豆」常象徵什麼？（202609-20）", options: ["相思","豐收","離別","愛國"], answer: 0, explanation: "本題為 202609 年 修辭 自動更新題。" },
+  { type: 'single', section: "修辭", text: "「紅豆生南國」中「紅豆」常象徵什麼？", options: ["相思","豐收","離別","愛國"], answer: 0, explanation: "本題為 202609 年 修辭 自動更新題。" },
 
   { type: 'single', section: "語文素養", text: "「美麗」與「美麗的」中「的」的詞性為何？", options: ["結構助詞","語氣助詞","嘆詞","連詞"], answer: 0, explanation: "「的」連接修飾語與中心語，為結構助詞。" },
 
@@ -263,9 +263,9 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "字音字形", text: "「採菊東籬下，悠然見南山」中「見」的讀音為何？", options: ["ㄐㄧㄢˋ","ㄒㄧㄢˋ","ㄐㄧㄢ","ㄒㄧㄢˇ"], answer: 0, explanation: "「見南山」的「見」讀ㄐㄧㄢˋ，意為看見。" },
 
-  { type: 'single', section: "修辭", text: "「風兒輕撫臉龐」運用何種修辭？（202609-9）", options: ["轉化","譬喻","誇飾","對偶"], answer: 0, explanation: "本題為 202609 年 修辭 自動更新題。" },
+  { type: 'single', section: "修辭", text: "「風兒輕撫臉龐」運用何種修辭？", options: ["轉化","譬喻","誇飾","對偶"], answer: 0, explanation: "本題為 202609 年 修辭 自動更新題。" },
 
-  { type: 'single', section: "白話文", text: "「數位時代仍需要深度閱讀」這句話的主旨為何？（202609-17）", options: ["閱讀方式需與時並進但仍重視理解","不必閱讀","只看影片就夠","紙本書已過時"], answer: 0, explanation: "本題為 202609 年 白話文 自動更新題。" },
+  { type: 'single', section: "白話文", text: "「數位時代仍需要深度閱讀」這句話的主旨為何？", options: ["閱讀方式需與時並進但仍重視理解","不必閱讀","只看影片就夠","紙本書已過時"], answer: 0, explanation: "本題為 202609 年 白話文 自動更新題。" },
 
   { type: 'single', section: "白話文", text: "「這本書情節曲折，讓人欲罷不能。」「欲罷不能」的意思是？", options: ["不想繼續","非常吸引人、無法停止","感到厭倦","勉強閱讀"], answer: 1, explanation: "「欲罷不能」形容非常吸引人，無法停止。" },
 
@@ -285,7 +285,7 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "修辭", text: "「春風又綠江南岸」中「綠」字詞性轉換為何？", options: ["形容詞作動詞","名詞作動詞","動詞作名詞","副詞作動詞"], answer: 0, explanation: "「綠」原為形容詞，此處作動詞用，為轉品。" },
 
-  { type: 'single', section: "文言文", text: "「溫故而知新」的「故」指什麼？（202609-10）", options: ["舊知識","故意","所以","故鄉"], answer: 0, explanation: "本題為 202609 年 文言文 自動更新題。" },
+  { type: 'single', section: "文言文", text: "「溫故而知新」的「故」指什麼？", options: ["舊知識","故意","所以","故鄉"], answer: 0, explanation: "本題為 202609 年 文言文 自動更新題。" },
 
   { type: 'single', section: "文言文", text: "「魚，我所欲也；熊掌，亦我所欲也。二者不可得兼，舍魚而取熊掌者也。」說明什麼道理？", options: ["魚比熊掌好吃","面對取捨時應選擇價值較高者","不應該吃魚","熊掌很珍貴"], answer: 1, explanation: "孟子以魚與熊掌比喻面對取捨時，應選擇價值較高者。" },
 
@@ -303,13 +303,13 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "字音字形", text: "「锲而不舍」的「舍」字，意思為何？", options: ["停止","房屋","放棄","居住"], answer: 0, explanation: "「锲而不舍」的「舍」指停止。" },
 
-  { type: 'single', section: "文言文", text: "「學而時習之」的「習」是什麼意思？（202609-4）", options: ["練習、複習","習慣","學習","教導"], answer: 0, explanation: "本題為 202609 年 文言文 自動更新題。" },
+  { type: 'single', section: "文言文", text: "「學而時習之」的「習」是什麼意思？", options: ["練習、複習","習慣","學習","教導"], answer: 0, explanation: "本題為 202609 年 文言文 自動更新題。" },
 
   { type: 'single', section: "修辭", text: "「白髮蒼蒼的老者，與青澀的少年，形成強烈對比。」主要運用了何種修辭？", options: ["映襯","誇飾","借代","轉化"], answer: 0, explanation: "以老者與少年互相對照，為映襯。" },
 
   { type: 'single', section: "修辭", text: "「紅豆生南國，春來發幾枝。」中「紅豆」象徵什麼？", options: ["相思","愛國","離別","友情"], answer: 0, explanation: "紅豆在古典詩詞中常象徵相思之情。" },
 
-  { type: 'single', section: "成語", text: "「锲而不舍」比喻什麼？（202609-2）", options: ["持續努力不間斷","快速完成","輕易放棄","猶豫不決"], answer: 0, explanation: "本題為 202609 年 成語 自動更新題。" },
+  { type: 'single', section: "成語", text: "「锲而不舍」比喻什麼？", options: ["持續努力不間斷","快速完成","輕易放棄","猶豫不決"], answer: 0, explanation: "本題為 202609 年 成語 自動更新題。" },
 
   { type: 'single', section: "語文素養", text: "「提高」屬於哪種合成詞結構？", options: ["並列式","偏正式","動賓式","補充式"], answer: 2, explanation: "「提高」為動詞+賓語，屬動賓式。" },
 
@@ -323,7 +323,7 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "語文素養", text: "「望梅止渴」的故事說明什麼道理？", options: ["用空想安慰自己","梅子可以解渴","曹操很聰明","士兵不該喝水"], answer: 0, explanation: "「望梅止渴」比喻用空想来安慰自己。" },
 
-  { type: 'single', section: "字音字形", text: "下列「　」中的字，何者讀音正確？（202609-1）", options: ["機會（ㄏㄨㄟˋ）","勉強（ㄑㄧㄤˇ）","參差（ㄘㄢ ㄔㄚ）","妥協（ㄒㄧㄝˊ）"], answer: 1, explanation: "本題為 202609 年 字音字形 自動更新題。" },
+  { type: 'single', section: "字音字形", text: "下列「　」中的字，何者讀音正確？", options: ["機會（ㄏㄨㄟˋ）","勉強（ㄑㄧㄤˇ）","參差（ㄘㄢ ㄔㄚ）","妥協（ㄒㄧㄝˊ）"], answer: 1, explanation: "本題為 202609 年 字音字形 自動更新題。" },
 
   { type: 'single', section: "字音字形", text: "「迫不急待」的正確寫法為何？", options: ["迫不及待","迫不急帶","迫不急戴","迫不急代"], answer: 0, explanation: "「及」有來得及之意，「迫不及待」形容急迫。" },
 
@@ -343,7 +343,7 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "白話文", text: "「他望著畢業典禮上的同學，知道這一刻將成為永恆的回憶。」情感基調為何？", options: ["不捨與感懷","憤怒","恐懼","冷漠"], answer: 0, explanation: "畢業典禮、永恆回憶，表現不捨與感懷。" },
 
-  { type: 'single', section: "白話文", text: "「閱讀讓我們看見更大的世界」這句話強調閱讀的何種價值？（202609-5）", options: ["拓展視野","增加考試分數","打發時間","代替旅行"], answer: 0, explanation: "本題為 202609 年 白話文 自動更新題。" },
+  { type: 'single', section: "白話文", text: "「閱讀讓我們看見更大的世界」這句話強調閱讀的何種價值？", options: ["拓展視野","增加考試分數","打發時間","代替旅行"], answer: 0, explanation: "本題為 202609 年 白話文 自動更新題。" },
 
   { type: 'single', section: "修辭", text: "「試問閑愁都幾許？一川煙草，滿城風絮，梅子黃時雨。」運用了何種修辭？", options: ["設問","感嘆","倒反","層遞"], answer: 0, explanation: "先設問再自答，為設問。" },
 
@@ -378,7 +378,7 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "語文素養", text: "「明」字的造字法為何？", options: ["象形","指事","會意","形聲"], answer: 2, explanation: "「明」為日月並見，會光明之意，為會意字。" },
 
-  { type: 'single', section: "修辭", text: "「飛流直下三千尺」主要運用何種修辭？（202609-15）", options: ["誇飾","譬喻","設問","借代"], answer: 0, explanation: "本題為 202609 年 修辭 自動更新題。" },
+  { type: 'single', section: "修辭", text: "「飛流直下三千尺」主要運用何種修辭？", options: ["誇飾","譬喻","設問","借代"], answer: 0, explanation: "本題為 202609 年 修辭 自動更新題。" },
 
   { type: 'single', section: "語文素養", text: "「他快速地跑著。」中「快速」的詞性為何？", options: ["形容詞","副詞","名詞","動詞"], answer: 1, explanation: "「快速」修飾動詞「跑」，為副詞。" },
 
@@ -402,13 +402,13 @@ window.QuestionBanks.junior.chinese = [
 
   { type: 'single', section: "語文素養", text: "下列何者為「象形字」？", options: ["日","休","明","好"], answer: 0, explanation: "「日」象太陽之形，為象形字。" },
 
-  { type: 'single', section: "成語", text: "「一箭雙雕」比喻什麼？（202609-19）", options: ["一舉兩得","射箭比賽","獵鷹很強","浪費箭矢"], answer: 0, explanation: "本題為 202609 年 成語 自動更新題。" },
+  { type: 'single', section: "成語", text: "「一箭雙雕」比喻什麼？", options: ["一舉兩得","射箭比賽","獵鷹很強","浪費箭矢"], answer: 0, explanation: "本題為 202609 年 成語 自動更新題。" },
 
   { type: 'single', section: "字音字形", text: "「狹隘」的「隘」字，下列注音何者正確？", options: ["ㄞˋ","ㄧˋ","ㄜˋ","ㄨㄞˋ"], answer: 1, explanation: "「隘」讀ㄧˋ，指狹窄。" },
 
   { type: 'single', section: "成語", text: "「杯弓蛇影」比喻什麼？", options: ["多疑而自驚","勇敢無畏","眼見為實","實事求是"], answer: 0, explanation: "「杯弓蛇影」比喻因多疑而自相驚擾。" },
 
-  { type: 'single', section: "文言文", text: "「三人行，必有我師焉」出於何者？（202609-16）", options: ["孔子","孟子","老子","韓非子"], answer: 0, explanation: "本題為 202609 年 文言文 自動更新題。" },
+  { type: 'single', section: "文言文", text: "「三人行，必有我師焉」出於何者？", options: ["孔子","孟子","老子","韓非子"], answer: 0, explanation: "本題為 202609 年 文言文 自動更新題。" },
 
   { type: 'single', section: "語文素養", text: "下列何者為「近義詞」？", options: ["美麗—漂亮","美麗—醜陋","高興—悲傷","增加—減少"], answer: 0, explanation: "「美麗」與「漂亮」意義相近。" },
 

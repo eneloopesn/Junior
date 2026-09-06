@@ -1,13 +1,13 @@
 window.QuestionBanks = window.QuestionBanks || {};
 window.QuestionBanks.ast = window.QuestionBanks.ast || {};
 window.QuestionBanks.ast.history = [
-  { type: 'single', section: "臺灣史", text: "荷蘭統治臺灣時期為？（1649307531）", options: ["1945-1949","1683-1895","1895-1945","1624-1662"], answer: 3, explanation: "臺灣史相關考點。" },
+  { type: 'single', section: "臺灣史", text: "荷蘭統治臺灣時期為？", options: ["1945-1949","1683-1895","1895-1945","1624-1662"], answer: 3, explanation: "臺灣史相關考點。" },
 
-  { type: 'single', section: "中國史", text: "秦始皇統一六國後推行？（1649307532）", options: ["科舉制","分封制","郡縣制","三省制"], answer: 2, explanation: "中國史相關考點。" },
+  { type: 'single', section: "中國史", text: "秦始皇統一六國後推行？", options: ["科舉制","分封制","郡縣制","三省制"], answer: 2, explanation: "中國史相關考點。" },
 
-  { type: 'single', section: "世界史", text: "文藝復興起源於？（1649307533）", options: ["德國","義大利","英國","法國"], answer: 1, explanation: "世界史相關考點。" },
+  { type: 'single', section: "世界史", text: "文藝復興起源於？", options: ["德國","義大利","英國","法國"], answer: 1, explanation: "世界史相關考點。" },
 
-  { type: 'single', section: "臺灣史", text: "《開羅宣言》要求日本歸還？（1649307534）", options: ["臺澎","琉球","滿洲","朝鮮"], answer: 0, explanation: "臺灣史相關考點。" },
+  { type: 'single', section: "臺灣史", text: "《開羅宣言》要求日本歸還？", options: ["臺澎","琉球","滿洲","朝鮮"], answer: 0, explanation: "臺灣史相關考點。" },
 
   { type: 'single', section: "補充", text: "[題號 1649307931] 補充題 400（seed 1649307531）", options: ["A","B","C","D"], answer: 0, explanation: "自動補充題。" },
 
