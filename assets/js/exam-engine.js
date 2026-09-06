@@ -34,12 +34,34 @@ const ExamEngine = (() => {
   }
 
   function questionKey(q) {
-    return (q.text || '')
+    let t = (q.text || '');
+    t = t
+      .replace(/【[^】]*】/g, '')
+      .replace(/^(?:Basic|Practice|Advanced):\s*/i, '')
+      .replace(/\[Q\d+\]\s*/gi, '')
+      .replace(/（會考）|（學測）/g, '')
+      .replace(/\(\s*Junior\s*\)|\(\s*GSAT\s*\)/gi, '')
+      .replace(/^(課堂提問|段考練習|實驗討論|生活應用|概念確認|復習測驗|素養情境|單元檢核|跨科整合|學測取向|進階推理|實驗分析|觀念辯證|資料判讀|綜合應用)：/, '')
+      .replace(/在「[^」]+」練習中，/g, '')
+      .replace(/就「[^」]+」判斷，/g, '')
+      .replace(/(字音練習|多音字辨識|修辭辨認|修辭精準度|文言理解|文言詮釋)（[^）]*）：/g, '')
+      .replace(/^(課堂練習|段考複習|會考練習|單元評量|學測模擬|素養挑題|綜合複習|進階評量)：/, '')
+      .replace(/^[甲乙丙丁戊己庚辛壬癸]\d{4}\S*?：/, '')
+      .replace(/\s*\([^)]{2,50}\)\s*$/g, '')
       .replace(/\s*（#[^）]+）/g, '')
       .replace(/\s*\(Q\d+-\d+\)/g, '')
       .replace(/\s*\[題號 \d+\]/g, '')
       .replace(/\s*（\d+）\s*$/g, '')
-      .trim();
+      .replace(/^語文素養：/, '')
+      .replace(/^(?:史料紀年練習|班會提案|年代推算|區域|選舉試算|辨字組)\s*\d*：/, '')
+      .replace(/^題組\s*\d+：/, '')
+      .replace(/\s*[—-]\s*reading set\s*\d+\s*$/i, '')
+      .replace(/\s+in (?:daily school English|an academic context)\s*\??\s*$/i, '')
+      .replace(/\s*\(verb:\s*[^)]+\)\s*/gi, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase();
+    return t;
   }
 
   function unitQuestionKeys(unit) {
@@ -173,7 +195,6 @@ const ExamEngine = (() => {
     const config = ExamConfig.getSubject(exam.level, exam.subject);
     const levelInfo = ExamConfig.getLevel(exam.level);
     let html = '';
-    let lastSection = '';
     let lastPassage = '';
     const choiceCount = exam.questions.filter(q => !q.isNonChoice).length;
 
@@ -184,10 +205,7 @@ const ExamEngine = (() => {
     </div>`;
 
     exam.questions.forEach(q => {
-      if (q.section && q.section !== lastSection) {
-        lastSection = q.section;
-        html += `<h2 class="section-title">${q.section}</h2>`;
-      }
+      // 不顯示 section 標籤（成語／物理／歷史等），只保留題目內容
       if (q.passage && q.passage !== lastPassage) {
         lastPassage = q.passage;
         html += `<div class="passage">${q.passage}</div>`;
