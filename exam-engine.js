@@ -52,6 +52,12 @@ const ExamEngine = (() => {
       .replace(/\s*\(Q\d+-\d+\)/g, '')
       .replace(/\s*\[題號 \d+\]/g, '')
       .replace(/\s*（\d+）\s*$/g, '')
+      .replace(/^語文素養：/, '')
+      .replace(/^(?:史料紀年練習|班會提案|年代推算|區域|選舉試算|辨字組)\s*\d*：/, '')
+      .replace(/^題組\s*\d+：/, '')
+      .replace(/\s*[—-]\s*reading set\s*\d+\s*$/i, '')
+      .replace(/\s+in (?:daily school English|an academic context)\s*\??\s*$/i, '')
+      .replace(/\s*\(verb:\s*[^)]+\)\s*/gi, '')
       .replace(/\s+/g, ' ')
       .trim()
       .toLowerCase();

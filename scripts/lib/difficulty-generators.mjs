@@ -409,7 +409,7 @@ function makeChineseQuestion(r, seed, idx, difficulty, level) {
     const [idiom, correct, w1, w2, w3] = idioms[idx - cursor];
     const stem = isJunior
       ? `「${idiom}」的意思最接近下列何者？`
-      : `語文素養：「${idiom}」最恰當的詮釋是？`;
+      : `「${idiom}」最恰當的詮釋是？`;
     return withMeta({
       type: 'single', section: '成語',
       text: stem,
@@ -469,15 +469,60 @@ function makeChineseQuestion(r, seed, idx, difficulty, level) {
     }, difficulty);
   }
   cursor += themes.length;
-  // 補題：字形／詞義辨識（參數化，題幹含不同字詞）
+  // 補題：字形／詞義辨識（擴大字組與句式，不加裝飾標籤）
   const pairs = isJunior
-    ? [['再', '在', '表示重複用「再」'], ['的', '得', '連接動詞與補語常用「得」'], ['辨', '辦', '辨別用「辨」'], ['合', '和', '合併用「合」'], ['做', '作', '具體動作常用「做」']]
-    : [['必須', '必需', '事理上一定要用「必須」'], ['啟事', '啟示', '刊登告知用「啟事」'], ['反映', '反應', '呈現問題用「反映」'], ['權利', '權力', '法律上得主張者為「權利」'], ['學力', '學歷', '學習能力為「學力」']];
-  const p = pairs[(idx - cursor) % pairs.length];
-  const n = Math.floor((idx - cursor) / pairs.length) + 1;
+    ? [
+      ['再', '在', '表示重複用「再」'], ['的', '得', '連接動詞與補語常用「得」'], ['辨', '辦', '辨別用「辨」'],
+      ['合', '和', '合併用「合」'], ['做', '作', '具體動作常用「做」'], ['己', '已', '自己用「己」'],
+      ['未', '末', '未來用「未」'], ['戊', '戌', '天干「戊」'], ['即', '既', '立即用「即」'],
+      ['定', '訂', '決定用「定」'], ['分', '份', '一分鐘用「分」'], ['長', '常', '首長用「長」'],
+      ['事', '是', '事情用「事」'], ['坐', '座', '坐下用「坐」'], ['帶', '代', '帶領用「帶」'],
+      ['歷', '曆', '歷史用「歷」'], ['優', '憂', '優秀用「優」'], ['須', '需', '必須用「須」'],
+      ['錄', '祿', '記錄用「錄」'], ['畫', '劃', '繪畫用「畫」'], ['到', '倒', '到達用「到」'],
+      ['後', '候', '前後用「後」'], ['青', '清', '青色用「青」'], ['情', '晴', '心情用「情」'],
+      ['辛', '幸', '辛苦用「辛」'], ['已', '以', '已經用「已」'], ['克', '刻', '克服用「克」'],
+      ['具', '俱', '工具用「具」'], ['帳', '賬', '帳篷用「帳」'], ['梁', '樑', '橋樑常用「梁」'],
+      ['密', '蜜', '密切用「密」'], ['燥', '躁', '乾燥用「燥」'], ['贏', '盈', '勝負用「贏」'],
+      ['戴', '帶', '穿戴用「戴」'], ['祕', '密', '祕書用「祕」'], ['練', '煉', '練習用「練」'],
+      ['暑', '署', '暑假用「暑」'], ['竟', '競', '竟然用「竟」'], ['厲', '勵', '嚴厲用「厲」'],
+      ['銷', '消', '銷售用「銷」'], ['提', '題', '提高用「提」'], ['義', '意', '意義用「義」'],
+      ['例', '列', '例子用「例」'], ['預', '予', '預備用「預」'], ['檢', '簡', '檢查用「檢」'],
+      ['態', '臺', '態度用「態」'], ['導', '道', '引導用「導」'], ['響', '向', '影響用「響」'],
+    ]
+    : [
+      ['必須', '必需', '事理上一定要用「必須」'], ['啟事', '啟示', '刊登告知用「啟事」'],
+      ['反映', '反應', '呈現問題用「反映」'], ['權利', '權力', '法律上得主張者為「權利」'],
+      ['學力', '學歷', '學習能力為「學力」'], ['截止', '截至', '期限終止用「截止」'],
+      ['定金', '訂金', '契約保證常用「定金」'], ['募集', '募積', '公開徵集用「募集」'],
+      ['原形', '原型', '本來面目用「原形」'], ['以至', '以致', '延伸到用「以至」'],
+      ['發奮', '發憤', '振作努力用「發憤」'], ['趨向', '取向', '發展方向用「趨向」'],
+      ['質數', '指數', '數學質數用「質數」'], ['豐功', '風功', '偉大功勞用「豐功」'],
+      ['部署', '部屬', '安排任務用「部署」'], ['幅員', '幅原', '疆域用「幅員」'],
+      ['精萃', '精粹', '精華用「精粹」'], ['涵蓋', '函蓋', '包含用「涵蓋」'],
+      ['急遽', '急據', '快速劇烈用「急遽」'], ['縝密', '稹密', '細密用「縝密」'],
+      ['委曲', '委屈', '事情原委用「委曲」'], ['利害', '厲害', '利益與損害用「利害」'],
+      ['處分', '處份', '懲處用「處分」'], ['成分', '成份', '組成用「成分」'],
+      ['紀錄', '記錄', '寫下過程用「記錄」'], ['計畫', '計劃', '名詞規劃常用「計畫」'],
+      ['佔有', '占有', '據有常用「占有」'], ['部份', '部分', '整體之一用「部分」'],
+      ['其它', '其他', '其餘用「其他」'], ['作廢', '做廢', '宣告無效用「作廢」'],
+      ['妝扮', '裝扮', '修飾儀容可用兩者，正式常用「妝扮」'], ['蒐集', '搜集', '收集資料常用「蒐集」'],
+      ['傳誦', '傳頌', '流傳稱揚用「傳頌」'], ['灌注', '貫注', '精神集中用「貫注」'],
+      ['宏大', '弘大', '規模大用「宏大」'], ['堅苦', '艱苦', '艱難困苦用「艱苦」'],
+      ['奇蹟', '奇跡', '罕見之事常用「奇蹟」'], ['聯接', '連接', '銜接常用「連接」'],
+      ['津貼', '津貼費', '額外補助用「津貼」'], ['題目', '提目', '試題用「題目」'],
+    ];
+  const fillIdx = idx - cursor;
+  const p = pairs[fillIdx % pairs.length];
+  const form = Math.floor(fillIdx / pairs.length) % 4;
+  const stems = [
+    `「${p[0]}」與「${p[1]}」該如何選用？`,
+    `寫作時若需區分「${p[0]}」和「${p[1]}」，應優先選？`,
+    `關於「${p[0]}／${p[1]}」的辨字，下列何者正確？`,
+    `下列哪一個用字較恰當？（「${p[0]}」與「${p[1]}」）`,
+  ];
   return withMeta({
     type: 'single', section: '字音字形',
-    text: `辨字組 ${n}：「${p[0]}／${p[1]}」——${p[2]}，正確應選？`,
+    text: stems[form],
     options: [p[0], p[1], `${p[0]}${p[1]}`, '兩者皆可任意'], answer: 0,
     explanation: p[2],
   }, difficulty);
@@ -485,7 +530,6 @@ function makeChineseQuestion(r, seed, idx, difficulty, level) {
 
 function makeEnglishQuestion(r, seed, idx, difficulty, level) {
   const isJunior = level === 'junior';
-  const hardPrefix = '';
   const vocab = isJunior ? JUNIOR_ENGLISH_VOCAB : GSAT_ENGLISH_VOCAB;
   const places = isJunior
     ? ['school', 'the library', 'the park', 'class', 'home', 'the museum', 'the station']
@@ -498,13 +542,13 @@ function makeEnglishQuestion(r, seed, idx, difficulty, level) {
     const place = places[Math.floor(idx / ENGLISH_VERBS.length) % places.length];
     const [base, third, ing, past] = v;
     const text = isJunior
-      ? `${hardPrefix}Amy _____ to ${place} every day. (verb: ${base})`
-      : `${hardPrefix}The researcher _____ toward ${place} every morning. (verb: ${base})`;
+      ? `Amy _____ to ${place} every day.`
+      : `The researcher _____ toward ${place} every morning.`;
     return withMeta({
       type: 'single', section: '文法',
       text,
       options: [third, base, ing, past], answer: 0,
-      explanation: `第三人稱單數現在式用 ${third}。`,
+      explanation: `第三人稱單數現在式用 ${third}（原形 ${base}）。`,
     }, difficulty);
   }
 
@@ -515,22 +559,22 @@ function makeEnglishQuestion(r, seed, idx, difficulty, level) {
     if (difficulty === 'hard' && isJunior) {
       return withMeta({
         type: 'single', section: '文法',
-        text: `${hardPrefix}The report was _____ by the students yesterday. (verb: ${base})`,
+        text: `The ${base} report was _____ by the students yesterday.`,
         options: [v[4], ing, base, third], answer: 0,
-        explanation: `被動語態：be + p.p.，答案為 ${v[4]}。`,
+        explanation: `被動語態：be + p.p.，答案為 ${v[4]}（原形 ${base}）。`,
       }, difficulty);
     }
     if (difficulty === 'hard' && !isJunior) {
       return withMeta({
         type: 'single', section: '文法',
-        text: `${hardPrefix}Not until yesterday _____ how important it was to ${base} carefully.`,
+        text: `Not until yesterday _____ how important it was to ${base} carefully.`,
         options: ['did he realize', 'he realized', 'he realizes', 'has he realized'], answer: 0,
         explanation: 'Not until 置於句首時需倒裝。',
       }, difficulty);
     }
     const text = isJunior
-      ? `${hardPrefix}They have _____ the ${base} homework already.`
-      : `${hardPrefix}Scholars have _____ the ${base} proposal already.`;
+      ? `They have _____ the ${base} homework already.`
+      : `Scholars have _____ the ${base} proposal already.`;
     return withMeta({
       type: 'single', section: '文法',
       text,
@@ -542,10 +586,9 @@ function makeEnglishQuestion(r, seed, idx, difficulty, level) {
 
   if (idx < offset + vocab.length) {
     const [word, correct, w1, w2, w3] = vocab[idx - offset];
-    const ctx = isJunior ? 'in daily school English' : 'in an academic context';
     return withMeta({
       type: 'single', section: '字彙',
-      text: `${hardPrefix}Which meaning best matches the word "${word}" ${ctx}?`,
+      text: `Which meaning best matches the word "${word}"?`,
       options: [correct, w1, w2, w3], answer: 0,
       explanation: `"${word}" means: ${correct}.`,
     }, difficulty);
@@ -562,14 +605,14 @@ function makeEnglishQuestion(r, seed, idx, difficulty, level) {
     if (isJunior && difficulty === 'hard') {
       return withMeta({
         type: 'single', section: '文法',
-        text: `${hardPrefix}He is the student _____ won the ${subj} contest for ${n} years.`,
+        text: `He is the student _____ won the ${subj} contest for ${n} years.`,
         options: ['who', 'which', 'where', 'when'], answer: 0,
         explanation: '修飾人用關係代名詞 who。',
       }, difficulty);
     }
     const text = isJunior
-      ? `${hardPrefix}If it rains tomorrow, we _____ at home and review ${subj} for ${n} hours.`
-      : `${hardPrefix}Should it rain tomorrow, we _____ at home and review ${subj} for ${n} hours.`;
+      ? `If it rains tomorrow, we _____ at home and review ${subj} for ${n} hours.`
+      : `Should it rain tomorrow, we _____ at home and review ${subj} for ${n} hours.`;
     return withMeta({
       type: 'single', section: '文法',
       text,
@@ -593,6 +636,22 @@ function makeEnglishQuestion(r, seed, idx, difficulty, level) {
     ['What does weather mean?', 'Conditions like rain or sunshine', 'A school subject only', 'A type of food', 'A music show'],
     ['What is homework?', 'School work done at home', 'A holiday trip', 'A sports game', 'A music show'],
     ['What is a neighbor?', 'A person living nearby', 'A distant stranger only', 'A type of animal', 'A school subject'],
+    ['What is a schedule?', 'A plan of times for activities', 'A type of food', 'A sports ball', 'A movie ticket only'],
+    ['What does careful mean?', 'Paying attention to avoid mistakes', 'Being very loud', 'Being always late', 'Being very sleepy'],
+    ['What is a cafeteria?', 'A place to eat at school', 'A science lab only', 'A bus station', 'A sports field only'],
+    ['What does honest mean?', 'Telling the truth', 'Hiding facts always', 'Being rude', 'Being silent forever'],
+    ['What is a textbook?', 'A book used for studying a subject', 'A comic only', 'A menu only', 'A ticket stub'],
+    ['What does polite mean?', 'Showing good manners', 'Being noisy', 'Being selfish', 'Ignoring others'],
+    ['What is a classmate?', 'A student in the same class', 'A teacher only', 'A parent only', 'A stranger outside school'],
+    ['What does delicious mean?', 'Tasting very good', 'Looking ugly', 'Sounding loud', 'Feeling cold'],
+    ['What is a backpack?', 'A bag carried on the back', 'A type of shoe', 'A desk lamp', 'A window'],
+    ['What does invite mean?', 'To ask someone to join an activity', 'To refuse help', 'To close a door', 'To erase a board'],
+    ['What is a festival?', 'A special celebration or event', 'A quiet nap', 'A math formula', 'A pencil case'],
+    ['What does protect mean?', 'To keep someone or something safe', 'To break things', 'To ignore danger', 'To hide forever'],
+    ['What is a map?', 'A drawing that shows places', 'A cooking pan', 'A song list', 'A sports score'],
+    ['What does arrive mean?', 'To reach a place', 'To leave forever', 'To sleep early', 'To forget homework'],
+    ['What is a bridge?', 'A structure that crosses over something', 'A type of fruit', 'A classroom chair', 'A rain cloud'],
+    ['What does compare mean?', 'To look at similarities and differences', 'To delete files', 'To shout loudly', 'To paint walls'],
   ];
   const gsatTopics = [
     ['What does sustainable mean?', 'Able to continue long-term', 'Very expensive always', 'Useful only once', 'Completely new'],
@@ -603,15 +662,69 @@ function makeEnglishQuestion(r, seed, idx, difficulty, level) {
     ['What is a consequence?', 'A result that follows an action', 'A starting point only', 'An unrelated hobby', 'A weather report'],
     ['What does reluctant mean?', 'Unwilling or hesitant', 'Eager always', 'Silent forever', 'Perfectly sure'],
     ['What does sufficient mean?', 'Enough for a purpose', 'Far too little', 'Completely empty', 'Always wrong'],
+    ['What does bias mean?', 'An unfair preference that skews judgment', 'A perfect balance', 'A random number', 'A sports trophy'],
+    ['What is a paradigm?', 'A typical pattern or model of thinking', 'A type of fruit', 'A bus schedule', 'A clothing brand'],
+    ['What does credible mean?', 'Believable and trustworthy', 'Always false', 'Completely silent', 'Visually bright'],
+    ['What is rhetoric?', 'Persuasive language techniques', 'Only math proofs', 'Silent meditation', 'Random noise'],
+    ['What does empirical mean?', 'Based on observation or experience', 'Based on pure fantasy', 'Never tested', 'Always secret'],
+    ['What is a dilemma?', 'A difficult choice between options', 'An easy win', 'A finished essay', 'A weather report'],
+    ['What does coherent mean?', 'Logically connected and clear', 'Totally random', 'Always angry', 'Completely empty'],
+    ['What is an analogy?', 'A comparison that clarifies meaning', 'A legal contract only', 'A sports score', 'A cooking recipe only'],
+    ['What does refute mean?', 'To prove a claim wrong', 'To praise loudly', 'To ignore forever', 'To copy exactly'],
+    ['What is a premise?', 'An assumption that supports an argument', 'A final conclusion only', 'A random joke', 'A blank page'],
+    ['What does rigorous mean?', 'Strictly careful and thorough', 'Careless and rushed', 'Always funny', 'Completely vague'],
+    ['What is a synopsis?', 'A brief summary of main points', 'A full novel reprint', 'A shopping list only', 'A sports highlight only'],
+    ['What does allocate mean?', 'To distribute resources for a purpose', 'To destroy completely', 'To hide forever', 'To sing loudly'],
+    ['What is a catalyst?', 'Something that speeds up change', 'Something that stops all motion', 'A finished product', 'A silent observer only'],
+    ['What does plausible mean?', 'Seeming reasonable or possible', 'Clearly impossible', 'Always proven false', 'Totally irrelevant'],
+    ['What is consensus?', 'General agreement among a group', 'Total disagreement only', 'A solo decision', 'A random guess'],
   ];
   const topics = isJunior ? juniorTopics : gsatTopics;
-  const t = topics[(idx - offset) % topics.length];
-  const sceneN = Math.floor((idx - offset) / topics.length) + 1;
+  const filli = idx - offset;
+  if (filli < topics.length) {
+    const t = topics[filli];
+    return withMeta({
+      type: 'single', section: '閱讀',
+      text: t[0],
+      options: [t[1], t[2], t[3], t[4]], answer: 0,
+      explanation: `正解：${t[1]}`,
+    }, difficulty);
+  }
+  // 參數化文法補題（以數字／地點／動詞組成獨特題幹，不加裝飾標籤）
+  const v = ENGLISH_VERBS[filli % ENGLISH_VERBS.length];
+  const place = places[filli % places.length];
+  const n = 2 + (filli % 37);
+  const [base, third, ing, past] = v;
+  const kind = Math.floor(filli / ENGLISH_VERBS.length) % 4;
+  if (kind === 0) {
+    return withMeta({
+      type: 'single', section: '文法',
+      text: `Yesterday, ${n} students _____ to ${place}.`,
+      options: [past, base, third, ing], answer: 0,
+      explanation: `過去式用 ${past}。`,
+    }, difficulty);
+  }
+  if (kind === 1) {
+    return withMeta({
+      type: 'single', section: '文法',
+      text: `Look! She is _____ near ${place} with ${n} friends.`,
+      options: [ing, base, third, past], answer: 0,
+      explanation: `現在進行式用 be + V-ing。`,
+    }, difficulty);
+  }
+  if (kind === 2) {
+    return withMeta({
+      type: 'single', section: '文法',
+      text: `He usually _____ for about ${n} minutes at ${place}.`,
+      options: [third, base, ing, past], answer: 0,
+      explanation: `第三人稱單數現在式用 ${third}。`,
+    }, difficulty);
+  }
   return withMeta({
-    type: 'single', section: '閱讀',
-    text: `${hardPrefix}${t[0]} — reading set ${sceneN}`,
-    options: [t[1], t[2], t[3], t[4]], answer: 0,
-    explanation: `正解：${t[1]}`,
+    type: 'single', section: '文法',
+    text: `They decided _____ the plan at ${place} after ${n} meetings.`,
+    options: [`to ${base}`, base, ing, third], answer: 0,
+    explanation: `decide to + V。`,
   }, difficulty);
 }
 
@@ -1131,7 +1244,7 @@ function makeSocialParametric(r, seed, idx, difficulty, level) {
     const { options, answer } = makeOptions(r, seed + idx, year + gap, [year, year + gap + 1, year - gap]);
     return withMeta({
       type: 'single', section: '歷史',
-      text: `史料紀年練習：若事件甲發生於 ${year} 年，事件乙晚 ${gap} 年，則事件乙約為？`,
+      text: `若事件甲發生於 ${year} 年，事件乙晚 ${gap} 年，則事件乙約為？`,
       options, answer, explanation: `${year}+${gap}=${year + gap}。`,
     }, difficulty);
   }
@@ -1162,13 +1275,12 @@ function makeSocialParametric(r, seed, idx, difficulty, level) {
       ? ['新北市', '臺中市', '高雄市', '臺南市', '桃園市', '彰化縣', '屏東縣', '花蓮縣', '宜蘭縣', '南投縣']
       : ['臺北都會區', '中彰投', '雲嘉南', '高屏', '宜花東', '桃竹苗', '基隆港區', '嘉義平原', '臺東縱谷', '澎湖群島'];
     const c = counties[idx % counties.length];
-    const code = 1000 + idx;
     const trait = isJunior
       ? ['人口密度較高', '農業活動可見', '臨海交通便利', '山地地形明顯'][Math.floor(idx / counties.length) % 4]
       : ['產業結構較多元', '交通網絡較密集', '自然資源管理重要', '區域發展需協調'][Math.floor(idx / counties.length) % 4];
     return withMeta({
       type: 'single', section: '地理',
-      text: `題組 ${code}：關於「${c}」的地理認識，下列敘述何者較合理？`,
+      text: `下列哪一項較能描述「${c}」的地理特色？`,
       options: [trait, '完全無人類活動', '位於南極圈', '全年無降雨紀錄'],
       answer: 0, explanation: `${c}可視為「${trait}」的例子之一。`,
     }, difficulty);
@@ -1177,7 +1289,7 @@ function makeSocialParametric(r, seed, idx, difficulty, level) {
     const { options, answer } = makeOptions(r, seed + idx, n1 + n2, [n1 * n2, Math.abs(n1 - n2), n1]);
     return withMeta({
       type: 'single', section: '公民',
-      text: `班會提案：贊成 ${n1} 票、反對 ${n2} 票，合計投票人數？`,
+      text: `贊成 ${n1} 票、反對 ${n2} 票，合計投票人數？`,
       options, answer, explanation: `${n1}+${n2}=${n1 + n2}。`,
     }, difficulty);
   }
@@ -1199,7 +1311,7 @@ function makeHumanitiesFill(r, seed, idx, difficulty, section) {
     const { options, answer } = makeOptions(r, seed + idx, a + b, [a, b, a * 2]);
     return withMeta({
       type: 'single', section,
-      text: `年代推算 ${idx}：前段歷時 ${a} 年、後段 ${b} 年，合計時長？`,
+      text: `前段歷時 ${a} 年、後段 ${b} 年，合計時長？`,
       options, answer, explanation: `${a}+${b}=${a + b}。`,
     }, difficulty);
   }
@@ -1209,7 +1321,7 @@ function makeHumanitiesFill(r, seed, idx, difficulty, section) {
     const { options, answer } = makeOptions(r, seed + idx, dens, [String(a), String(b), fmtNum(a * b)]);
     return withMeta({
       type: 'single', section,
-      text: `區域 ${idx}：人口 ${a} 萬、面積約 ${area.toFixed(1)} 百平方公里，粗估密度最接近？`,
+      text: `某地人口 ${a} 萬、面積約 ${area.toFixed(1)} 百平方公里，粗估密度最接近？`,
       options, answer, explanation: `粗估密度約 ${dens}。`,
     }, difficulty);
   }
@@ -1217,7 +1329,7 @@ function makeHumanitiesFill(r, seed, idx, difficulty, section) {
   const { options, answer } = makeOptions(r, seed + idx, b, [b + 1, a, votes]);
   return withMeta({
     type: 'single', section: '公民',
-    text: `選舉試算 ${idx}：每席需 ${a} 票，共得 ${votes} 票，可獲幾席？`,
+    text: `每席需 ${a} 票，共得 ${votes} 票，可獲幾席？`,
     options, answer, explanation: `${votes}÷${a}=${b}。`,
   }, difficulty);
 }
